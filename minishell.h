@@ -8,6 +8,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <sys/wait.h>
+#include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -16,19 +17,26 @@
 #define BUFFER_SIZE_MAX 2048
 
 //tokeniser la ligne de commande
-
-typedef struct s_token
+typedef struct s_token_cmd
 {
-	int simplePipe;
-	int multiPipe;
-	int outRedirection;
-	int multiOutRedirection;
-	int inRedirection;
-	int multiInRedirection;
-	int appendRedirection;
-	int multiAppendRedirection;
+	bool outRedirection;
+	bool multiOutRedirection;
+	bool inRedirection;
+	bool multiInRedirection;
+	bool appendRedirection;
+	bool multiAppendRedirection;
 	struct s_token *next;
-} t_token;
+} t_token_cmd;
+
+
+typedef struct s_token_line
+{
+	int nb_cmd;
+	int nb_pipe;
+} t_token_line;
+
+
+t_token_line *ft_tk_line(char *line);
 
 //
 ////fonction de parsing
