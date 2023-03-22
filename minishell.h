@@ -44,9 +44,12 @@ typedef struct s_cmd
 	struct s_cmd *next;
 } t_cmd;
 
+
+//Parseur
 t_token_line *ft_tk_line(char *line);
 char	**ft_init_char(char *line);
 void 	push(t_cmd **p, char *line);
 void 	print_list(t_cmd *p);
+void 	make_list(char **line_second);
 
 #endif

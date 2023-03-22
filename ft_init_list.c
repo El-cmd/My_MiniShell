@@ -14,7 +14,23 @@ void print_list(t_cmd *p)
 {
 	while(p->next)
 	{
-			printf("%s\n", p->cmd);
-			p = p->next;
+		printf("%s\n", p->cmd);
+		p = p->next;
 	}
+}
+
+void make_list(char **line_second)
+{
+	t_cmd *cmds;
+
+	cmds = NULL;
+	int i = 0;
+	while (line_second[i])
+		i++;
+	while (i >= 0)
+	{
+		push(&cmds, line_second[i]);
+		i--;
+	}
+	print_list(cmds);
 }

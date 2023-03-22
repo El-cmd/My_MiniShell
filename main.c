@@ -16,16 +16,7 @@ int main(void)
 		t_token_line *prout = ft_tk_line((char *)line);
 		printf("nb de cmd: %d\nnb de pipe %d\n", prout->nb_cmd, prout->nb_pipe);
 		line_second = ft_init_char((char *)line);
-		t_cmd *cmds = NULL;
-		int i = 0;
-		while (line_second[i])
-			i++;
-		while (i >= 0)
-		{
-			push(&cmds, line_second[i]);
-			i--;
-		}
-		print_list(cmds);
+		make_list(line_second);
 		add_history(line);
 		free((void*)line);
 		free(prout);
