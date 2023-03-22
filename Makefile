@@ -33,7 +33,8 @@ SRC = main.c \
 	  libft/ft_putendl_fd.c \
 	  libft/ft_putnbr_fd.c \
 	  libft/ft_split.c \
-	  ft_cut_cmd.c
+	  ft_cut_cmd.c \
+	  ft_init_list.c
 
 all: $(NAME)
 

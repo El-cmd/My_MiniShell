@@ -15,14 +15,21 @@ int main(void)
 		line = readline( "MS >> 🤖: " );
 		t_token_line *prout = ft_tk_line((char *)line);
 		printf("nb de cmd: %d\nnb de pipe %d\n", prout->nb_cmd, prout->nb_pipe);
-		printf("%s\n", line);
 		line_second = ft_init_char((char *)line);
-		while(*line_second)
+		t_cmd *cmds = NULL;
+		int i = 0;
+		while (line_second[i])
+			i++;
+		while (i >= 0)
 		{
-			printf("%s\n", *line_second);
-			line_second++;
+			push(&cmds, line_second[i]);
+			i--;
 		}
-
+		while(cmds->next)
+		{
+			printf("%s\n", cmds->cmd);
+			cmds = cmds->next;
+		}
 		add_history(line);
 		free((void*)line);
 		free(prout);
