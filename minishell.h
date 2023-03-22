@@ -47,5 +47,6 @@ typedef struct s_cmd
 t_token_line *ft_tk_line(char *line);
 char	**ft_init_char(char *line);
 void 	push(t_cmd **p, char *line);
+void 	print_list(t_cmd *p);
 
 #endif

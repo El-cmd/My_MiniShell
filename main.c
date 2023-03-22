@@ -25,11 +25,7 @@ int main(void)
 			push(&cmds, line_second[i]);
 			i--;
 		}
-		while(cmds->next)
-		{
-			printf("%s\n", cmds->cmd);
-			cmds = cmds->next;
-		}
+		print_list(cmds);
 		add_history(line);
 		free((void*)line);
 		free(prout);

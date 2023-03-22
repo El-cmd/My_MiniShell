@@ -9,3 +9,12 @@ void push(t_cmd **p, char *line)
         element->next = *p;
         *p = element;
 }
+
+void print_list(t_cmd *p)
+{
+	while(p->next)
+	{
+			printf("%s\n", p->cmd);
+			p = p->next;
+	}
+}
