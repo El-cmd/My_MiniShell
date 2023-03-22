@@ -20,12 +20,10 @@
 //tokeniser la ligne de commande
 typedef struct s_token_cmd
 {
-	bool oneoutRedirection;
-	bool multiOutRedirection;
-	bool oneinRedirection;
-	bool multiInRedirection;
-	bool appendRedirection;
-	bool multiAppendRedirection;
+	int outRedirection;
+	int inRedirection;
+	int appendRedirection;
+	int HereDoc;
 	struct s_token_cmd *next;
 } t_token_cmd;
 
@@ -51,5 +49,6 @@ char	**ft_init_char(char *line);
 void 	push(t_cmd **p, char *line);
 void 	print_list(t_cmd *p);
 void 	make_list(char **line_second);
+void 	token(t_token_cmd *cmd, t_cmd *cmds);
 
 #endif

@@ -34,12 +34,13 @@ SRC = main.c \
 	  libft/ft_putnbr_fd.c \
 	  libft/ft_split.c \
 	  ft_cut_cmd.c \
-	  ft_init_list.c
+	  ft_init_list.c \
+	  parsing.c
 
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(FLAGS) $(SRC) -o $(NAME) -lreadline
+	$(CC) $(FLAGS) $(SRC) -o $(NAME) -lreadline -g
 
 clean: 
 	rm -f $(NAME)

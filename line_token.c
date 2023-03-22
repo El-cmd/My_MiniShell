@@ -23,6 +23,3 @@ t_token_line *ft_tk_line(char *line)
 	}
 	return (tk_line);
 }
-
-
-
