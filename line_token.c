@@ -16,10 +16,13 @@ t_token_line *ft_tk_line(char *line)
 	{
 		if (*line == '|')
 		{
-			tk_line->nb_cmd++;
 			tk_line->nb_pipe++;
+			tk_line->nb_cmd++;
 		}
 		line++;
 	}
 	return (tk_line);
 }
+
+
+

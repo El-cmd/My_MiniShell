@@ -20,13 +20,13 @@
 //tokeniser la ligne de commande
 typedef struct s_token_cmd
 {
-	bool outRedirection;
+	bool oneoutRedirection;
 	bool multiOutRedirection;
-	bool inRedirection;
+	bool oneinRedirection;
 	bool multiInRedirection;
 	bool appendRedirection;
 	bool multiAppendRedirection;
-	struct s_token *next;
+	struct s_token_cmd *next;
 } t_token_cmd;
 
 //tokeniser le prompt
