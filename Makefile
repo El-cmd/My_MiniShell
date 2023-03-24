@@ -35,7 +35,9 @@ SRC = main.c \
 	  libft/ft_split.c \
 	  ft_cut_cmd.c \
 	  ft_init_list.c \
-	  parsing.c
+	  parsing.c \
+	  exec/env.c \
+	  exec/one_cmd.c \
 
 all: $(NAME)
 

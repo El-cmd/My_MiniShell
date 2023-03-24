@@ -47,7 +47,7 @@ t_token_cmd *init_token_cmd(t_cmd *cmds)
 	return (token_cmds);
 }
 
-void make_list(char **line_second)
+void make_list(char **line_second, t_token_line *prout, char **envp)
 {
 	t_cmd *cmds;
 	t_token_cmd *token_cmd;
@@ -65,12 +65,5 @@ void make_list(char **line_second)
 	print_list(cmds);
 	token_cmd = init_token_cmd(cmds);
 	token(token_cmd, cmds);
-	//while (token_cmd)
-	//{
-	//	printf("token_cmd->HereDoc = %d\n", token_cmd->HereDoc);
-	//	printf("token_cmd->inRedirection = %d\n", token_cmd->inRedirection);
-	//	printf("token_cmd->appendRedirection = %d\n", token_cmd->appendRedirection);
-	//	printf("token_cmd->outRedirection = %d\n", token_cmd->outRedirection);
-	//	token_cmd = token_cmd->next;
-	//}
+	simple_cmd(token_cmd, prout, envp, cmds);
 }

@@ -39,6 +39,7 @@ typedef struct s_token_line
 typedef struct s_cmd
 {
 	char *cmd;
+	char **redir;
 	struct s_cmd *next;
 } t_cmd;
 
@@ -48,7 +49,9 @@ t_token_line *ft_tk_line(char *line);
 char	**ft_init_char(char *line);
 void 	push(t_cmd **p, char *line);
 void 	print_list(t_cmd *p);
-void 	make_list(char **line_second);
+void 	make_list(char **line_second, t_token_line *tk_line, char **envp);
 void 	token(t_token_cmd *cmd, t_cmd *cmds);
+char	**ft_parsing(char **envp);
+void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, char **envp, t_cmd *cmds);
 
 #endif
