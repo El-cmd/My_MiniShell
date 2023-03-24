@@ -62,7 +62,6 @@ void make_list(char **line_second, t_token_line *prout, char **envp)
 		push(&cmds, line_second[i]);
 		i--;
 	}
-	print_list(cmds);
 	token_cmd = init_token_cmd(cmds);
 	token(token_cmd, cmds);
 	simple_cmd(token_cmd, prout, envp, cmds);
