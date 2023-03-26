@@ -38,6 +38,11 @@ SRC = main.c \
 	  parsing.c \
 	  exec/env.c \
 	  exec/one_cmd.c \
+	  builtins/pwd.c \
+	  builtins/echo.c \
+	  builtins/cd.c \
+	  builtins/ft_env.c \
+	  builtins/exit.c
 
 all: $(NAME)
 

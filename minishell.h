@@ -53,5 +53,9 @@ void 	make_list(char **line_second, t_token_line *tk_line, char **envp);
 void 	token(t_token_cmd *cmd, t_cmd *cmds);
 char	**ft_parsing(char **envp);
 void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, char **envp, t_cmd *cmds);
+int		ft_builtins(t_cmd *cmd, char **envp);
+int		ft_env(char **envp);
+int		ft_pwd(void);
+void	ft_cd(t_cmd *cmd);
 
 #endif
