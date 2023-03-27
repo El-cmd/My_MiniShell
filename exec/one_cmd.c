@@ -19,9 +19,11 @@ int	ft_builtins(t_cmd *cmd, char **envp)
 	}
 	else if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
 	{
-			ft_echo(cmd);
-			return 0;
+		ft_echo(cmd);
+		return 0;
 	}
+	else if (ft_strncmp(cmd->cmd, "exit", 4) == 0 && ft_strlen(cmd->cmd) == 4)
+		ft_exit();
 	return 1;
 }
 
