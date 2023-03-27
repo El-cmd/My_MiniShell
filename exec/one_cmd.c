@@ -17,7 +17,12 @@ int	ft_builtins(t_cmd *cmd, char **envp)
 		ft_cd(cmd);
 		return 0;
 	}
-	return -1;
+	else if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
+	{
+			ft_echo(cmd);
+			return 0;
+	}
+	return 1;
 }
 
 void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, char **envp, t_cmd *cmds)
@@ -50,5 +55,3 @@ void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, char **envp, t_cmd *
 			wait(NULL);
 	}
 }
-
-
