@@ -1,8 +1,10 @@
 #include "../minishell.h"
 
-int ft_echo_n(t_cmd *cmd)
+int ft_echo_n(char *str, t_cmd *cmd)
 {
-	printf("echo -n : %s" , cmd->cmd + 8);
+	str = cmd->cmd + 8;
+	str = ft_strtrim(str, " ");
+	ft_putstr_fd(str, 1);
 	return 0;
 }
 
@@ -10,14 +12,15 @@ int	ft_echo(t_cmd *cmd)
 {
 	char *str;
 
-	str = cmd->cmd + 5;
-	if (ft_strncmp(str, " -n", 3) == 0)
+	str = NULL;
+	if (ft_strncmp(cmd->cmd, "echo -n ", 8)== 0)
 	{
-		ft_echo_n(cmd);
+		ft_echo_n(str, cmd);
 		return 0;
 	}
 	else
 	{
+		str = cmd->cmd + 5;
 		str = ft_strtrim(str, " ");
 		ft_putendl_fd(str, 1);
 		return 0;

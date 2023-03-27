@@ -62,7 +62,6 @@ int		ft_env(char **envp);
 int		ft_pwd(void);
 void	ft_cd(t_cmd *cmd);
 int		ft_echo(t_cmd *cmd);
-int 	ft_echo_n(t_cmd *cmd);
 void	ft_exit(void);
 
 #endif

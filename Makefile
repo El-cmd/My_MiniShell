@@ -2,7 +2,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 NAME = Minishell
 SRC = main.c \
-	  line_token.c \
+	  parsing/line_token.c \
 	  libft/ft_strlen.c \
 	  libft/ft_strjoin.c \
 	  libft/ft_strchr.c \
@@ -33,9 +33,9 @@ SRC = main.c \
 	  libft/ft_putendl_fd.c \
 	  libft/ft_putnbr_fd.c \
 	  libft/ft_split.c \
-	  ft_cut_cmd.c \
-	  ft_init_list.c \
-	  parsing.c \
+	  parsing/ft_cut_cmd.c \
+	  parsing/ft_init_list.c \
+	  parsing/parsing.c \
 	  exec/env.c \
 	  exec/one_cmd.c \
 	  builtins/pwd.c \
@@ -48,8 +48,12 @@ all: $(NAME)
 
 $(NAME):
 	$(CC) $(FLAGS) $(SRC) -o $(NAME) -lreadline -g
+	@printf "\e[92;5;118m\n>>> Executable ready\n\e[0m"
 
-clean: 
+clean:
+	@printf "\033[00;31m\n>>> Executable removed.\n\033[00m"
 	rm -f $(NAME)
 
 fclean: clean 
+
+re : fclean all
