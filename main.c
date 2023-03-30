@@ -8,6 +8,7 @@ int main(int argc, char **argv, char **envp)
 	char **line_second;
 	line = malloc(sizeof(char *) * BUFFER_SIZE_MAX);
 	t_token_line *prout;
+	t_envSom *doberman = init_envp(envp);
 	prout = NULL;
 	if (!line)
 	{
@@ -19,7 +20,7 @@ int main(int argc, char **argv, char **envp)
 		line = readline( "MS >> 🤖: " );
 		prout = ft_tk_line((char *)line);
 		line_second = ft_init_char((char *)line);
-		make_list(line_second, prout, envp);
+		make_list(line_second, prout, envp, doberman);
 		add_history(line);
 		free((void*)line);
 		free(prout);

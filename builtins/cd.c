@@ -12,9 +12,10 @@ int settings_cd(t_cmd *cmd)
 	return (1);
 }
 
-void	ft_cd(t_cmd *cmd)
+void	ft_cd(t_cmd *cmd, t_envSom *env)
 {
 	char *path;
+	char *olpwd = getcwd(NULL, 0);
 
 	if (settings_cd(cmd) == 0)
 		path = getenv("HOME");
@@ -24,5 +25,10 @@ void	ft_cd(t_cmd *cmd)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
 		ft_putendl_fd(path, 2);
+	}
+	else
+	{
+		change_pwd(env);
+		change_oldpwd(env, olpwd);
 	}
 }

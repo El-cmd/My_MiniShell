@@ -2,7 +2,9 @@
 
 void push(t_cmd **p, char *line)
 {
-    t_cmd *element = malloc(sizeof(t_cmd));
+    t_cmd *element;
+
+	element = malloc(sizeof(t_cmd));
     if(!element)
 		exit(EXIT_FAILURE);
     element->cmd = line;
@@ -47,7 +49,7 @@ t_token_cmd *init_token_cmd(t_cmd *cmds)
 	return (token_cmds);
 }
 
-void make_list(char **line_second, t_token_line *prout, char **envp)
+void make_list(char **line_second, t_token_line *prout, char **envp, t_envSom *doberman)
 {
 	t_cmd *cmds;
 	t_token_cmd *token_cmd;
@@ -64,5 +66,5 @@ void make_list(char **line_second, t_token_line *prout, char **envp)
 	}
 	token_cmd = init_token_cmd(cmds);
 	token(token_cmd, cmds);
-	simple_cmd(token_cmd, prout, envp, cmds);
+	simple_cmd(token_cmd, prout, doberman, cmds, envp);
 }

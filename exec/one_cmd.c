@@ -1,10 +1,10 @@
 #include "../minishell.h"
 
-int	ft_builtins(t_cmd *cmd, char **envp)
+int	ft_builtins(t_cmd *cmd, t_envSom *env)
 {
 	if (ft_strncmp(cmd->cmd, "env", 3) == 0 && ft_strlen(cmd->cmd) == 3)
 	{
-		ft_env(envp);
+		ft_env(env);
 		return 0;
 	}
 	else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0 && ft_strlen(cmd->cmd) == 3)
@@ -14,7 +14,8 @@ int	ft_builtins(t_cmd *cmd, char **envp)
 	}
 	else if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
 	{
-		ft_cd(cmd);
+		ft_cd(cmd, env);
+		change_pwd(env);
 		return 0;
 	}
 	else if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
@@ -27,7 +28,7 @@ int	ft_builtins(t_cmd *cmd, char **envp)
 	return 1;
 }
 
-void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, char **envp, t_cmd *cmds)
+void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, t_envSom *env, t_cmd *cmds, char **envp)
 {
 	char *exec;
 	char **path;
@@ -36,11 +37,11 @@ void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, char **envp, t_cmd *
 	int y;
 
 	y = 0;
-	path = ft_parsing(envp);
+	path = ft_parsing(env);
 	if (tk_line->nb_pipe == 0 && tk_cmd->outRedirection == 0 && tk_cmd->inRedirection == 0 
 		&& tk_cmd->appendRedirection == 0 && tk_cmd->HereDoc == 0)
 	{	
-		if (ft_builtins(cmds, envp) == 0)
+		if (ft_builtins(cmds, env) == 0)
 			return ;
 		pid = fork();
 		cmdarg = ft_split(cmds->cmd, ' ');

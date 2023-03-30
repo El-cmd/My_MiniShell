@@ -22,6 +22,7 @@ SRC = main.c \
 	  libft/ft_calloc.c \
 	  libft/ft_isalpha.c \
 	  libft/ft_isdigit.c \
+	  parsing/init_env.c \
 	  libft/ft_isalnum.c \
 	  libft/ft_isascii.c \
 	  libft/ft_isprint.c \
@@ -36,13 +37,13 @@ SRC = main.c \
 	  parsing/ft_cut_cmd.c \
 	  parsing/ft_init_list.c \
 	  parsing/parsing.c \
-	  exec/env.c \
+	  exec/getPath.c \
 	  exec/one_cmd.c \
 	  builtins/pwd.c \
 	  builtins/echo.c \
+	  builtins/exit.c \
 	  builtins/cd.c \
-	  builtins/ft_env.c \
-	  builtins/exit.c
+	  builtins/ft_env.c
 
 all: $(NAME)
 
@@ -51,8 +52,8 @@ $(NAME):
 	@printf "\e[92;5;118m\n>>> Executable ready\n\e[0m"
 
 clean:
-	@printf "\033[00;31m\n>>> Executable removed.\n\033[00m"
 	rm -f $(NAME)
+	@printf "\033[00;31mm>>> Executable removed.\n\033[00m"
 
 fclean: clean 
 

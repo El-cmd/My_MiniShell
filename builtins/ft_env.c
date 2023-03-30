@@ -1,13 +1,27 @@
 #include "../minishell.h"
 
-int ft_env(char **env)
+int ft_env(t_envSom *env)
+{
+	t_env *tmp;
+
+	tmp = env->begin;
+	while (tmp)
+	{
+		ft_putendl_fd(tmp->name, 1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int have_olpwd(char **envp)
 {
 	int i;
 
 	i = 0;
-	while (env[i])
+	while (envp[i])
 	{
-		ft_putendl_fd(env[i], 1);
+		if (ft_strncmp(envp[i], "OLDPWD=", 7) == 0)
+			return (1);
 		i++;
 	}
 	return (0);
