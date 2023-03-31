@@ -15,7 +15,6 @@ int	ft_builtins(t_cmd *cmd, t_envSom *env)
 	else if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
 	{
 		ft_cd(cmd, env);
-		change_pwd(env);
 		return 0;
 	}
 	else if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
@@ -25,6 +24,16 @@ int	ft_builtins(t_cmd *cmd, t_envSom *env)
 	}
 	else if (ft_strncmp(cmd->cmd, "exit", 4) == 0 && ft_strlen(cmd->cmd) == 4)
 		ft_exit();
+	else if (ft_strncmp(cmd->cmd, "export", 6) == 0)
+	{
+		ft_export(env, cmd);
+		return 0;
+	}
+	else if (ft_strncmp(cmd->cmd, "unset", 5) == 0)
+	{
+		ft_unset(env, cmd);
+		return 0;
+	}
 	return 1;
 }
 
