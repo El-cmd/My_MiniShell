@@ -29,6 +29,11 @@ int ft_unset(t_envSom *env, t_cmd *cmd)
 		{
 			free(tmp->name);
 			tmp->name = NULL;
+			if (tmp->next == NULL)
+			{
+				tmp->back->next = NULL;
+				return (0);
+			}
 			tmp->next->back = tmp->back;
 			tmp->back->next = tmp->next;
 			return (0);
