@@ -1,5 +1,10 @@
 #include "minishell.h"
 
+void test_sinaux(int code)
+{
+	printf("code = %d\n", code);
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -10,6 +15,8 @@ int main(int argc, char **argv, char **envp)
 	t_token_line *prout;
 	t_envSom *doberman = init_envp(envp);
 	prout = NULL;
+
+	signal(SIGINT, &test_sinaux);
 	if (!line)
 	{
 		perror("Malloc failure\n");

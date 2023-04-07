@@ -1,11 +1,5 @@
 #include "../minishell.h"
 
-void	guillemet(char *line)
-{
-	line++;
-}
-
-
 int ft_export(t_envSom *env, t_cmd *cmd)
 {
 	t_env *tmp;
@@ -23,6 +17,7 @@ int ft_export(t_envSom *env, t_cmd *cmd)
 			tmp = tmp->next;
 		}
 	}
-	
+	else
+		push_env(name[1], env);
 	return (0);
 }
