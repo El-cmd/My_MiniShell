@@ -1,8 +1,17 @@
 #include "minishell.h"
 
-void test_sinaux(int code)
+void	newline(void)
 {
-	printf("code = %d\n", code);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	sigint_handler(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	newline();
 }
 
 int main(int argc, char **argv, char **envp)
@@ -16,7 +25,7 @@ int main(int argc, char **argv, char **envp)
 	t_envSom *doberman = init_envp(envp);
 	prout = NULL;
 
-	signal(SIGINT, &test_sinaux);
+	signal(SIGINT, &sigint_handler);
 	if (!line)
 	{
 		perror("Malloc failure\n");
