@@ -88,5 +88,6 @@ void	change_pwd(t_envSom *env);
 void	change_oldpwd(t_envSom *env, char *oldpwd);
 int 	have_olpwd(char **envp);
 void	push_env(char *envp, t_envSom *som);
+void    printTitle(void);
 
 #endif

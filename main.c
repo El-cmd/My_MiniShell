@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+// Les Signaux
 void	newline(void)
 {
 	rl_on_new_line();
@@ -13,6 +15,14 @@ void	sigint_handler(int sig)
 	write(1, "\n", 1);
 	newline();
 }
+void sigquit_handler(int sig)
+{
+	(void)sig;
+	ft_putendl_fd("CTRL-D = Segmentation fault", 2);
+	exit(0);
+}
+//
+
 
 int main(int argc, char **argv, char **envp)
 {
@@ -26,11 +36,14 @@ int main(int argc, char **argv, char **envp)
 	prout = NULL;
 
 	signal(SIGINT, &sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGSEGV, &sigquit_handler);
 	if (!line)
 	{
 		perror("Malloc failure\n");
 		return (EXIT_FAILURE);
 	}
+	printTitle();
 	while(1)
 	{
 		line = readline( "MS >> 🤖: " );
