@@ -1,0 +1,48 @@
+TO DO LIST 09/03
+
+-github copilot  V
+-cpp
+-page dacceuil gtihub
+-se renseigner sur lautomatisation :VIDEO DE HARRY
+-essayer de faire minishell avec copilot
+-Rendre jusqu'au cpp 04*
+---------____________-----------
+
+Fiche pour minishell
+
+
+deja afficher le prompt et l'historique = 1   O
+Ensuite le parsing=2 = 
+	- les pipe, redirection
+	-trier les commadande 
+	-voir le nombre de commande 
+	-bultin ou pas (cd, echo, pwd, export, unset, env, exit)
+	-en gros faire des tokens
+-execution des commande = 3
+	-gerer les multi et simple pipe
+-les signaux = 4
+	-ctrl c
+	-ctrl d
+	-ctrl \
+ATTENTION LES VARIABLE DENV
+
+faire attention a la gestion d'erreurs
+
+simple commande = ls
+
+simple commande avec redir = ls > out
+
+plusieurs commande pipe sans redir = cat fichier | wc -l 
+
+Plusieur commande pipe avec redir = cat < fichier | wc -l > out
+
+ne pas oublier les  >> et <<
+
+unset et export a coder 
+unset fait mais pleins de truc a faire avec export
+
+gerer les signaux 
+
+PS = sdl api graphique
+
+Ne pas oublier de snetrainer pour lexame avec grademe
