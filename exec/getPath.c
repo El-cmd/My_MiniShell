@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char	**ft_parsing(t_envSom *env)
+char	**ft_getpath(t_envSom *env)
 {
 	char	*tmpa;
 	char	**path;

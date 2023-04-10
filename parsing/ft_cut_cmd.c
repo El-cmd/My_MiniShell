@@ -1,6 +1,30 @@
 #include "../minishell.h"
 
-char	**ft_init_char(char *line)
+int	ft_pipeError(char *line)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == '|')
+		{
+			if (line[i + 1] == '|')
+				return (1);
+			if (line[i + 1] == '\0')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	if (j > 0)
+		return (0);
+	return (2);
+}
+
+void	splitage(char *line, t_cmdIndex *cmdIndex)
 {
 	char	**line_second;
 	int i;
@@ -12,5 +36,20 @@ char	**ft_init_char(char *line)
 		line_second[i] = ft_strtrim(line_second[i], " ");
 		i++;
 	}
-	return (line_second);
+	i = 0;
+	while (line_second[i])
+	{
+		pushback_cmd(line_second[i], cmdIndex);
+		i++;
+	}
+}
+
+void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
+{
+	if (ft_pipeError(line) == 1)
+		return ;
+	else if (ft_pipeError(line) == 2)
+		pushback_cmd(line, cmdIndex);
+	else
+		splitage(line, cmdIndex);
 }

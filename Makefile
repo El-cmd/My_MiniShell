@@ -2,7 +2,6 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 NAME = Minishell
 SRC = main.c \
-	  parsing/line_token.c \
 	  libft/ft_strlen.c \
 	  libft/ft_strjoin.c \
 	  libft/ft_strchr.c \
@@ -46,7 +45,9 @@ SRC = main.c \
 	  builtins/ft_env.c \
 	  builtins/ft_export.c \
 	  builtins/ft_unset.c \
-	  print_title.c
+	  print_title.c \
+	  free/free.c \
+	  builtins/exec_builtin.c
 
 all: $(NAME)
 

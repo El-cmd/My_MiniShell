@@ -15,6 +15,8 @@
 #include <signal.h>
 #include <errno.h>
 #include "libft/libft.h"
+
+
 #define BUFFER_SIZE_MAX 2048
 
 
@@ -34,46 +36,51 @@ typedef struct s_envSom
 } t_envSom;
 
 //tokeniser la ligne de commande
-typedef struct s_token_cmd
-{
-	int outRedirection;
-	int inRedirection;
-	int appendRedirection;
-	int HereDoc;
-	struct s_token_cmd *next;
-} t_token_cmd;
+//typedef struct s_token_cmd
+//{
+//	int outRedirection;
+//	int inRedirection;
+//	int appendRedirection;
+//	int HereDoc;
+//	struct s_token_cmd *next;
+//} t_token_cmd;
 
 //tokeniser le prompt
-typedef struct s_token_line
+typedef struct s_cmdIndex
 {
 	int nb_cmd;
 	int nb_pipe;
-} t_token_line;
+	struct s_cmd *begin;
+	struct s_cmd *end;
+} t_cmdIndex;
 
 
 //liste chainée des commandes
 typedef struct s_cmd
 {
 	char *cmd;
-	char **redir;
 	struct s_cmd *next;
+	struct s_cmd *back;
 } t_cmd;
 
 
+//init liste cmd
+int			ft_pipeError(char *line);
+void		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
+t_cmdIndex *init_cmd(void);
+void		splitOrNot(char *line, t_cmdIndex *cmdIndex);
+
+
 //Parseur
-t_token_line *ft_tk_line(char *line);
-char	**ft_init_char(char *line);
-void 	push(t_cmd **p, char *line);
-void 	print_list(t_cmd *p);
-void 	make_list(char **line_second, t_token_line *tk_line, char **envp, t_envSom *doberman);
-void 	token(t_token_cmd *cmd, t_cmd *cmds);
-char	**ft_parsing(t_envSom *env);
+char	**ft_getpath(t_envSom *env);
 
 //Executer
-void	simple_cmd(t_token_cmd *tk_cmd, t_token_line *tk_line, t_envSom *env, t_cmd *cmds, char **envp);
-int		ft_builtins(t_cmd *cmd, t_envSom *env);
+int		simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
+void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
+void 	ft_execve(char *cmd, char **envp);
 
 //Builtins
+int		ft_builtins(t_cmd *cmd, t_envSom *env);
 int		ft_env(t_envSom *env);
 int		ft_pwd(void);
 void	ft_cd(t_cmd *cmd, t_envSom *env);
@@ -88,6 +95,12 @@ void	change_pwd(t_envSom *env);
 void	change_oldpwd(t_envSom *env, char *oldpwd);
 int 	have_olpwd(char **envp);
 void	push_env(char *envp, t_envSom *som);
+
+//utils
+void 	print_list(t_cmdIndex *cmdIndex);
 void    printTitle(void);
+
+//free
+void	free_list(t_cmdIndex *index);
 
 #endif
