@@ -41,5 +41,5 @@ void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
 	if (cmd->nb_cmd == 1)
 		simple_cmd(doberman, tmp, envp, cmd);
 	else if (cmd->nb_cmd == 2)
-		ft_simple_pipe(cmd, envp);
+		ft_simple_pipe(cmd, envp, doberman);
 }

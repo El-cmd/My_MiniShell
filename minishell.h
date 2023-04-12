@@ -80,7 +80,7 @@ void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(char *cmd, char **envp);
 
 //pipe
-void	ft_simple_pipe(t_cmdIndex *index, char **envp);
+void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 
 //Builtins
 int		ft_builtins(t_cmd *cmd, t_envSom *env);

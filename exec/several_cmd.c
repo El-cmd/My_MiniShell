@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void ft_simple_pipe(t_cmdIndex *index, char **envp)
+void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom * env)
 {
 	pid_t pid;
 	pid_t pid2;
@@ -19,6 +19,8 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp)
 				dup2(fd[1], IN);
 				close(fd[0]);
 				close(fd[1]);
+				if (ft_builtins(index->begin, env) == 0)
+					exit(0);
 				ft_execve(index->begin->cmd, envp);
 			}
 			else
@@ -27,6 +29,8 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp)
 				close(fd[0]);
 				close(fd[1]);
 				waitpid(pid, &status, 0);
+				if (ft_builtins(index->end, env) == 0)
+					exit(0);
 				ft_execve(index->end->cmd, envp);
 			}
 		}
