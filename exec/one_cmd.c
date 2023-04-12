@@ -4,11 +4,16 @@ void ft_execve(char *cmd, char **envp)
 {
 	char **cmdarg;
 	int y;
+	char *exec;
 
 	y = 0;
 	cmdarg = ft_split(cmd, ' ');
 	while (envp[++y])
-		execve(ft_strjoin(ft_strjoin(envp[y], "/"), cmdarg[0]), cmdarg, envp);
+	{
+		exec = ft_strjoin(ft_strjoin(envp[y], "/"), cmdarg[0]);
+		execve(exec, cmdarg, envp);
+		free(exec);
+	}
 }
 
 int	simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex)
@@ -33,5 +38,8 @@ void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
 	t_cmd *tmp;
 
 	tmp = cmd->begin;
-	simple_cmd(doberman, tmp, envp, cmd);
+	if (cmd->nb_cmd == 1)
+		simple_cmd(doberman, tmp, envp, cmd);
+	else if (cmd->nb_cmd == 2)
+		ft_simple_pipe(cmd, envp);
 }

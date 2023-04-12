@@ -16,7 +16,8 @@
 #include <errno.h>
 #include "libft/libft.h"
 
-
+#define IN 1
+#define OUT 0
 #define BUFFER_SIZE_MAX 2048
 
 
@@ -70,7 +71,6 @@ void		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
 t_cmdIndex *init_cmd(void);
 void		splitOrNot(char *line, t_cmdIndex *cmdIndex);
 
-
 //Parseur
 char	**ft_getpath(t_envSom *env);
 
@@ -78,6 +78,9 @@ char	**ft_getpath(t_envSom *env);
 int		simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
 void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(char *cmd, char **envp);
+
+//pipe
+void	ft_simple_pipe(t_cmdIndex *index, char **envp);
 
 //Builtins
 int		ft_builtins(t_cmd *cmd, t_envSom *env);

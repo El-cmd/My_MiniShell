@@ -21,7 +21,7 @@ void sigquit_handler(int sig)
 	ft_putendl_fd("CTRL-D = Segmentation fault", 2);
 	exit(0);
 }
-//
+
 
 void printtest(t_cmdIndex *cmd)
 {
@@ -34,8 +34,7 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	const char *line;
-	char **Nenv; 
-	//char **line_second;
+	char **Nenv;
 	line = malloc(sizeof(char *) * BUFFER_SIZE_MAX);
 	t_envSom *doberman = init_envp(envp);
 	t_cmdIndex *cmdIndex;
