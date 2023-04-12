@@ -50,6 +50,6 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 		return ;
 	else if (ft_pipeError(line) == 2)
 		pushback_cmd(line, cmdIndex);
-	else
+	else if (ft_pipeError(line) == 0)
 		splitage(line, cmdIndex);
 }

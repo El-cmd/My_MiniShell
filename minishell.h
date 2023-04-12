@@ -76,6 +76,7 @@ char	**ft_getpath(t_envSom *env);
 
 //Executer
 int		simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
+void 	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(char *cmd, char **envp);
 
