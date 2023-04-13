@@ -16,8 +16,8 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 			pid = fork();
 			if (pid == 0)
 			{
-				dup2(fd[1], IN);
 				close(fd[0]);
+				dup2(fd[1], IN);
 				close(fd[1]);
 				if (ft_builtins(index->begin, env) == 0)
 					exit(0);
@@ -25,9 +25,9 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 			}
 			else
 			{
+				close(fd[1]);
 				dup2(fd[0], OUT);
 				close(fd[0]);
-				close(fd[1]);
 				waitpid(pid, &status, 0);
 				if (ft_builtins(index->end, env) == 0)
 					exit(0);
@@ -54,12 +54,13 @@ void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 	{
 		while (cmd)
 		{
-			pipe(fd);
+			if (cmd->next != NULL)
+				pipe(fd);
 			pid2 = fork();
 			if (pid2 == 0)
 			{
-				dup2(fd[1], IN);
 				close(fd[0]);
+				dup2(fd[1], IN);
 				close(fd[1]);
 				if (ft_builtins(cmd, env) == 0)
 					exit(0);
@@ -67,15 +68,28 @@ void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 			}
 			else
 			{
-				dup2(fd[0], OUT);
-				close(fd[0]);
-				close(fd[1]);
-				waitpid(pid2, &status2, 0);
-				cmd = cmd->next;
+				if (cmd->next != NULL)
+				{
+					close(fd[1]);
+					dup2(fd[0], OUT);
+					close(fd[0]);
+					close(fd[1]);
+					waitpid(pid2, &status2, 0);
+				}
+				else
+				{
+					close(fd[1]);
+					dup2(fd[0], OUT);
+					close(fd[0]);
+					waitpid(pid2, &status2, 0);
+					if (ft_builtins(cmd, env) == 0)
+						exit(0);
+					ft_execve(cmd->cmd, envp);
+				}
 			}
+			cmd = cmd->next;
 		}
 	}
 	else
 		waitpid(pid, &status, 0);
-
 }
