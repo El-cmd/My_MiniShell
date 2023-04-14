@@ -48,7 +48,8 @@ SRC = main.c \
 	  print_title.c \
 	  free/free.c \
 	  builtins/exec_builtin.c \
-	  exec/several_cmd.c
+	  exec/several_cmd.c \
+	  parsing/redir_parse.c
 
 all: $(NAME)
 

@@ -14,6 +14,10 @@ void ft_execve(char *cmd, char **envp)
 		execve(exec, cmdarg, envp);
 		free(exec);
 	}
+	ft_putstr_fd(cmdarg[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	free_tab(cmdarg);
+	exit(127);
 }
 
 int	simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex)

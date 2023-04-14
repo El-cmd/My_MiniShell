@@ -16,8 +16,13 @@
 #include <errno.h>
 #include "libft/libft.h"
 
+#define HERD 7
+#define APPEND 6
+#define R_IN 5
+#define R_OUT 4
 #define IN 1
 #define OUT 0
+#define ERR 2
 #define BUFFER_SIZE_MAX 2048
 
 
@@ -29,6 +34,7 @@ typedef struct s_env
 	struct s_env *back;
 } t_env;
 
+//Index environnement
 typedef struct s_envSom
 {
 	int size;
@@ -36,17 +42,7 @@ typedef struct s_envSom
 	struct s_env *end;
 } t_envSom;
 
-//tokeniser la ligne de commande
-//typedef struct s_token_cmd
-//{
-//	int outRedirection;
-//	int inRedirection;
-//	int appendRedirection;
-//	int HereDoc;
-//	struct s_token_cmd *next;
-//} t_token_cmd;
-
-//tokeniser le prompt
+//index commande
 typedef struct s_cmdIndex
 {
 	int nb_cmd;
@@ -54,7 +50,6 @@ typedef struct s_cmdIndex
 	struct s_cmd *begin;
 	struct s_cmd *end;
 } t_cmdIndex;
-
 
 //liste chainée des commandes
 typedef struct s_cmd
@@ -64,6 +59,22 @@ typedef struct s_cmd
 	struct s_cmd *back;
 } t_cmd;
 
+//index redirections
+typedef struct s_redirIndex
+{
+	int size;
+	struct t_redir *begin;
+	struct t_redir *end;
+} t_redirIndex;
+
+//liste chainée des redirections
+typedef struct s_redir
+{
+	int type;
+	char *file;
+	struct s_redir *next;
+	struct s_redir *back;
+} t_redir;
 
 //init liste cmd
 int			ft_pipeError(char *line);
@@ -106,5 +117,6 @@ void    printTitle(void);
 
 //free
 void	free_list(t_cmdIndex *index);
+void	free_tab(char **str);
 
 #endif

@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 // Les Signaux
 void	newline(void)
 {
