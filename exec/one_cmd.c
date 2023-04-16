@@ -42,6 +42,8 @@ void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
 	t_cmd *tmp;
 
 	tmp = cmd->begin;
+	if (cmd->begin->redir == true)
+		return ;
 	if (cmd->nb_cmd == 1)
 		simple_cmd(doberman, tmp, envp, cmd);
 	else if (cmd->nb_cmd == 2)

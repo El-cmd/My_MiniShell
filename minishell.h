@@ -55,6 +55,8 @@ typedef struct s_cmdIndex
 typedef struct s_cmd
 {
 	char *cmd;
+	bool redir;
+	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
 } t_cmd;
@@ -63,8 +65,8 @@ typedef struct s_cmd
 typedef struct s_redirIndex
 {
 	int size;
-	struct t_redir *begin;
-	struct t_redir *end;
+	struct s_redir *begin;
+	struct s_redir *end;
 } t_redirIndex;
 
 //liste chainée des redirections
@@ -118,5 +120,13 @@ void    printTitle(void);
 //free
 void	free_list(t_cmdIndex *index);
 void	free_tab(char **str);
+
+//init list redirection
+
+t_redirIndex	*init_redirI(void);
+void			pushback_redir(t_redirIndex *i);
+int 			lookIfRedir(char *line);
+void			redirOrNot(t_cmdIndex *index);
+void			initRedirOrnot(t_cmdIndex *index);
 
 #endif

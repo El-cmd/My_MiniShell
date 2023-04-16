@@ -35,3 +35,23 @@ void	pushback_redir(t_redirIndex *i)
 	}
 	i->size++;
 }
+
+int lookIfRedir(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == '<' && line[i + 1] == '<')
+			return (1);
+		else if (line[i] == '<')
+			return (1);
+		else if (line[i] == '>' && line[i + 1] == '>')
+			return (1);
+		else if (line[i] == '>')
+			return (1);
+		i++;
+	}
+	return (0);
+}

@@ -49,7 +49,7 @@ SRC = main.c \
 	  free/free.c \
 	  builtins/exec_builtin.c \
 	  exec/several_cmd.c \
-	  parsing/redir_parse.c
+	  parsing/init_redir.c
 
 all: $(NAME)
 

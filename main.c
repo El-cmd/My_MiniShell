@@ -54,6 +54,8 @@ int main(int argc, char **argv, char **envp)
 		cmdIndex = init_cmd();
 		Nenv = ft_getpath(doberman);
 		splitOrNot((char *)line, cmdIndex);
+		redirOrNot(cmdIndex);
+		initRedirOrnot(cmdIndex);
 		exec(cmdIndex, Nenv, doberman);
 		add_history(line);
 		free((void*)line);
