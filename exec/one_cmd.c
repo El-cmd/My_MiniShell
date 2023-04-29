@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+// fonction d'execution
 void ft_execve(char *cmd, char **envp)
 {
 	char **cmdarg;
@@ -20,6 +21,7 @@ void ft_execve(char *cmd, char **envp)
 	exit(127);
 }
 
+//execution dune seule cmd sans redirection ou pipe
 int	simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex)
 {
 	pid_t pid;
@@ -37,6 +39,7 @@ int	simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex)
 	return 0;
 }
 
+//regarde quel execution faire si une ou plusieur cmd
 void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
 {
 	t_cmd *tmp;

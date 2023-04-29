@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+//init le sommaire de la liste chaine des redir
 t_redirIndex	*init_redirI(void)
 {
 	t_redirIndex *redirI;

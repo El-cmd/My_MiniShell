@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+//init le sommaire de la liste chaine des cmd
 t_cmdIndex *init_cmd(void)
 {
 	t_cmdIndex *cmdIndex;
@@ -14,6 +15,7 @@ t_cmdIndex *init_cmd(void)
 	return (cmdIndex);
 }
 
+//tout est dans le nom ne pas oublier de mettre le type
 void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex)
 {
 	t_cmd *element;
@@ -39,6 +41,7 @@ void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex)
 	cmdIndex->nb_cmd++;
 }
 
+//print les commande
 void print_list(t_cmdIndex *cmdIndex)
 {
 	t_cmd *p;

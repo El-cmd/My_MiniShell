@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+// execution d'un seul pipe et donc deux commandes
 void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 {
 	pid_t pid;
@@ -39,6 +40,7 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 	}
 }
 
+//execution de plus de deux commande mais quelques bug
 void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 {
 	pid_t	pid;

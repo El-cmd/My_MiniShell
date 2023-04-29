@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+
+//fonction qui execute les builtins un peu caca bouda
 int	ft_builtins(t_cmd *cmd, t_envSom *env)
 {
 	if (ft_strncmp(cmd->cmd, "env", 3) == 0 && ft_strlen(cmd->cmd) == 3)

@@ -28,6 +28,10 @@ int	ft_pipeError(char *line)
 	return (2);
 }
 
+
+//split le buffer par rapport au pipe et enleve les espace
+//au debut et a la fin de chaque commande
+//et enfin les ajoute dans la liste chainé
 void	splitage(char *line, t_cmdIndex *cmdIndex)
 {
 	char	**line_second;
@@ -60,6 +64,7 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 		splitage(line, cmdIndex);
 }
 
+// regarde si il y a des redirection ou non et remplie le token
 void	redirOrNot(t_cmdIndex *index)
 {
 	t_cmd *tmp;
@@ -75,6 +80,8 @@ void	redirOrNot(t_cmdIndex *index)
 	}
 }
 
+// init la liste chainé des redirection pour chaque cmd
+// si il y a des redirection
 void	initRedirOrnot(t_cmdIndex *index)
 {
 	t_cmd *tmp;
