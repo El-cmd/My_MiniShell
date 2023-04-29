@@ -83,3 +83,4 @@ void	initRedirOrnot(t_cmdIndex *index)
 		tmp = tmp->next;
 	}
 }
+

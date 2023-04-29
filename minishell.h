@@ -122,7 +122,6 @@ void	free_list(t_cmdIndex *index);
 void	free_tab(char **str);
 
 //init list redirection
-
 t_redirIndex	*init_redirI(void);
 void			pushback_redir(t_redirIndex *i);
 int 			lookIfRedir(char *line);
