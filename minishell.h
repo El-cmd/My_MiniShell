@@ -78,6 +78,31 @@ typedef struct s_redir
 	struct s_redir *back;
 } t_redir;
 
+
+//datas
+typedef struct s_data
+{
+	char **envp;
+	t_envSom *env;
+	t_cmdIndex *cmdIndex;
+	char	**path_exec;
+} t_data;
+
+//SIGNAL HANDLER
+
+void	signal_handler(void);
+
+//ERROR GESTION
+
+void 	the_arg(int ac, char **av);
+int		malloc_error(char *str);
+
+
+//INIT DATA
+
+void	init_data(t_data *data, char **en);
+void	init_data_cmd(t_data *data);
+
 //init liste cmd
 int			ft_pipeError(char *line);
 void		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);

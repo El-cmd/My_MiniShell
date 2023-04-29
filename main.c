@@ -1,64 +1,32 @@
 #include "minishell.h"
 
-// Les Signaux
-void	newline(void)
+void	eternal_loop(t_data *data)
 {
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	char *str;
 
-void	sigint_handler(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	newline();
-}
+	while(1)
+	{
+		str = readline("MS >> 🤖: ");
+		malloc_error(str);
+		add_history(str);
+		init_data_cmd(data);
 
-void sigquit_handler(int sig)
-{
-	(void)sig;
-	ft_putendl_fd("CTRL-D = Segmentation fault", 2);
-	exit(0);
-}
+		// il faut que je clean a partir d'ici
+		splitOrNot(str, data->cmdIndex);
+		redirOrNot(data->cmdIndex);
+		initRedirOrnot(data->cmdIndex);
+		exec(data->cmdIndex, data->path_exec, data->env);
 
-
-void printtest(t_cmdIndex *cmd)
-{
-	printf("cmd->nb_cmd = %d\n", cmd->nb_cmd);
-	printf("cmd->nb_pipe = %d\n", cmd->nb_pipe);
+		free(str);
+	}
 }
 
 int main(int argc, char **argv, char **envp)
 {
-	(void)argc;
-	(void)argv;
-	const char *line;
-	char **Nenv;
-	line = malloc(sizeof(char *) * BUFFER_SIZE_MAX);
-	t_envSom *doberman = init_envp(envp);
-	t_cmdIndex *cmdIndex;
-	(void)doberman;
-	signal(SIGINT, &sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGSEGV, &sigquit_handler);
-	if (!line)
-	{
-		perror("Malloc failure\n");
-		return (EXIT_FAILURE);
-	}
-	printTitle();
-	while(1)
-	{
-		line = readline( "MS >> 🤖: " );
-		cmdIndex = init_cmd();
-		Nenv = ft_getpath(doberman);
-		splitOrNot((char *)line, cmdIndex);
-		redirOrNot(cmdIndex);
-		initRedirOrnot(cmdIndex);
-		exec(cmdIndex, Nenv, doberman);
-		add_history(line);
-		free((void*)line);
-	}
+	t_data data;
+
+	the_arg(argc, argv);
+	init_data(&data, envp);
+	eternal_loop(&data);
 	return (0);
 }

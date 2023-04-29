@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../minishell.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -23,8 +24,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	if (!s1 || !s2)
 		return (0);
 	join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
-	if (!join)
-		return (0);
+	malloc_error(join);
 	while (s1[i])
 	{
 		join[i] = s1[i];

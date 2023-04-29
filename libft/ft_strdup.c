@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../minishell.h"
 
 char	*ft_strdup(const char *s)
 {
@@ -19,8 +20,7 @@ char	*ft_strdup(const char *s)
 
 	n = 0;
 	tab = malloc(sizeof (char) * ft_strlen(s) + 1);
-	if (!tab)
-		return (0);
+	malloc_error(tab);
 	while (s[n])
 	{
 		tab[n] = s[n];

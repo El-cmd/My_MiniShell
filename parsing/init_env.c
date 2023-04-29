@@ -21,6 +21,7 @@ void	push_env(char *envp, t_envSom *som)
     if(!env)
 		exit(EXIT_FAILURE);
 	env->name = ft_strdup(envp);
+	malloc_error(env->name);
 	env->next = NULL;
 	env->back = NULL;
 	if (som->size == 0)
@@ -42,7 +43,7 @@ void	change_pwd(t_envSom *env)
 	t_env	*tmp;
 	
 	tmp = env->begin;
-	while (tmp->next && ft_strncmp(tmp->name, "PWD=", 4))
+	while (tmp && ft_strncmp(tmp->name, "PWD=", 4))
 		tmp = tmp->next;
 	tmp->name = ft_strjoin("PWD=", getcwd(NULL, 0));
 }
@@ -52,7 +53,7 @@ void	change_oldpwd(t_envSom *env, char *oldpwd)
 	t_env *tmp;
 
 	tmp = env->begin;
-	while (tmp->next && ft_strncmp(tmp->name, "OLDPWD=", 7))
+	while (tmp && ft_strncmp(tmp->name, "OLDPWD=", 7))
 		tmp = tmp->next;
 	if (tmp->name)
 		tmp->name = ft_strjoin("OLDPWD=", oldpwd);
