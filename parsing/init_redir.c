@@ -13,6 +13,9 @@ t_redirIndex	*init_redirI(void)
 	return (redirI);
 }
 
+
+//tout est dans le nom ne pas oublier de mettre le type
+//et de parser le file 
 void	pushback_redir(t_redirIndex *i)
 {
 	t_redir *redir;
@@ -36,6 +39,7 @@ void	pushback_redir(t_redirIndex *i)
 	i->size++;
 }
 
+// parse pour voir si dans la cmd il y a des redirection
 int lookIfRedir(char *line)
 {
 	int i;

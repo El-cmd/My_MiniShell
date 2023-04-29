@@ -1,5 +1,9 @@
 #include "../minishell.h"
 
+
+// regarde sil y a des pipe ou non
+//et aussi si il y a des || ou des pipe invalide genre 
+// ls | grep truc | \0
 int	ft_pipeError(char *line)
 {
 	int i;
@@ -30,6 +34,7 @@ void	splitage(char *line, t_cmdIndex *cmdIndex)
 	int i;
 
 	i = 0;
+	//toujours ne pas oublier les leaks et d'opti split
 	line_second = ft_split(line, '|');
 	while (line_second[i])
 	{
@@ -44,6 +49,7 @@ void	splitage(char *line, t_cmdIndex *cmdIndex)
 	}
 }
 
+// par rapport a la commande regarde sil doit split ou pas
 void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 {
 	if (ft_pipeError(line) == 1)
@@ -83,4 +89,3 @@ void	initRedirOrnot(t_cmdIndex *index)
 		tmp = tmp->next;
 	}
 }
-
