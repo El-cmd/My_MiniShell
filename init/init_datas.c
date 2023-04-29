@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+//init les datas avant le lancement du shell
 void	init_data(t_data *data, char **en)
 {
 	printTitle();
@@ -8,6 +9,8 @@ void	init_data(t_data *data, char **en)
 	signal_handler();
 }
 
+
+//init les datas dans la boucle
 void init_data_cmd(t_data *data)
 {
 	data->cmdIndex = init_cmd();

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../minishell.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -23,8 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start > ft_strlen(s))
 	{
 		new = malloc(sizeof(char) * 1);
-		if (!new)
-			return (NULL);
+		malloc_error(new);
 		new[0] = '\0';
 		return (new);
 	}
@@ -32,8 +32,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		new = malloc(sizeof(char) * ft_strlen(&s[start]) + 1);
 	else
 		new = malloc(sizeof(char) * len + 1);
-	if (!new)
-		return (NULL);
+	malloc_error(new);
 	i = 0;
 	while (s[start] != '\0' && len-- != 0)
 		new[i++] = s[start++];

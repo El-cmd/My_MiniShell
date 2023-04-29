@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+//init le sommaire de ma double lchainee de env
 t_envSom	*init_envSom(void)
 {
 	t_envSom *envSom;
@@ -13,6 +14,7 @@ t_envSom	*init_envSom(void)
 	return (envSom);
 }
 
+//pushback les variable denv dans ma liste
 void	push_env(char *envp, t_envSom *som)
 {
 	t_env *env;
@@ -38,6 +40,8 @@ void	push_env(char *envp, t_envSom *som)
 	som->size++;
 }
 
+
+//change la variable pwd dans ma liste de env
 void	change_pwd(t_envSom *env)
 {	
 	t_env	*tmp;
@@ -48,6 +52,7 @@ void	change_pwd(t_envSom *env)
 	tmp->name = ft_strjoin("PWD=", getcwd(NULL, 0));
 }
 
+//mes a jours la varible oldpwd dans mon env
 void	change_oldpwd(t_envSom *env, char *oldpwd)
 {
 	t_env *tmp;
@@ -61,6 +66,7 @@ void	change_oldpwd(t_envSom *env, char *oldpwd)
 		push_env(ft_strjoin("OLDPWD=", oldpwd), env);
 }
 
+//mes toute les variable dans ma liste
 t_envSom	*init_envp(char **envp)
 {
 	t_envSom *env;

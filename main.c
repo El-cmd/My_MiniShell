@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+//tout est dans le titre de ma fonction
 void	eternal_loop(t_data *data)
 {
 	char *str;
