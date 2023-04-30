@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+
+//echo sans le \n mais encore quelque bug
 int ft_echo_n(char *str, t_cmd *cmd)
 {
 	str = cmd->cmd + 8;
@@ -8,6 +10,7 @@ int ft_echo_n(char *str, t_cmd *cmd)
 	return 0;
 }
 
+//execute echo mais encore quelques truc a regler
 int	ft_echo(t_cmd *cmd)
 {
 	char *str;

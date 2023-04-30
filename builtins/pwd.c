@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+//affiche le repertoir courrant
 int	ft_pwd(void)
 {
 	char	*pwd;

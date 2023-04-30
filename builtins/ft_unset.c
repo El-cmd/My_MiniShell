@@ -1,5 +1,6 @@
 #include "../minishell.h"
 
+//renvoie la la place du egale dans la cmd
 int search_egal(char *str)
 {
 	int i;
@@ -14,6 +15,7 @@ int search_egal(char *str)
 	return (-1);
 }
 
+//cherche et enleve la variable demandé
 int ft_unset(t_envSom *env, t_cmd *cmd)
 {
 	t_env *tmp;

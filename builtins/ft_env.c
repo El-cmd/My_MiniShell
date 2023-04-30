@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+
+//execute la cmd env en affichant notre liste chainee 
 int ft_env(t_envSom *env)
 {
 	t_env *tmp;
@@ -13,6 +15,7 @@ int ft_env(t_envSom *env)
 	return (0);
 }
 
+// regarde si dans notre env il y a la variable oldpwd
 int have_olpwd(char **envp)
 {
 	int i;

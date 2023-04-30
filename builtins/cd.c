@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+//passe les espaces a parir des 2 caractere de cd
+//et regarde si cest juste cd ou un cd /repertoir
 int settings_cd(t_cmd *cmd)
 {
 	int i;
@@ -12,6 +14,9 @@ int settings_cd(t_cmd *cmd)
 	return (1);
 }
 
+//change les variables denv OLPWD et PWD et execute cd
+// mais je vais devoir enlever quelques erreur possible
+//genre si cest        cd /repertoire
 void	ft_cd(t_cmd *cmd, t_envSom *env)
 {
 	char *path;
