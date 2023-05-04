@@ -7,17 +7,16 @@ void	eternal_loop(t_data *data)
 
 	while(1)
 	{
-		str = readline("MS >> 🤖: ");
+		str = readline("MS#🤖: ");
 		malloc_error(str);
 		add_history(str);
 		init_data_cmd(data);
 
 		// il faut que je clean a partir d'ici
 		splitOrNot(str, data->cmdIndex);
-		redirOrNot(data->cmdIndex);
-		initRedirOrnot(data->cmdIndex);
+		//init redirection token
+		malloc_all(data);
 		exec(data->cmdIndex, data->path_exec, data->env);
-
 		free(str);
 	}
 }

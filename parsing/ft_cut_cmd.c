@@ -63,36 +63,3 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 	else if (ft_pipeError(line) == 0)
 		splitage(line, cmdIndex);
 }
-
-// regarde si il y a des redirection ou non et remplie le token
-void	redirOrNot(t_cmdIndex *index)
-{
-	t_cmd *tmp;
-
-	tmp = index->begin;
-	while (tmp)
-	{
-		if (lookIfRedir(tmp->cmd) == 1)
-			tmp->redir = true;
-		else
-			tmp->redir = false;
-		tmp = tmp->next;
-	}
-}
-
-// init la liste chainé des redirection pour chaque cmd
-// si il y a des redirection
-void	initRedirOrnot(t_cmdIndex *index)
-{
-	t_cmd *tmp;
-
-	tmp = index->begin;
-	while (tmp)
-	{
-		if (tmp->redir == true)
-			tmp->lredir = init_redirI();
-		else
-			tmp->lredir = NULL;
-		tmp = tmp->next;
-	}
-}

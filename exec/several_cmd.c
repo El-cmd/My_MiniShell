@@ -14,7 +14,7 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 		if (pid2 == 0)
 		{
 			pipe(fd);
-			pid = fork();
+			pid = fork_error();
 			if (pid == 0)
 			{
 				close(fd[0]);
@@ -51,14 +51,17 @@ void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 	t_cmd	*cmd;
 
 	cmd = index->begin;
-	pid = fork();
+	pid = fork_error();
 	if (pid == 0)
 	{
 		while (cmd)
 		{
 			if (cmd->next != NULL)
-				pipe(fd);
-			pid2 = fork();
+			{
+				if (pipe(fd) == -1)
+					exit(1);
+			}
+			pid2 = fork_error();
 			if (pid2 == 0)
 			{
 				close(fd[0]);

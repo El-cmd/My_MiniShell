@@ -18,3 +18,17 @@ int	malloc_error(char *str)
 	}
 	return (EXIT_SUCCESS);
 }
+
+//fork error
+pid_t fork_error(void)
+{
+	pid_t pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("Fork failure\n");
+		exit(EXIT_FAILURE);
+	}
+	return (pid);
+}

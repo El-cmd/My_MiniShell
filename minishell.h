@@ -25,6 +25,8 @@
 #define ERR 2
 #define BUFFER_SIZE_MAX 2048
 
+#define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
+
 
 //environnement
 typedef struct s_env
@@ -99,7 +101,6 @@ int		malloc_error(char *str);
 
 
 //INIT DATA
-
 void	init_data(t_data *data, char **en);
 void	init_data_cmd(t_data *data);
 
@@ -121,6 +122,9 @@ void 	ft_execve(char *cmd, char **envp);
 //pipe
 void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 
+//FORKING
+pid_t	fork_error(void);
+
 //Builtins
 int		ft_builtins(t_cmd *cmd, t_envSom *env);
 int		ft_env(t_envSom *env);
@@ -141,6 +145,8 @@ void	push_env(char *envp, t_envSom *som);
 //utils
 void 	print_list(t_cmdIndex *cmdIndex);
 void    printTitle(void);
+void	pass_space(char *str, int *i);
+int		is_end_redir(char c);
 
 //free
 void	free_list(t_cmdIndex *index);
@@ -152,5 +158,7 @@ void			pushback_redir(t_redirIndex *i);
 int 			lookIfRedir(char *line);
 void			redirOrNot(t_cmdIndex *index);
 void			initRedirOrnot(t_cmdIndex *index);
+int  			malloc_redir(t_data *data);
+void			malloc_all(t_data *data);
 
 #endif
