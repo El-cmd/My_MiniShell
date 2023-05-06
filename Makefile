@@ -55,7 +55,8 @@ SRC = main.c \
 	  init/init_datas.c \
 	  redir/init.c \
 	  utils/utils.c \
-	  redir/redir_pars.c
+	  redir/redir_pars.c \
+	  exec/exec.c
 
 all: $(NAME)
 

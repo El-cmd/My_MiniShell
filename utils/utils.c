@@ -18,6 +18,7 @@ int		is_end_redir(char c)
 	return (EXIT_SUCCESS);
 }
 
+//regarde si la commande est vide
 void no_str(char *cmd)
 {
 	int i;
