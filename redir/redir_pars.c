@@ -10,7 +10,7 @@ void	malloc_all(t_data *data)
 
 
 // decoupe les file des redirections
-void	get_file(t_data *data)
-{
-	
-}
+//void	get_file(t_data *data)
+//{
+//	
+//}

@@ -17,3 +17,14 @@ int		is_end_redir(char c)
 	}
 	return (EXIT_SUCCESS);
 }
+
+void no_str(char *cmd)
+{
+	int i;
+
+	i = 0;
+	while (cmd[i] == ' ')
+		i++;
+	if (cmd[i] == '\0')
+		exit(0);
+}

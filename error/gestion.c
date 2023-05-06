@@ -13,7 +13,7 @@ int	malloc_error(char *str)
 {
 	if (!str)
 	{
-		perror("Malloc failure\n");
+		ft_putendl_fd("Malloc failure", 2);
 		exit(EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -27,7 +27,7 @@ pid_t fork_error(void)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("Fork failure\n");
+		ft_putendl_fd("Fork failure", 2);
 		exit(EXIT_FAILURE);
 	}
 	return (pid);

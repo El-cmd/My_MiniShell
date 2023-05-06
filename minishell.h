@@ -147,6 +147,7 @@ void 	print_list(t_cmdIndex *cmdIndex);
 void    printTitle(void);
 void	pass_space(char *str, int *i);
 int		is_end_redir(char c);
+void	no_str(char *cmd);
 
 //free
 void	free_list(t_cmdIndex *index);

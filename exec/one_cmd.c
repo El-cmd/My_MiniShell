@@ -7,6 +7,7 @@ void ft_execve(char *cmd, char **envp)
 	int y;
 	char *exec;
 
+	no_str(cmd);
 	y = 0;
 	cmdarg = ft_split(cmd, ' ');
 	while (envp[++y])

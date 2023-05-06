@@ -8,7 +8,6 @@ void	eternal_loop(t_data *data)
 	while(1)
 	{
 		str = readline("MS#🤖: ");
-		malloc_error(str);
 		add_history(str);
 		init_data_cmd(data);
 
@@ -24,6 +23,7 @@ void	eternal_loop(t_data *data)
 int main(int argc, char **argv, char **envp)
 {
 	t_data data;
+
 
 	the_arg(argc, argv);
 	init_data(&data, envp);
