@@ -1,5 +1,12 @@
 #include "../minishell.h"
 
+/*
+void	redirOrNot(t_cmdIndex *index);
+void	initRedirOrnot(t_cmdIndex *index);
+int 	malloc_out(char *str, int *i, t_redirIndex *tmp);
+int 	malloc_in(char *str, int *i, t_redirIndex *tmp);
+int 	malloc_redir(t_data *data);
+*/
 // regarde si il y a des redirection ou non et remplie le token
 void	redirOrNot(t_cmdIndex *index)
 {

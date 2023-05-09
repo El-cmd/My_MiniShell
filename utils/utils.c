@@ -1,5 +1,12 @@
 #include "../minishell.h"
 
+/*
+void	pass_space(char *str, int *i);
+int		is_end_redir(char c);
+void 	no_str(char *cmd);
+void	get_file(char *str, int *i);
+void	printTitle(void);
+*/
 //passe les espace et les tabulation
 void	pass_space(char *str, int *i)
 {
@@ -34,4 +41,12 @@ void	get_file(char *str, int *i)
 {
 	while (str[*i] && str[*i] != '>' && str[*i] != '<' && str[*i] != ' ')
 		(*i)++;
+}
+
+void   printTitle(void)
+{
+	printf(".-.   .-..-..-. .-..-. .----..-. .-..----..-.   .-.\n");
+	printf("|  `.'  || ||  `| || |{ {__  | {_} || {_  | |   | |\n");
+	printf("| |\\ /| || || |\\  || |.-._} }| { } || {__ | `--.| |--.\n");
+	printf("`-' ` `-'`-'`-' `-'`-'`----' `-' `-'`----'`----'`----'\n");
 }

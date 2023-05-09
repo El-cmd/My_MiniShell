@@ -1,5 +1,11 @@
 #include "../minishell.h"
 
+/*
+t_cmd 	*pop_front_dlist(t_cmdIndex *index);
+void	free_list(t_cmdIndex *index);
+void	free_tab(char **str);
+*/
+
 t_cmd *pop_front_dlist(t_cmdIndex *index)
 {
 	t_cmd *tmp;

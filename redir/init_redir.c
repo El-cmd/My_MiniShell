@@ -1,5 +1,10 @@
 #include "../minishell.h"
 
+/*
+t_redirIndex	*init_redirI(void);
+void			pushback_redir(t_redirIndex *i, int type);
+int 			lookIfRedir(char *line);
+*/
 //init le sommaire de la liste chaine des redir
 t_redirIndex	*init_redirI(void)
 {

@@ -1,5 +1,12 @@
 #include "../minishell.h"
 
+/*
+t_envSom	*init_envSom(void);
+void		push_env(char *envp, t_envSom *som);
+void		change_pwd(t_envSom *env);
+void		change_oldpwd(t_envSom *env, char *oldpwd);
+t_envSom	*init_envp(char **envp);
+*/
 //init le sommaire de ma double lchainee de env
 t_envSom	*init_envSom(void)
 {
