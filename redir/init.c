@@ -34,6 +34,7 @@ void	initRedirOrnot(t_cmdIndex *index)
 }
 
 //parsing des redirections out
+// can use one f() like this: int redirection(char *str, int *i, t_redirIndex *tmp, char r)
 int balade_out(char *str, int *i, t_redirIndex *tmp)
 {
 	if (str[*i] == '>')
@@ -97,6 +98,7 @@ int malloc_redir(t_data *data)
 			i = 0;
 			while (tmp->cmd[i])
 			{
+				//if (redirection(tmp->cmd, &i, tmp->lredir, '>') == 1)
 				if (balade_out(tmp->cmd, &i, tmp->lredir) == 1)
 					return (EXIT_FAILURE);
 				else if (ballad_in(tmp->cmd, &i, tmp->lredir) == 1)
