@@ -49,6 +49,7 @@ int lookIfRedir(char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
+		//if (i > 0 && line[i] == '<' && line[i - 1] == '<')
 		if (line[i] == '<' && line[i + 1] == '<')
 			return (1);
 		else if (line[i] == '<')
