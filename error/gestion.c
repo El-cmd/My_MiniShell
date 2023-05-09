@@ -1,5 +1,10 @@
 #include "../minishell.h"
 
+/*
+void	the_arg(int ac, char **av);
+int		malloc_error(char *str);
+pid_t	fork_error(void);
+*/
 // Gestion des arguments
 void the_arg(int ac, char **av)
 {

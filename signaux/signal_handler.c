@@ -1,5 +1,11 @@
 #include "../minishell.h"
 
+/*
+void	newline(void);
+void	sigint_handler(int sig);
+void 	sigquit_handler(int sig);
+void	signal_handler(void);
+*/
 //GESTION DES SIGNAUX
 
 void	newline(void)

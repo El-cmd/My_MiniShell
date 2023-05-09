@@ -1,5 +1,10 @@
 #include "../minishell.h"
 
+/*
+t_cmdIndex *init_cmd(void);
+void 		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
+void 		print_list(t_cmdIndex *cmdIndex);
+*/
 //init le sommaire de la liste chaine des cmd
 t_cmdIndex *init_cmd(void)
 {

@@ -1,5 +1,9 @@
 #include "../minishell.h"
 
+/*
+void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
+void ft_execve(char *cmd, char **envp);
+*/
 // fonction d'execution
 void ft_execve(char *cmd, char **envp)
 {

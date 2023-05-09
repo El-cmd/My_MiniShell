@@ -45,7 +45,6 @@ SRC = main.c \
 	  builtins/ft_env.c \
 	  builtins/ft_export.c \
 	  builtins/ft_unset.c \
-	  print_title.c \
 	  free/free.c \
 	  builtins/exec_builtin.c \
 	  exec/several_cmd.c \

@@ -1,6 +1,10 @@
 #include "../minishell.h"
 
-
+/*
+int		ft_pipeError(char *line);
+void	splitage(char *line, t_cmdIndex *cmdIndex);
+void	splitOrNot(char *line, t_cmdIndex *cmdIndex);
+*/
 // regarde sil y a des pipe ou non
 //et aussi si il y a des || ou des pipe invalide genre 
 // ls | grep truc | \0
