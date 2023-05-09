@@ -34,7 +34,7 @@ void	initRedirOrnot(t_cmdIndex *index)
 }
 
 //parsing des redirections out
-int balade_out(char *str, int *i, t_redirIndex *tmp)
+int malloc_out(char *str, int *i, t_redirIndex *tmp)
 {
 	if (str[*i] == '>')
 	{
@@ -45,21 +45,21 @@ int balade_out(char *str, int *i, t_redirIndex *tmp)
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp);
+			pushback_redir(tmp, APPEND);
 		}
 		else
 		{
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp);
+			pushback_redir(tmp, R_OUT);
 		}
 	}
 	return (0);
 }
 
 //parsing des redirections in
-int ballad_in(char *str, int *i, t_redirIndex *tmp)
+int malloc_in(char *str, int *i, t_redirIndex *tmp)
 {
 	if (str[*i] == '<')
 	{
@@ -70,14 +70,14 @@ int ballad_in(char *str, int *i, t_redirIndex *tmp)
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp);
+			pushback_redir(tmp, HERD);
 		}
 		else
 		{
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp);
+			pushback_redir(tmp, R_IN);
 		}
 	}
 	return (0);
@@ -97,9 +97,9 @@ int malloc_redir(t_data *data)
 			i = 0;
 			while (tmp->cmd[i])
 			{
-				if (balade_out(tmp->cmd, &i, tmp->lredir) == 1)
+				if (malloc_out(tmp->cmd, &i, tmp->lredir) == 1)
 					return (EXIT_FAILURE);
-				else if (ballad_in(tmp->cmd, &i, tmp->lredir) == 1)
+				else if (malloc_in(tmp->cmd, &i, tmp->lredir) == 1)
 					return (EXIT_FAILURE);
 				i++;
 			}

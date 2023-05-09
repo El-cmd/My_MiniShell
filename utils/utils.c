@@ -29,3 +29,9 @@ void no_str(char *cmd)
 	if (cmd[i] == '\0')
 		exit(0);
 }
+
+void	get_file(char *str, int *i)
+{
+	while (str[*i] && str[*i] != '>' && str[*i] != '<' && str[*i] != ' ')
+		(*i)++;
+}

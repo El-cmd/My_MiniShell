@@ -17,13 +17,14 @@ t_redirIndex	*init_redirI(void)
 
 //tout est dans le nom ne pas oublier de mettre le type
 //et de parser le file 
-void	pushback_redir(t_redirIndex *i)
+void	pushback_redir(t_redirIndex *i, int type)
 {
 	t_redir *redir;
 
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
 		exit(EXIT_FAILURE);
+	redir->type = type;
 	redir->next = NULL;
 	redir->back = NULL;
 	if (i->size == 0)
