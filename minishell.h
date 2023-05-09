@@ -92,70 +92,71 @@ typedef struct s_data
 
 //SIGNAL HANDLER
 
-void	signal_handler(void);
+void			signal_handler(void);
 
 //ERROR GESTION
 
-void 	the_arg(int ac, char **av);
-int		malloc_error(char *str);
+void 			the_arg(int ac, char **av);
+int				malloc_error(char *str);
 
 
 //INIT DATA
-void	init_data(t_data *data, char **en);
-void	init_data_cmd(t_data *data);
+void			init_data(t_data *data, char **en);
+void			init_data_cmd(t_data *data);
 
 //init liste cmd
-int			ft_pipeError(char *line);
-void		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
-t_cmdIndex *init_cmd(void);
-void		splitOrNot(char *line, t_cmdIndex *cmdIndex);
+int				ft_pipeError(char *line);
+void			pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
+t_cmdIndex 		*init_cmd(void);
+void			splitOrNot(char *line, t_cmdIndex *cmdIndex);
 
 //Parseur
-char	**ft_getpath(t_envSom *env);
+char			**ft_getpath(t_envSom *env);
 
 //Executer
-int		simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
-void 	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
-void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
-void 	ft_execve(char *cmd, char **envp);
+int				simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
+void 			multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
+void 			exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
+void 			ft_execve(char *cmd, char **envp);
 
 //pipe
-void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
+void			ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 
 //FORKING
-pid_t	fork_error(void);
+pid_t			fork_error(void);
 
 //Builtins
-int		ft_builtins(t_cmd *cmd, t_envSom *env);
-int		ft_env(t_envSom *env);
-int		ft_pwd(void);
-void	ft_cd(t_cmd *cmd, t_envSom *env);
-int		ft_echo(t_cmd *cmd);
-void	ft_exit(void);
-int		ft_export(t_envSom *env, t_cmd *cmd);
-int 	ft_unset(t_envSom *env, t_cmd *cmd);
+int				ft_builtins(t_cmd *cmd, t_envSom *env);
+int				ft_env(t_envSom *env);
+int				ft_pwd(void);
+void			ft_cd(t_cmd *cmd, t_envSom *env);
+int				ft_echo(t_cmd *cmd);
+void			ft_exit(void);
+int				ft_export(t_envSom *env, t_cmd *cmd);
+int 			ft_unset(t_envSom *env, t_cmd *cmd);
 
 //env
-t_envSom *init_envp(char **envp);
-void	change_pwd(t_envSom *env);
-void	change_oldpwd(t_envSom *env, char *oldpwd);
-int 	have_olpwd(char **envp);
-void	push_env(char *envp, t_envSom *som);
+t_envSom 		*init_envp(char **envp);
+void			change_pwd(t_envSom *env);
+void			change_oldpwd(t_envSom *env, char *oldpwd);
+int 			have_olpwd(char **envp);
+void			push_env(char *envp, t_envSom *som);
 
 //utils
-void 	print_list(t_cmdIndex *cmdIndex);
-void    printTitle(void);
-void	pass_space(char *str, int *i);
-int		is_end_redir(char c);
-void	no_str(char *cmd);
+void 			print_list(t_cmdIndex *cmdIndex);
+void    		printTitle(void);
+void			pass_space(char *str, int *i);
+int				is_end_redir(char c);
+void			no_str(char *cmd);
+void			get_file(char *str, int *i);
 
 //free
-void	free_list(t_cmdIndex *index);
-void	free_tab(char **str);
+void			free_list(t_cmdIndex *index);
+void			free_tab(char **str);
 
 //init list redirection
 t_redirIndex	*init_redirI(void);
-void			pushback_redir(t_redirIndex *i);
+void			pushback_redir(t_redirIndex *i, int type);
 int 			lookIfRedir(char *line);
 void			redirOrNot(t_cmdIndex *index);
 void			initRedirOrnot(t_cmdIndex *index);

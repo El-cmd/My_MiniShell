@@ -17,4 +17,3 @@ int	simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex)
 	}
 	return 0;
 }
-
