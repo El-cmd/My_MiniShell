@@ -8,37 +8,24 @@ void	malloc_all(t_data *data)
 	malloc_redir(data);
 }
 
+//Open des file parser plus haut, dans lexec si fd = -1 exit le process
+void    ft_open(t_redir *red)
+{
+    if (red->type == APPEND)
+        red->fd = open(red->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+    else if (red->type == R_OUT)
+        red->fd = open(red->file,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    else if (red->type == R_IN)
+        red->fd = open(red->file, O_RDONLY, 0644);
+}
 
-//en construction ---------------->>>>>>>
-// decoupe les file des redirections
-//void	get_file_redir(t_data *data)
-//{
-//	int i;
-//
-//	i = 0;
-//	t_cmd *tmp;
-//	t_redir *redir;
-//	redir = tmp->lredir->begin;
-//	tmp = data->cmdIndex->begin;
-//	while (tmp->cmd[i])
-//	{
-//		if (tmp->cmd[i] == '<')
-//		{
-//			i++;
-//			if (tmp->cmd[i] == '<')
-//			{
-//				i++;
-//				pass_space(tmp->cmd, i);
-//				//ici mettre le substr
-//				get_file(tmp->cmd, i);
-//			}
-//			else
-//			{
-//				pass_space(tmp->cmd, i);
-//				get_file(tmp->cmd, i);
-//			}
-//		}
-//		i++;
-//	}
-//	return (0);
-//}
+// decoupe les fichier de redirection et open les file en en mettant les fd dans ls struct
+void    begin_end_file(int i, t_redir *red, char *str)
+{
+    red->begin = i;
+    while (str[i] && str[i] != '>' && str[i] != '<' && str[i] != ' ')
+        i++;
+    red->len = i - red->begin;
+    red->file = ft_substr(str, red->begin, red->len);
+    ft_open(red);    
+}
