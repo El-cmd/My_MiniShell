@@ -191,6 +191,7 @@ int 			lookIfRedir(char *line);
 
 /* redir_pars.c */
 void	malloc_all(t_data *data);
+void    begin_end_file(int i, t_redir *red, char *str);
 
 /* SIGNAUX */
 /* signal_handler.c */
@@ -206,6 +207,5 @@ int		is_end_redir(char c);
 void 	no_str(char *cmd);
 void	get_file(char *str, int *i);
 void	printTitle(void);
-void    begin_end_file(int i, t_redir *red, char *str);
 
 #endif

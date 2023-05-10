@@ -19,7 +19,7 @@ void    ft_open(t_redir *red)
         red->fd = open(red->file, O_RDONLY, 0644);
 }
 
-// decoupe les fichier de redirection et open les file en en mettant les fd dans ls struct
+//decoupe les fichier de redirection et open les file en en mettant les fd dans ls struct
 void    begin_end_file(int i, t_redir *red, char *str)
 {
     red->begin = i;
