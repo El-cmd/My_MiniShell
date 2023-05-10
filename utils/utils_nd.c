@@ -8,4 +8,5 @@ void    begin_end_file(int i, t_redir *red, char *str)
         i++;
     red->len = i - red->begin;
     red->file = ft_substr(str, red->begin, red->len);
+    
 }
