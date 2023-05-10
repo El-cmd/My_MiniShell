@@ -77,7 +77,7 @@ typedef struct s_redir
 	int type;
 	char *file;
 	int	begin;
-	int end;
+	int len;
 	struct s_redir *next;
 	struct s_redir *back;
 } t_redir;
