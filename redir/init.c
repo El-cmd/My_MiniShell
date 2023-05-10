@@ -52,14 +52,14 @@ int malloc_out(char *str, int *i, t_redirIndex *tmp)
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp, APPEND);
+			pushback_redir(tmp, APPEND, *i, str);
 		}
 		else
 		{
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp, R_OUT);
+			pushback_redir(tmp, R_OUT, *i, str);
 		}
 	}
 	return (0);
@@ -77,14 +77,14 @@ int malloc_in(char *str, int *i, t_redirIndex *tmp)
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp, HERD);
+			pushback_redir(tmp, HERD, *i, str);
 		}
 		else
 		{
 			pass_space(str, i);
 			if (is_end_redir(str[*i]) == 1)
 				return(EXIT_FAILURE);
-			pushback_redir(tmp, R_IN);
+			pushback_redir(tmp, R_IN, *i, str);
 		}
 	}
 	return (0);

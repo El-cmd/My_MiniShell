@@ -22,7 +22,7 @@ t_redirIndex	*init_redirI(void)
 
 //tout est dans le nom ne pas oublier de mettre le type
 //et de parser le file 
-void	pushback_redir(t_redirIndex *i, int type)
+void	pushback_redir(t_redirIndex *i, int type, int index, char *str)
 {
 	t_redir *redir;
 
@@ -30,6 +30,7 @@ void	pushback_redir(t_redirIndex *i, int type)
 	if (!redir)
 		exit(EXIT_FAILURE);
 	redir->type = type;
+	begin_end_file(index, redir, str);
 	redir->next = NULL;
 	redir->back = NULL;
 	if (i->size == 0)

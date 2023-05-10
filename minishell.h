@@ -76,6 +76,8 @@ typedef struct s_redir
 {
 	int type;
 	char *file;
+	int	begin;
+	int end;
 	struct s_redir *next;
 	struct s_redir *back;
 } t_redir;
@@ -185,7 +187,7 @@ int 	malloc_redir(t_data *data);
 
 /* init_redir.c */
 t_redirIndex	*init_redirI(void);
-void			pushback_redir(t_redirIndex *i, int type);
+void			pushback_redir(t_redirIndex *i, int type, int index, char *str);
 int 			lookIfRedir(char *line);
 
 /* redir_pars.c */
@@ -205,6 +207,7 @@ int		is_end_redir(char c);
 void 	no_str(char *cmd);
 void	get_file(char *str, int *i);
 void	printTitle(void);
+void    begin_end_file(int i, t_redir *red, char *str);
 
 /*
 //SIGNAL HANDLER
