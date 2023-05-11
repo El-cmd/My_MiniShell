@@ -27,26 +27,17 @@ void ft_execve(char *cmd, char **envp)
 }
 
 //regarde quel execution faire si une ou plusieur cmd
-//void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
-void exec(t_data *data)
+void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
 {
-	t_cmdIndex	*cmd;
-	t_envSom	*doberman;
-	t_cmd		*tmp;
+	t_cmd *tmp;
 
-	cmd = data->cmdIndex;
-	doberman = data->env;
 	tmp = cmd->begin;
 	if (cmd->begin->redir == true)
 		return ;
 	if (cmd->nb_cmd == 1)
-		simple_cmd(doberman, tmp, data->envp, cmd);
-	if (cmd->nb_cmd > 1)
-		ft_pipex(cmd, data->argv, data->envp);
-	/*
+		simple_cmd(doberman, tmp, envp, cmd);
 	else if (cmd->nb_cmd == 2)
-		ft_simple_pipe(cmd, data->envp, doberman);
+		ft_simple_pipe(cmd, envp, doberman);
 	else if (cmd->nb_cmd > 2)
-		multi_pipe(cmd, data->envp, doberman);
-	*/
+		multi_pipe(cmd, envp, doberman);
 }

@@ -38,9 +38,6 @@ SRC = main.c \
 	  parsing/parsing.c \
 	  exec/getPath.c \
 	  exec/one_cmd.c \
-	  exec/several_cmd.c \
-	  exec/exec.c \
-	  exec/ft_pipex.c \
 	  builtins/pwd.c \
 	  builtins/echo.c \
 	  builtins/exit.c \
@@ -50,6 +47,7 @@ SRC = main.c \
 	  builtins/ft_unset.c \
 	  free/free.c \
 	  builtins/exec_builtin.c \
+	  exec/several_cmd.c \
 	  redir/init_redir.c \
 	  signaux/signal_handler.c \
 	  error/gestion.c \
@@ -57,6 +55,7 @@ SRC = main.c \
 	  redir/init.c \
 	  utils/utils.c \
 	  redir/redir_pars.c \
+	  exec/exec.c \
 	  utils/utils_nd.c
 
 all: $(NAME)

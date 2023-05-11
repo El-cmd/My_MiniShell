@@ -25,22 +25,6 @@
 #define BUFFER_SIZE_MAX 2048
 #define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 
-/* piping cmd */
-typedef struct s_pipex
-{
-	char			*herd;
-	char			*append;
-	char			*r_in;
-	char			*r_out;
-	char			*in;
-	char			*out;
-	char			*err;
-	char			*cmd;
-	int				rd_in;
-	int				wr_out;
-	int				pos;
-	struct s_pipex	*next;
-}	t_pipe_cmd;
 
 //environnement
 typedef struct s_env
@@ -75,7 +59,6 @@ typedef struct s_cmd
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
-	t_pipe_cmd	*p_cmd;
 } t_cmd;
 
 //index redirections
@@ -102,7 +85,6 @@ typedef struct s_redir
 //datas
 typedef struct s_data
 {
-	char **argv;
 	char **envp;
 	t_envSom *env;
 	t_cmdIndex *cmdIndex;
@@ -146,8 +128,7 @@ pid_t	fork_error(void);
 
 /* EXEC */
 /* exec.c */
-//void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
-void 	exec(t_data *data);
+void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(char *cmd, char **envp);
 
 /* getPath.c */
@@ -157,13 +138,12 @@ char	**ft_getpath(t_envSom *env);
 int		simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
 
 /* several_cmd.c */
-void	ft_pipex(t_cmdIndex *index, char **argv, char **envp);
-
 void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2);
 void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2]);
 void	ft_parent(int pid, int *status, int fd[2]);
+
 /* FREE */
 /* free.c */
 t_cmd 	*pop_front_dlist(t_cmdIndex *index);
@@ -172,7 +152,7 @@ void	free_tab(char **str);
 
 /* INIT */
 /* init_datdas.c */
-void	init_data(t_data *data, char **av, char **en);
+void	init_data(t_data *data, char **en);
 void 	init_data_cmd(t_data *data);
 
 /* PARSING */
