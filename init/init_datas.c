@@ -5,9 +5,10 @@ void	init_data(t_data *data, char **en);
 void 	init_data_cmd(t_data *data);
 */
 //init les datas avant le lancement du shell
-void	init_data(t_data *data, char **en)
+void	init_data(t_data *data, char **av, char **en)
 {
 	printTitle();
+	data->argv = av;
 	data->envp = en;
 	data->env = init_envp(en);
 	signal_handler();
