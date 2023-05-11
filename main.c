@@ -15,7 +15,8 @@ void	eternal_loop(t_data *data)
 		splitOrNot(str, data->cmdIndex);
 		//init redirection token
 		malloc_all(data);
-		exec(data->cmdIndex, data->path_exec, data->env);
+		exec(data);
+		//exec(data->cmdIndex, data->path_exec, data->env);
 		free(str);
 	}
 }
@@ -26,7 +27,7 @@ int main(int argc, char **argv, char **envp)
 
 
 	the_arg(argc, argv);
-	init_data(&data, envp);
+	init_data(&data, argv, envp);
 	eternal_loop(&data);
 	return (0);
 }
