@@ -1,30 +1,38 @@
 #ifndef MINISHELL_H
 	#define MINISHELL_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/wait.h>
-#include <stdbool.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <signal.h>
-#include <errno.h>
-#include "libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
+# include <stdbool.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <signal.h>
+# include <errno.h>
+# include "libft/libft.h"
 
-#define HERD 7 // <<
-#define APPEND 6 // >>
-#define R_IN 5 // <
-#define R_OUT 4 // > 
-#define IN 1
-#define OUT 0
-#define ERR 2
-#define BUFFER_SIZE_MAX 2048
-#define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
+# define HERD 7 // <<
+# define APPEND 6 // >>
+# define R_IN 5 // <
+# define R_OUT 4 // > 
+# define IN 1
+# define OUT 0
+# define ERR 2
+# define BUFFER_SIZE_MAX 2048
+# define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 
+typedef struct s_pipex
+{
+	char			*cmd;
+	int				rd_in;
+	int				wr_out;
+	int				pos;
+	struct s_pipex	*next;
+}	t_pipe_cmd;
 
 //environnement
 typedef struct s_env
@@ -59,6 +67,7 @@ typedef struct s_cmd
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
+	t_pipe_cmd	*p_cmd;
 } t_cmd;
 
 //index redirections
@@ -131,6 +140,7 @@ pid_t	fork_error(void);
 void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(char *cmd, char **envp);
 
+void 	ft_pipex(t_cmdIndex *index, char **envp, t_envSom *env);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);
 
