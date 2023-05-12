@@ -6,6 +6,7 @@ void	malloc_all(t_data *data)
 	redirOrNot(data->cmdIndex);
 	initRedirOrnot(data->cmdIndex);
 	malloc_redir(data);
+    exec_find_cmd(data);
 }
 
 //Open des file parser plus haut, dans lexec si fd = -1 exit le process

@@ -62,7 +62,8 @@ typedef struct s_cmdIndex
 //liste chainée des commandes
 typedef struct s_cmd
 {
-	char *cmd;
+	char *cmd; // si il ny a pas de redirection regarder cette string
+	char *just_cmd; // si il y a des redirection regarder cette string
 	bool redir;
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
@@ -182,6 +183,7 @@ void		push_env(char *envp, t_envSom *som);
 void		change_pwd(t_envSom *env);
 void		change_oldpwd(t_envSom *env, char *oldpwd);
 t_envSom	*init_envp(char **envp);
+void 		exec_find_cmd(t_data *data);
 
 /* parsing.c */
 
@@ -217,5 +219,7 @@ int		is_end_redir(char c);
 void 	no_str(char *cmd);
 void	get_file(char *str, int *i);
 void	printTitle(void);
+int 	is_redir_or_cmd(char c);
+void 	cut(t_cmd *cmd, int *i);
 
 #endif

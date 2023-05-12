@@ -67,3 +67,66 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 	else if (ft_pipeError(line) == 0)
 		splitage(line, cmdIndex);
 }
+
+void find_cmd(t_cmd *cmd)
+{
+	int i;
+
+	i = 0;
+	if (cmd->redir == false)
+		return ;
+	else 
+	{
+		while (cmd->cmd[i])
+		{
+			pass_space(cmd->cmd, &i);
+			if (is_redir_or_cmd(cmd->cmd[i]))
+			{
+				i++;
+				if (is_redir_or_cmd(cmd->cmd[i]))
+				{
+					i++;
+					pass_space(cmd->cmd, &i);
+					get_file(cmd->cmd, &i);
+					pass_space(cmd->cmd, &i);
+					i--;
+					if (is_redir_or_cmd(cmd->cmd[i] == 0))
+					{
+						cut(cmd, &i);
+						return;
+					}
+				}
+				else
+				{
+					pass_space(cmd->cmd, &i);
+					get_file(cmd->cmd, &i);
+					pass_space(cmd->cmd, &i);
+					i--;
+					if (is_redir_or_cmd(cmd->cmd[i] == 0))
+					{
+						cut(cmd, &i);
+						return ;
+					}
+				}
+			}
+			else
+			{
+				cut(cmd, &i);
+				return ;
+			}
+			i++;
+		}
+	}
+}
+
+void exec_find_cmd(t_data *data)
+{
+	t_cmd *tmp;
+
+	tmp = data->cmdIndex->begin;
+	while (tmp)
+	{
+		find_cmd(tmp);
+		tmp = tmp->next;
+	}
+}

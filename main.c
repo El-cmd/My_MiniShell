@@ -15,6 +15,14 @@ void	eternal_loop(t_data *data)
 		splitOrNot(str, data->cmdIndex);
 		//init redirection token
 		malloc_all(data);
+		//t_cmd *tmp = data->cmdIndex->begin;
+		//while (tmp)
+		//{
+		//	printf("just la commande: %s\n", tmp->just_cmd);
+		//	printf("just la commande cmd: %s\n", tmp->cmd);
+		//	printf("redir: %d\n", tmp->redir);
+		//	tmp = tmp->next;
+		//}
 		exec(data->cmdIndex, data->path_exec, data->env);
 		free(str);
 	}
@@ -28,5 +36,6 @@ int main(int argc, char **argv, char **envp)
 	the_arg(argc, argv);
 	init_data(&data, envp);
 	eternal_loop(&data);
+	rl_clear_history();
 	return (0);
 }
