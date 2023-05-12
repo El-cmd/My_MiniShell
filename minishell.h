@@ -19,20 +19,24 @@
 # define APPEND 6 // >>
 # define R_IN 5 // <
 # define R_OUT 4 // > 
-# define IN 1
-# define OUT 0
+# define IN 0
+# define OUT 1
 # define ERR 2
 # define BUFFER_SIZE_MAX 2048
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 
 typedef struct s_pipex
 {
-	char			*cmd;
-	int				rd_in;
-	int				wr_out;
-	int				pos;
-	struct s_pipex	*next;
-}	t_pipe_cmd;
+	char	*infile;
+	char	*outfile;
+	char	**paths;
+	int		prev_fd;
+	int		pipe_fd[2];
+	int		num_commans;
+	int		active_cmds;
+	char	**commands;
+	int		heredoc_fd;
+}	t_pipex;
 
 //environnement
 typedef struct s_env
@@ -68,7 +72,7 @@ typedef struct s_cmd
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
-	t_pipe_cmd	*p_cmd;
+	t_pipex	*p_cmd;
 } t_cmd;
 
 //index redirections

@@ -39,6 +39,6 @@ void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
 	else if (cmd->nb_cmd == 2)
 		ft_simple_pipe(cmd, envp, doberman);
 	else if (cmd->nb_cmd > 2)
-		multi_pipe(cmd, envp, doberman);
-	 	//ft_pipex(cmd, envp, doberman);
+	 	ft_pipex(cmd, envp, doberman);
+		//multi_pipe(cmd, envp, doberman);
 }

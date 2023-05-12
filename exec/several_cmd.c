@@ -86,7 +86,7 @@ void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2)
 void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2])
 {
 	close(fd[0]);
-	dup2(fd[1], IN);
+	dup2(fd[1], 1);
 	close(fd[1]);
 	if (ft_builtins(cmd, env) == 0)
 		exit(0);
@@ -96,7 +96,7 @@ void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2])
 void	ft_parent(int pid, int *status, int fd[2])
 {
 	close(fd[1]);
-	dup2(fd[0], OUT);
+	dup2(fd[0], 0);
 	close(fd[0]);
 	waitpid(pid, status, 0);
 }
