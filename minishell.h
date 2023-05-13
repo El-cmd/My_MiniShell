@@ -178,6 +178,10 @@ int		ft_pipeError(char *line);
 void	splitage(char *line, t_cmdIndex *cmdIndex);
 void	splitOrNot(char *line, t_cmdIndex *cmdIndex);
 
+/* cut.c */
+void 		cut(t_cmd *cmd, int *i);
+void 		exec_find_cmd(t_data *data);
+
 /* ft_init_list.c */
 t_cmdIndex *init_cmd(void);
 void 		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
@@ -189,7 +193,6 @@ void		push_env(char *envp, t_envSom *som);
 void		change_pwd(t_envSom *env);
 void		change_oldpwd(t_envSom *env, char *oldpwd);
 t_envSom	*init_envp(char **envp);
-void 		exec_find_cmd(t_data *data);
 
 /* parsing.c */
 
@@ -226,6 +229,5 @@ void 	no_str(char *cmd);
 void	get_file(char *str, int *i);
 void	printTitle(void);
 int 	is_redir_or_cmd(char c);
-void 	cut(t_cmd *cmd, int *i);
 
 #endif
