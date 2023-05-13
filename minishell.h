@@ -32,7 +32,7 @@ typedef struct s_pipex
 	char	**paths;
 	int		prev_fd;
 	int		pipe_fd[2];
-	int		num_commans;
+	int		num_commands;
 	int		active_cmds;
 	char	**commands;
 	int		heredoc_fd;
@@ -142,10 +142,12 @@ pid_t	fork_error(void);
 
 /* EXEC */
 /* exec.c */
-void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
+void 	exec(t_data *data);
+//void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(char *cmd, char **envp);
 
-void 	ft_pipex(t_cmdIndex *index, char **envp, t_envSom *env);
+void 	ft_pipex(t_data *data);
+//void 	ft_pipex(t_cmdIndex *index, char **envp, t_envSom *env);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);
 

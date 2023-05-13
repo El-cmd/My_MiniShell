@@ -1,7 +1,7 @@
 #include "../minishell.h"
 
 /*
-void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
+void exec(t_cmdIndex *cmd, char **envp, t_envSom *envp_nodes);
 void ft_execve(char *cmd, char **envp);
 */
 // fonction d'execution
@@ -27,18 +27,26 @@ void ft_execve(char *cmd, char **envp)
 }
 
 //regarde quel execution faire si une ou plusieur cmd
-void exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman)
+//void exec(t_cmdIndex *cmd, char **envp, t_envSom *envp_nodes)
+void exec(t_data *data)
 {
-	t_cmd *tmp;
+	t_cmdIndex *index;
+	char **path_dirs;
+	t_envSom *envp_nodes;
+	t_cmd *cmd;
 
-	tmp = cmd->begin;
-	if (cmd->begin->redir == true)
+	index = data->cmdIndex;
+	path_dirs = data->path_exec;
+	envp_nodes = data->env;
+	cmd = index->begin;
+	if (index->begin->redir == true)
 		return ;
-	if (cmd->nb_cmd == 1)
-		simple_cmd(doberman, tmp, envp, cmd);
-	else if (cmd->nb_cmd == 2)
-		ft_simple_pipe(cmd, envp, doberman);
-	else if (cmd->nb_cmd > 2)
-	 	ft_pipex(cmd, envp, doberman);
-		//multi_pipe(cmd, envp, doberman);
+	if (index->nb_cmd == 1)
+		simple_cmd(envp_nodes, cmd, path_dirs, index);
+	else if (index->nb_cmd == 2)
+		ft_simple_pipe(index, path_dirs, envp_nodes);
+	else if (index->nb_cmd > 2)
+	 	ft_pipex(data);
+	 	//ft_pipex(index, path_dirs, envp_nodes);
+		//multi_pipe(index, path_dirs, envp_nodes);
 }
