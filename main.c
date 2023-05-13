@@ -23,7 +23,8 @@ void	eternal_loop(t_data *data)
 		//	printf("redir: %d\n", tmp->redir);
 		//	tmp = tmp->next;
 		//}
-		exec(data->cmdIndex, data->path_exec, data->env);
+		exec(data);
+		//exec(data->cmdIndex, data->path_exec, data->env);
 		free(str);
 	}
 }

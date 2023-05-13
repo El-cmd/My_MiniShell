@@ -11,6 +11,7 @@ SRC = main.c \
 	  libft/ft_strlcpy.c \
 	  libft/ft_strrchr.c \
 	  libft/ft_strnstr.c \
+	  libft/ft_strstr.c \
 	  libft/ft_strtrim.c \
 	  libft/ft_substr.c \
 	  libft/ft_memset.c \
