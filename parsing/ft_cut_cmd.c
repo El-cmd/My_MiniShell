@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:24:58 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/13 18:33:00 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 	if (ft_pipeError(line) == 1)
 		return ;
 	else if (ft_pipeError(line) == 2)
+	{
+		line = ft_strtrim(line, " ");
 		pushback_cmd(line, cmdIndex);
+	}
 	else if (ft_pipeError(line) == 0)
 		splitage(line, cmdIndex);
 }
