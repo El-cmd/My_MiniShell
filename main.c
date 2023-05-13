@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
+/*   Updated: 2023/05/13 18:23:58 by vloth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 //tout est dans le titre de ma fonction
@@ -15,14 +27,6 @@ void	eternal_loop(t_data *data)
 		splitOrNot(str, data->cmdIndex);
 		//init redirection token
 		malloc_all(data);
-		//t_cmd *tmp = data->cmdIndex->begin;
-		//while (tmp)
-		//{
-		//	printf("just la commande: %s\n", tmp->just_cmd);
-		//	printf("just la commande cmd: %s\n", tmp->cmd);
-		//	printf("redir: %d\n", tmp->redir);
-		//	tmp = tmp->next;
-		//}
 		exec(data);
 		//exec(data->cmdIndex, data->path_exec, data->env);
 		free(str);
@@ -32,7 +36,6 @@ void	eternal_loop(t_data *data)
 int main(int argc, char **argv, char **envp)
 {
 	t_data data;
-
 
 	the_arg(argc, argv);
 	init_data(&data, envp);
