@@ -115,6 +115,7 @@ typedef struct s_data
 	t_envSom *env;
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
+	int		exit_return;
 } t_data;
 
 /* BUILTINS */
