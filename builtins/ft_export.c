@@ -15,7 +15,7 @@
 //execute la cmd export en affichant notre liste chainee mais pas
 //dans lordre alpha, a faire
 //ou rajoute une variable dans notre env
-int ft_export(t_envSom *env, t_cmd *cmd)
+int ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
 {
 	t_env *tmp;
 	char **name;
@@ -34,5 +34,6 @@ int ft_export(t_envSom *env, t_cmd *cmd)
 	}
 	else
 		push_env(name[1], env);
+	data->exit_return = 0;
 	return (0);
 }

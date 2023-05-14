@@ -121,31 +121,31 @@ typedef struct s_data
 /* BUILTINS */
 /* cd.c */
 int 	settings_cd(t_cmd *cmd);
-void	ft_cd(t_cmd *cmd, t_envSom *env);
+void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data);
 
 /* echo.c */
 int		ft_echo_n(char *str, t_cmd *cmd);
-int		ft_echo(t_cmd *cmd);
+int		ft_echo(t_cmd *cmd, t_data *data);
 
 /* exec_builtin.c */
-int		ft_builtins(t_cmd *cmd, t_envSom *env);
+int		ft_builtins(t_cmd *cmd, t_envSom *env, t_data *data);
 
 /* exit.c */
-void	ft_exit(void);
+void	ft_exit(t_cmd *cmd, t_data *data);
 
 /* ft_env.c */
-int 	ft_env(t_envSom *env);
+int 	ft_env(t_envSom *env, t_data *data);
 int 	have_olpwd(char **envp);
 
 /* ft_export.c */
-int 	ft_export(t_envSom *env, t_cmd *cmd);
+int 	ft_export(t_envSom *env, t_cmd *cmd, t_data *data);
 
 /* ft_unset.c */
 int 	search_egal(char *str);
-int 	ft_unset(t_envSom *env, t_cmd *cmd);
+int 	ft_unset(t_envSom *env, t_cmd *cmd, t_data *data);
 
 /* pwd.c */
-int		ft_pwd(void);
+int		ft_pwd(t_data *data);
 
 /* ERROR */
 /* gestion.c */
@@ -157,7 +157,7 @@ pid_t	fork_error(void);
 /* exec.c */
 void 	exec(t_data *data);
 //void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
-void 	ft_execve(char *cmd, char **envp);
+void 	ft_execve(char *cmd, char **envp, t_data *data);
 
 void 	ft_pipex(t_data *data);
 //void 	ft_pipex(t_cmdIndex *index, char **envp, t_envSom *env);
@@ -165,13 +165,13 @@ void 	ft_pipex(t_data *data);
 char	**ft_getpath(t_envSom *env);
 
 /* one_cmd.c */
-int		simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex);
+int		simple_cmd(t_envSom *env, t_cmd *cmd, char **e, t_cmdIndex *c, t_data *d);
 
 /* several_cmd.c */
-void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
-void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
-void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2);
-void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2]);
+void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data* data);
+void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *data);
+void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2, t_data *data);
+void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *data);
 void	ft_parent(int pid, int *status, int fd[2]);
 
 /* FREE */

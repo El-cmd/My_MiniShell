@@ -13,17 +13,17 @@
 #include "../minishell.h"
 
 //execution dune seule cmd sans redirection ou pipe
-int	simple_cmd(t_envSom *env, t_cmd *cmd, char **envp, t_cmdIndex *cmdIndex)
+int	simple_cmd(t_envSom *env, t_cmd *cmd, char **e, t_cmdIndex *c, t_data *d)
 {
 	pid_t pid;
 
-	if (cmdIndex->nb_cmd == 1)
+	if (c->nb_cmd == 1)
 	{
-		if (ft_builtins(cmd, env) == 0)
+		if (ft_builtins(cmd, env, d) == 0)
 			return (0);
 		pid = fork();
 		if (pid == 0)
-			ft_execve(cmd->cmd, envp);
+			ft_execve(cmd->cmd, e, d);
 		else
 			wait(NULL);
 	}

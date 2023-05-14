@@ -28,7 +28,7 @@ int search_egal(char *str)
 }
 
 //cherche et enleve la variable demandé
-int ft_unset(t_envSom *env, t_cmd *cmd)
+int ft_unset(t_envSom *env, t_cmd *cmd, t_data *data)
 {
 	t_env *tmp;
 	char **name;
@@ -36,7 +36,10 @@ int ft_unset(t_envSom *env, t_cmd *cmd)
 	tmp = env->begin;
 	name = ft_split(cmd->cmd, ' ');
 	if (name[1] == NULL)
+	{
+		data->exit_return = 0;
 		return (0);
+	}
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->name, name[1], search_egal(tmp->name)) == 0)
@@ -53,6 +56,7 @@ int ft_unset(t_envSom *env, t_cmd *cmd)
 			return (0);
 		}
 		tmp = tmp->next;
-	};
+	}
+	data->exit_return = 0;
 	return (0);
 }

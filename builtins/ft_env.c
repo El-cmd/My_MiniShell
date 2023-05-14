@@ -14,7 +14,7 @@
 
 
 //execute la cmd env en affichant notre liste chainee 
-int ft_env(t_envSom *env)
+int ft_env(t_envSom *env, t_data *data)
 {
 	t_env *tmp;
 
@@ -24,6 +24,7 @@ int ft_env(t_envSom *env)
 		ft_putendl_fd(tmp->name, 1);
 		tmp = tmp->next;
 	}
+	data->exit_return = 0;
 	return (0);
 }
 

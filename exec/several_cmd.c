@@ -20,7 +20,7 @@ void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2]);
 void	ft_parent(int pid, int *status, int fd[2]);
 */
 // execution d'un seul pipe et donc deux commandes
-void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
+void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *d)
 {
 	pid_t pid;
 	pid_t pid2;
@@ -35,13 +35,13 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 			pipe(fd);
 			pid = fork_error();
 			if (pid == 0)
-				ft_child(index->begin, envp, env, fd);
+				ft_child(index->begin, envp, env, fd, d);
 			else
 			{
 				ft_parent(pid, &status, fd);
-				if (ft_builtins(index->end, env) == 0)
-					exit(0);
-				ft_execve(index->end->cmd, envp);
+				if (ft_builtins(index->end, env, d) == 0)
+					exit(d->exit_return);
+				ft_execve(index->end->cmd, envp, d);
 			}
 		}
 		else
@@ -49,7 +49,7 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 	}
 }
 
-void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
+void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *d)
 {
 	pid_t	pid;
 	int		status;
@@ -62,7 +62,7 @@ void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 	{
 		while (cmd)
 		{
-			ft_multi_pipe(cmd, envp, env, &status2);
+			ft_multi_pipe(cmd, envp, env, &status2, d);
 			cmd = cmd->next;
 		}
 	}
@@ -70,7 +70,7 @@ void multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env)
 		waitpid(pid, &status, 0);
 }
 
-void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2)
+void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2, t_data *d)
 {
 	int		fd[2];
 	pid_t	pid2;
@@ -80,7 +80,7 @@ void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2)
 			exit(1);
 	pid2 = fork_error();
 	if (pid2 == 0)
-		ft_child(cmd, envp, env, fd);
+		ft_child(cmd, envp, env, fd, d);
 	else
 	{
 		if (cmd->next != NULL)
@@ -88,27 +88,27 @@ void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2)
 		else
 		{
 			ft_parent(pid2, status2, fd);
-			if (ft_builtins(cmd, env) == 0)
-				exit(0);
-			ft_execve(cmd->cmd, envp);
+			if (ft_builtins(cmd, env, d) == 0)
+				exit(d->exit_return);
+			ft_execve(cmd->cmd, envp, d);
 		}
 	}
 }
 
-void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2])
+void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *d)
 {
 	close(fd[0]);
-	dup2(fd[1], 1);
+	dup2(fd[1], OUT);
 	close(fd[1]);
-	if (ft_builtins(cmd, env) == 0)
-		exit(0);
-	ft_execve(cmd->cmd, envp);
+	if (ft_builtins(cmd, env, d) == 0)
+		exit(d->exit_return);
+	ft_execve(cmd->cmd, envp, d);
 }
 
 void	ft_parent(int pid, int *status, int fd[2])
 {
 	close(fd[1]);
-	dup2(fd[0], 0);
+	dup2(fd[0], IN);
 	close(fd[0]);
 	waitpid(pid, status, 0);
 }

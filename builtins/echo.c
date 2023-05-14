@@ -23,7 +23,7 @@ int ft_echo_n(char *str, t_cmd *cmd)
 }
 
 //execute echo mais encore quelques truc a regler
-int	ft_echo(t_cmd *cmd)
+int	ft_echo(t_cmd *cmd, t_data *data)
 {
 	char *str;
 
@@ -31,14 +31,14 @@ int	ft_echo(t_cmd *cmd)
 	if (ft_strncmp(cmd->cmd, "echo -n ", 8)== 0)
 	{
 		ft_echo_n(str, cmd);
-		return 0;
+		data->exit_return = 0;
 	}
 	else
 	{
 		str = cmd->cmd + 5;
 		str = ft_strtrim(str, " ");
 		ft_putendl_fd(str, 1);
-		return 0;
+		data->exit_return = 0;
 	}
-	return -1;
+	return 0;
 }

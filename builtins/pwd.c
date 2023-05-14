@@ -13,7 +13,7 @@
 #include "../minishell.h"
 
 //affiche le repertoir courrant
-int	ft_pwd(void)
+int	ft_pwd(t_data *data)
 {
 	char	*pwd;
 
@@ -22,5 +22,6 @@ int	ft_pwd(void)
 		return (1);
 	ft_putendl_fd(pwd, 1);
 	free(pwd);
+	data->exit_return = 0;
 	return (0);
 }

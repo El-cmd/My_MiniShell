@@ -17,7 +17,7 @@ void exec(t_cmdIndex *cmd, char **envp, t_envSom *envp_nodes);
 void ft_execve(char *cmd, char **envp);
 */
 // fonction d'execution
-void ft_execve(char *cmd, char **envp)
+void ft_execve(char *cmd, char **envp, t_data *data)
 {
 	char **cmdarg;
 	int y;
@@ -29,13 +29,14 @@ void ft_execve(char *cmd, char **envp)
 	while (envp[++y])
 	{
 		exec = ft_strjoin(ft_strjoin(envp[y], "/"), cmdarg[0]);
-		execve(exec, cmdarg, envp);
+		data->exit_return = execve(exec, cmdarg, envp);
 		free(exec);
 	}
 	ft_putstr_fd(cmdarg[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	free_tab(cmdarg);
-	exit(127);
+	data->exit_return = errno;
+	exit(data->exit_return);
 }
 
 //regarde quel execution faire si une ou plusieur cmd
@@ -54,9 +55,9 @@ void exec(t_data *data)
 	if (index->begin->redir == true)
 		return ;
 	if (index->nb_cmd == 1)
-		simple_cmd(envp_nodes, cmd, path_dirs, index);
+		simple_cmd(envp_nodes, cmd, path_dirs, index, data);
 	else if (index->nb_cmd == 2)
-		ft_simple_pipe(index, path_dirs, envp_nodes);
+		ft_simple_pipe(index, path_dirs, envp_nodes, data);
 	else if (index->nb_cmd > 2)
 	 	ft_pipex(data);
 	 	//ft_pipex(index, path_dirs, envp_nodes);
