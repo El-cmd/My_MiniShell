@@ -6,13 +6,12 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:00 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 20:38:28 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 21:34:30 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_global global;
 /*
 void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env);
 void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env);

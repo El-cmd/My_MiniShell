@@ -6,12 +6,12 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:23:58 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 21:33:48 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+t_global global;
 //tout est dans le titre de ma fonction
 void	eternal_loop(t_data *data)
 {

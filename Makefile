@@ -1,6 +1,8 @@
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 NAME = Minishell
+
+
 SRC = main.c \
 	  libft/ft_strlen.c \
 	  libft/ft_strjoin.c \
@@ -61,16 +63,25 @@ SRC = main.c \
 	  utils/utils_nd.c \
 	  parsing/cut.c
 
+OBJS = $(SRC:.c=.o)
+
+INCL = minishell.h
+
 all: $(NAME)
 
-$(NAME):
-	$(CC) $(FLAGS) $(SRC) -o $(NAME) -lreadline -g
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME) -lreadline -g
 	@printf "\e[92;5;118m\n>>> Executable ready\n\e[0m"
 
-clean:
-	rm -f $(NAME)
-	@printf "\033[00;31mm>>> Executable removed.\n\033[00m"
+%.o: %.c $(INCL)
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
-fclean: clean 
+clean:
+	rm -f $(OBJS)
+	@printf "\033[00;31m>>> objects removed.\n\033[00m"
+
+fclean:	clean
+		rm -rf $(NAME)
+		@printf "\033[00;31m>>> executable removed.\n\033[00m"
 
 re : fclean all

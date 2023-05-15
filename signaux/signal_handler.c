@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:24:31 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 21:33:52 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	sigint_handler(int sig)
 	(void)sig;
 	write(1, "\n", 1);
 	newline();
+	if (global.pid == 0)
+		rl_redisplay();
 }
 
 void sigquit_handler(int sig)

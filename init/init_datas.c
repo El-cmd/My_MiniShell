@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:25:15 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 21:37:59 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data(t_data *data, char **en)
 	printTitle();
 	data->envp = en;
 	data->env = init_envp(en);
+	global.pid = 42;
 	signal_handler();
 }
 

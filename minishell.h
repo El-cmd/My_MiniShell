@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 20:38:37 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 21:37:22 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,5 +252,7 @@ void 	no_str(char *cmd);
 void	get_file(char *str, int *i);
 void	printTitle(void);
 int 	is_redir_or_cmd(char c);
+
+extern t_global	global;
 
 #endif
