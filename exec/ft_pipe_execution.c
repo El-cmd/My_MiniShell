@@ -72,7 +72,7 @@ typedef struct s_glob
 	bool	in_exec;
 }	t_glob;
 
-extern	t_glob	g_mini;
+//extern	t_glob	g_mini;
 
 #define PIPE_IN 1
 #define PIPE_OUT 0

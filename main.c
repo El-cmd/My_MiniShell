@@ -36,7 +36,6 @@ void	eternal_loop(t_data *data)
 int main(int argc, char **argv, char **envp)
 {
 	t_data data;
-
 	the_arg(argc, argv);
 	init_data(&data, envp);
 	eternal_loop(&data);

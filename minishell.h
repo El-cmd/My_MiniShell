@@ -50,6 +50,13 @@ typedef struct s_pipex
 	int		heredoc_fd;
 }	t_pipex;
 
+//global
+typedef struct s_global
+{
+	pid_t	pid;
+}	t_global;
+
+
 //environnement
 typedef struct s_env
 {
@@ -115,8 +122,10 @@ typedef struct s_data
 	t_envSom *env;
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
+	t_global global;
 	int		exit_return;
 } t_data;
+
 
 /* BUILTINS */
 /* cd.c */
@@ -170,9 +179,9 @@ int		simple_cmd(t_envSom *env, t_cmd *cmd, char **e, t_cmdIndex *c, t_data *d);
 /* several_cmd.c */
 void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data* data);
 void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *data);
-void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, int *status2, t_data *data);
+void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, t_data *d);
 void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *data);
-void	ft_parent(int pid, int *status, int fd[2]);
+void	ft_parent(int fd[2]);
 
 /* FREE */
 /* free.c */
