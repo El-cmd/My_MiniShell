@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:00 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:26:01 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 20:38:28 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,53 @@ void wait_all(t_data *data)
 		}
 		cmd = cmd->next;
 	}
-
 }
+
+void	launch_cmd(t_cmd *cmd, t_data *data, int *fd)
+{
+	global.pid = fork();
+	if (global.pid < 0)
+		return ;
+	else if (global.pid == 0)
+		ft_child(cmd, data->path_exec, data->env, fd, data);
+	else
+		ft_parent(fd);
+	return ;
+}
+
+void	ft_exec(t_data *data)
+{
+	t_cmd *cmd;
+	int	fd[2];
+
+	cmd = data->cmdIndex->begin;
+	while (cmd)
+	{
+		if (pipe(fd) == -1)
+			return ;
+		launch_cmd(cmd, data, fd);
+		cmd = cmd->next;
+	}
+	wait_all(data);
+}
+
+void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *d)
+{
+	close(fd[0]);
+	if (cmd->next != NULL)
+		dup2(fd[1], OUT);
+	close(fd[1]);
+	if (ft_builtins(cmd, env, d) == 0)
+		exit(d->exit_return);
+	ft_execve(cmd->cmd, envp, d);
+}
+
+void	ft_parent(int *fd)
+{
+	close(fd[0]);		
+	close(fd[1]);
+}
+
 void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *d)
 {
 	int fd[2];
@@ -55,12 +100,12 @@ void ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *d)
 				ft_child(index->begin, envp, env, fd, d);
 			else
 			{
-				ft_parent(fd);
+				//ft_parent(fd, cmd);
 				if (ft_builtins(index->end, env, d) == 0)
 					exit(d->exit_return);
 				ft_execve(index->end->cmd, envp, d);
 			}
-			wait_all(d);
+			//wait_all(d);
 			exit(0);
 		}
 	}
@@ -109,23 +154,6 @@ void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, t_data *d)
 			ft_execve(cmd->cmd, envp, d);
 		//}
 	}
-}
-
-void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *d)
-{
-	close(fd[0]);
-	dup2(fd[1], OUT);
-	close(fd[1]);
-	if (ft_builtins(cmd, env, d) == 0)
-		exit(d->exit_return);
-	ft_execve(cmd->cmd, envp, d);
-}
-
-void	ft_parent(int fd[2])
-{
-	close(fd[1]);
-	dup2(fd[0], IN);
-	close(fd[0]);
 }
 
 /*

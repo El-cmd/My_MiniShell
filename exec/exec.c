@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:26:50 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 19:15:10 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void exec(t_data *data)
 		return ;
 	if (index->nb_cmd == 1)
 		simple_cmd(envp_nodes, cmd, path_dirs, index, data);
-	else if (index->nb_cmd == 2)
-		ft_simple_pipe(index, path_dirs, envp_nodes, data);
-	else if (index->nb_cmd > 2)
-	 	ft_pipex(data);
+	else if (index->nb_cmd >= 2)
+		ft_exec(data);
+	//	ft_simple_pipe(index, path_dirs, envp_nodes, data);
+	//else if (index->nb_cmd > 2)
+	// 	ft_pipex(data);
 	 	//ft_pipex(index, path_dirs, envp_nodes);
 		//multi_pipe(index, path_dirs, envp_nodes);
 }

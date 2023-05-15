@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:24:11 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 20:38:37 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,8 @@ void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data* data)
 void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *data);
 void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, t_data *d);
 void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *data);
-void	ft_parent(int fd[2]);
+void	ft_parent(int *fd);
+void	ft_exec(t_data *data);
 
 /* FREE */
 /* free.c */
