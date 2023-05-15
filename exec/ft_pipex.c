@@ -108,6 +108,20 @@ void ft_pipex(t_data *data)
 	ft_multiple_pipes(data);
 }
 
+void	print_pipex(t_pipex *pipex, t_data *data, int n)
+{
+	(void)data;
+	int	i = -1;
+
+	printf("command: '%s'\tactive_cmd:'%d'\tnb_cmd:'%d'\n", pipex->commands[n], pipex->active_cmds, data->cmdIndex->nb_cmd);
+	printf("\tprev_fd\t\t'%d'\n", pipex->prev_fd);
+	while (++i < 2)
+		printf("\tpipe_fd[%d]\t'%d'\n", i, pipex->pipe_fd[i]);
+	//printf("paths:\n");
+	//while (pipex->paths[++i])
+	//	printf("\t'%s'\n", pipex->paths[i]);
+}
+
 void	ft_multiple_pipes(t_data *data)
 {
 	//t_cmdIndex	*index;
@@ -118,20 +132,25 @@ void	ft_multiple_pipes(t_data *data)
 	pipex = NULL;
 	ft_init_pipex(&pipex);
 	ft_preprocess(pipex, data);
-	i = 0;
-	while (i < pipex->num_commands)
+	i = -1;
+	while (++i < pipex->num_commands)
 	{
 		ft_prepare_pipes(pipex, data, i);
 		if (ft_check_condition_to_execute(pipex) == 1)
 		{
-			//printf("so far so good\n");
+			print_pipex(pipex, data, i);
+			printf("<< exec >>\t");
 			ft_exec_command(pipex, data, pipex->commands[i]);
+			printf("<< exec done >>\n");
 			pipex->active_cmds++;
 		}
-		i++;
 	}
+	printf("WAIT\n");
+	//while (wait(0) > 0) {}
 	ft_wait_for_child_processes(pipex);
+	printf("<CLEAN\t");
 	ft_clean_full(pipex);
+	printf("clean done>\t");
 }
 
 void	ft_init_pipex(t_pipex **pipex)
@@ -174,7 +193,10 @@ void	ft_preprocess_cmds(t_pipex *pipex, t_data *data)
 		ft_error_clean_exit(pipex);
 	i = -1;
 	while (++i < data->cmdIndex->nb_cmd)
+	{
 		commands[i] = cmd->cmd;
+		cmd = cmd->next;
+	}
 	commands[i] = NULL;
 	pipex->commands = commands;
 	pipex->num_commands = i;
@@ -244,7 +266,7 @@ void	ft_prepare_pipes(t_pipex *pipex, t_data *data, int i)
 	if (i == 0)
 		ft_prepare_first(pipex);
 	else if (i == data->cmdIndex->nb_cmd - 1)
-		ft_prepare_first(pipex);
+		ft_prepare_last(pipex);
 	else
 		ft_prepare_next(pipex);
 }	
@@ -253,6 +275,7 @@ void	ft_prepare_first(t_pipex *pipex)
 {
 	int	fd[2];
 
+	printf("first\n");
 	fd[0] = -1;
 	fd[1] = -1;
 	if (pipe(fd) == -1)
@@ -266,6 +289,7 @@ void	ft_prepare_next(t_pipex *pipex)
 {
 	int	fd[2];
 
+	printf("middle\n");
 	fd[0] = -1;
 	fd[1] = -1;
 	pipex->prev_fd = pipex->pipe_fd[0];
@@ -278,10 +302,11 @@ void	ft_prepare_next(t_pipex *pipex)
 
 void	ft_prepare_last(t_pipex *pipex)
 {
+	printf("last\n");
 	close(pipex->pipe_fd[1]);
 	pipex->prev_fd = pipex->pipe_fd[0];
 	pipex->pipe_fd[0] = -1;
-	pipex->pipe_fd[1] = OUT;
+	pipex->pipe_fd[1] = 1;
 }
 
 int	ft_check_condition_to_execute(t_pipex *pipex)
@@ -306,16 +331,18 @@ void	ft_exec_command(t_pipex *pipex, t_data *data, char *command)
 	i = -1;
 	while (dirs[++i])
 		printf("'%s'\n", dirs[i]);
+	printf("before fork prev_fd: '%d'..", pipex->prev_fd);
 	*/
 	pid = fork();
 	if (pid < -1)
 		ft_perror_clean_exit(pipex, "Fork failure");
 	if (pid == 0)
 	{
+		printf("FORK->prev_fd: '%d'\t", pipex->prev_fd);
 		if (dup2(pipex->prev_fd, IN) == -1)
-			ft_perror_clean_exit(pipex, "Dup2 failure in child.");
+			ft_perror_clean_exit(pipex, "(from prev_fd) Dup2 failure in child.");
 		if (dup2(pipex->pipe_fd[1], OUT) == -1)
-			ft_perror_clean_exit(pipex, "Dup2 failure in child.");
+			ft_perror_clean_exit(pipex, "(from fd[1]) Dup2 failure in child.");
 		ft_close_fds(pipex);
 		command_path = ft_find_path_exit(pipex, data, command);
 		splitted_command = ft_split(command, ' ');
@@ -325,7 +352,11 @@ void	ft_exec_command(t_pipex *pipex, t_data *data, char *command)
 			ft_perror_clean_exit(pipex, "Execve failure");
 	}
 	else
+	{
+		printf("in parrent. chid:'%d' .. ", pid);
+		// we might be closing this before dup2 in child
 		close(pipex->prev_fd);
+	}
 }
 
 char	*ft_find_path_exit(t_pipex *pipex, t_data *data, char *full_cmd)
@@ -384,9 +415,10 @@ void	ft_wait_for_child_processes(t_pipex *pipex)
 	{
 		if (wait(&status) == -1)
 			ft_perror_clean_exit(pipex, "Wait Failed");
+		printf("\tstatus: '%d'\n", status);
 		if (WIFSIGNALED(status) && WTERMSIG(status) != 13)
 		{
-			ft_putstr_fd("Child was terminated by signal ", 2);
+			ft_putstr_fd("\nChild was terminated by signal ", 2);
 			ft_putnbr_fd(WTERMSIG(status), 2);
 			ft_putchar_fd('\n', 2);
 		}
