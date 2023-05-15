@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 21:37:22 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 22:28:27 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ typedef struct s_data
 	t_envSom *env;
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
-	t_global global;
 	int		exit_return;
 } t_data;
 

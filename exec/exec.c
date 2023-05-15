@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 21:18:53 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 22:25:39 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void ft_execve(char *cmd, char **envp, t_data *data)
 void exec(t_data *data)
 {
 	t_cmdIndex *index;
-	char **path_dirs;
-	t_envSom *envp_nodes;
-	t_cmd *cmd;
+	//char **path_dirs;
+	//t_envSom *envp_nodes;
+	//t_cmd *cmd;
 
 	index = data->cmdIndex;
-	path_dirs = data->path_exec;
-	envp_nodes = data->env;
-	cmd = index->begin;
+	//path_dirs = data->path_exec;
+	//envp_nodes = data->env;
+	//cmd = index->begin;
 	if (index->begin->redir == true)
 		return ;
-	if (index->nb_cmd == 1)
-		simple_cmd(envp_nodes, cmd, path_dirs, index, data);
-	else if (index->nb_cmd >= 2)
+	//if (index->nb_cmd == 1)
+	//	simple_cmd(envp_nodes, cmd, path_dirs, index, data);
+	else if (index->nb_cmd)
 		ft_exec(data);
 	//	ft_simple_pipe(index, path_dirs, envp_nodes, data);
 	//else if (index->nb_cmd > 2)

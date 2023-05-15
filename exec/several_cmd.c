@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:00 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 21:34:30 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/15 22:30:06 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	ft_exec(t_data *data)
 	int	fd[2];
 
 	cmd = data->cmdIndex->begin;
+	if (data->cmdIndex->nb_cmd == 1 && ft_builtins(cmd, data->env, data) == 0)
+		return ;
 	while (cmd)
 	{
 		if (pipe(fd) == -1)
