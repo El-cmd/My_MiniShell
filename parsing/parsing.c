@@ -1,36 +1,19 @@
 #include "../minishell.h"
 
-//int	redir_compteur(char *line)
-//{
-//	int i;
-//	t_redirIndex *in;
-//
-//	i = 0;
-//	in = init_redirI();
-//	while(line[i] != '\0')
-//	{
-//		if (line[i] == '<' && line[i + 1] == '<')
-//		{
-//			i+=2;
-//			return (i);
-//		}
-//		else if (line[i] == '<')
-//		{
-//			i++;
-//			return (i);
-//		}
-//		else if (line[i] == '>' && line[i + 1] == '>')
-//		{
-//			i+=2;
-//			return (i);
-//		}
-//		else if (line[i] == '>')
-//		{
-//			i++;
-//			return (i);
-//		}
-//		i++;
-//	}
-//	return(-1);
-//}
-//
+void cut_arg(t_data *data)
+{
+    t_cmd *cmd;
+    
+    cmd = data->cmdIndex->begin;
+    while (cmd)
+    {
+        if (cmd->is_built == false)
+        {
+            if (cmd->redir)
+                cmd->argv = ft_split(cmd->just_cmd, ' ');
+            else
+                cmd->argv = ft_split(cmd->cmd, ' ');
+        }
+        cmd = cmd->next;
+    }
+}

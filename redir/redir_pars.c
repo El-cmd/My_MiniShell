@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/16 15:06:48 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:47:02 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	malloc_all(t_data *data)
 	malloc_redir(data);
     exec_find_cmd(data);
     is_built(data);
+    cut_arg(data);
 }
 
 //Open des file parser plus haut, dans lexec si fd = -1 exit le process

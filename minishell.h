@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/16 15:06:04 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:43:52 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_cmd
 	char *cmd; // si il ny a pas de redirection regarder cette string
 	char *just_cmd; // si il y a des redirection regarder cette string
 	bool is_built;
-	//char	**argv;
+	char	**argv;
 	bool redir;
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
@@ -220,7 +220,7 @@ void		change_oldpwd(t_envSom *env, char *oldpwd);
 t_envSom	*init_envp(char **envp);
 
 /* parsing.c */
-
+void cut_arg(t_data *data);
 
 /* REDIR */
 /* init.c */
