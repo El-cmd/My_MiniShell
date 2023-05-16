@@ -129,7 +129,9 @@ void	ft_multiple_pipes(t_data *data)
 	//char		**path_dirs;
 	t_pipex		*pipex;
 	int			i;
+	t_cmd		*cmd;
 
+	cmd = data->cmdIndex->begin;
 	pipex = NULL;
 	ft_init_pipex(&pipex);
 	ft_preprocess(pipex, data);
@@ -137,7 +139,9 @@ void	ft_multiple_pipes(t_data *data)
 	while (++i < pipex->num_commands)
 	{
 		ft_prepare_pipes(pipex, data, i);
-		if (ft_check_condition_to_execute(pipex) == 1)
+		if (cmd->is_built)
+			ft_builtins(cmd, data->env, data);
+		else if (ft_check_condition_to_execute(pipex) == 1)
 		{
 			//print_pipex(pipex, data, i);
 			//printf("<< exec >>\t");
@@ -145,6 +149,7 @@ void	ft_multiple_pipes(t_data *data)
 			//printf("<< exec done >>\n");
 			pipex->active_cmds++;
 		}
+		cmd = cmd->next;
 	}
 	//printf("WAIT\n");
 	//while (wait(0) > 0) {}
