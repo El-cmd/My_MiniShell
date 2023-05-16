@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 21:33:48 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:09:46 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	eternal_loop(t_data *data)
 		//init redirection token
 		malloc_all(data);
 		exec(data);
-		//exec(data->cmdIndex, data->path_exec, data->env);
 		free(str);
 	}
 }

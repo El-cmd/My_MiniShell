@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/15 22:28:27 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:06:04 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct s_cmd
 {
 	char *cmd; // si il ny a pas de redirection regarder cette string
 	char *just_cmd; // si il y a des redirection regarder cette string
+	bool is_built;
+	//char	**argv;
 	bool redir;
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
@@ -137,6 +139,7 @@ int		ft_echo(t_cmd *cmd, t_data *data);
 
 /* exec_builtin.c */
 int		ft_builtins(t_cmd *cmd, t_envSom *env, t_data *data);
+void	is_built(t_data *data);
 
 /* exit.c */
 void	ft_exit(t_cmd *cmd, t_data *data);
