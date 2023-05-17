@@ -1,23 +1,6 @@
 #include "../minishell.h"
 
-void	ft_multiple_pipes(t_data *data);
-void	ft_init_pipex(t_data *data);
-void	ft_prepare_pipes(t_cmd *cmd, t_data *data);
-void	ft_prepare_first(t_data *data);
-void	ft_prepare_next(t_data *data);
-void	ft_prepare_last(t_data *data);
-int		ft_check_condition_to_execute(t_data *data);
-void	ft_exec_command(t_cmd *cmd, t_data *data);
-void	ft_wait_for_child_processes(t_data *data);
-void	ft_perror_clean_exit(t_data *data, char *str);
-void	ft_close_fds(t_data *data);
-int		close_if(int fd);
-
 //void ft_pipex(t_cmdIndex *index, char **path_dirs, t_envSom *envp_nodes)
-void ft_pipex(t_data *data)
-{
-	ft_multiple_pipes(data);
-}
 
 void	ft_init_pipex(t_data *data)
 {
@@ -52,7 +35,7 @@ void	ft_close_fds(t_data *data)
 void	ft_perror_clean_exit(t_data *data, char *str)
 {
 	perror(str);
-	ft_clean_full(data);
+	ft_close_fds(data);
 	exit(-1);
 }
 
@@ -147,7 +130,7 @@ void	ft_multiple_pipes(t_data *data)
 		cmd = cmd->next;
 	}
 	ft_wait_for_child_processes(data);
-	close_fds(data);
+	ft_close_fds(data);
 }
 
 void	ft_wait_for_child_processes(t_data *data)

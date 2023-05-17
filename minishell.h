@@ -167,11 +167,9 @@ pid_t	fork_error(void);
 /* EXEC */
 /* exec.c */
 void 	exec(t_data *data);
-//void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
 void 	ft_execve(t_cmd *cmd, t_data *data);
 
 void 	ft_pipex(t_data *data);
-//void 	ft_pipex(t_cmdIndex *index, char **envp, t_envSom *env);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);
 
@@ -179,9 +177,6 @@ char	**ft_getpath(t_envSom *env);
 int		simple_cmd(t_envSom *env, t_cmd *cmd, t_cmdIndex *c, t_data *d);
 
 /* several_cmd.c */
-//void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data* data);
-//void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *data);
-//void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, t_data *d);
 void	ft_child(t_cmd *cmd, t_envSom *env, int fd[2], t_data *data);
 void	ft_parent(int *fd);
 void	ft_exec(t_data *data);
@@ -254,6 +249,20 @@ void 	no_str(char *cmd);
 void	get_file(char *str, int *i);
 void	printTitle(void);
 int 	is_redir_or_cmd(char c);
+
+//ft_pipex
+void	ft_multiple_pipes(t_data *data);
+void	ft_init_pipex(t_data *data);
+void	ft_prepare_pipes(t_cmd *cmd, t_data *data);
+void	ft_prepare_first(t_data *data);
+void	ft_prepare_next(t_data *data);
+void	ft_prepare_last(t_data *data);
+int		ft_check_condition_to_execute(t_data *data);
+void	ft_exec_command(t_cmd *cmd, t_data *data);
+void	ft_wait_for_child_processes(t_data *data);
+void	ft_perror_clean_exit(t_data *data, char *str);
+void	ft_close_fds(t_data *data);
+int		close_if(int fd);
 
 extern t_global	global;
 

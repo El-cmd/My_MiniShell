@@ -48,5 +48,5 @@ void exec(t_data *data)
 	if (index->nb_cmd == 1)
 		ft_exec(data);
 	else if (index->nb_cmd > 1)
-	 	ft_pipex(data);
+	 	ft_multiple_pipes(data);
 }
