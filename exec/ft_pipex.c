@@ -4,6 +4,8 @@
 
 void	ft_init_pipex(t_data *data)
 {
+	data->p_cmd.infile = -1;
+	data->p_cmd.outfile = -1;
 	data->p_cmd.prev_fd = -1;
 	data->p_cmd.pipe_fd[0] = -1;
 	data->p_cmd.pipe_fd[1] = -1;
