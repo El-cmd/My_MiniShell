@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/16 15:43:52 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:56:54 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 typedef struct s_pipex
 {
+	int 	infile;
+	int		outfile;
 	int		prev_fd;
 	int		pipe_fd[2];
 	int		num_commands;
@@ -229,6 +231,7 @@ int 			lookIfRedir(char *line);
 /* redir_pars.c */
 void	malloc_all(t_data *data);
 void    begin_end_file(int i, t_redir *red, char *str);
+void    redir_fd(t_cmd *cmd, t_data *data);
 
 /* SIGNAUX */
 /* signal_handler.c */

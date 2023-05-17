@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/16 15:47:02 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:56:49 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,23 @@ void    begin_end_file(int i, t_redir *red, char *str)
     red->len = i - red->begin;
     red->file = ft_substr(str, red->begin, red->len);
     ft_open(red);    
+}
+
+void    redir_fd(t_cmd *cmd, t_data *data)
+{
+    t_redir *redir;
+
+    if (cmd->redir)
+    {
+        redir = cmd->lredir->begin;
+        while (redir)
+        {
+            if (redir->type == R_IN)
+                data->p_cmd.infile = redir->fd;
+            if (redir->type == R_OUT || redir->type == APPEND)
+                data->p_cmd.outfile = redir->fd;
+            redir = redir->next;
+        }
+    }
+    return ;
 }

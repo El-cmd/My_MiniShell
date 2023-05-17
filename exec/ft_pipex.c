@@ -122,9 +122,8 @@ void	ft_multiple_pipes(t_data *data)
 	ft_init_pipex(data);
 	while (cmd)
 	{
+		redir_fd(cmd, data);
 		ft_prepare_pipes(cmd, data);
-		//if (cmd->is_built)
-		//	ft_builtins(cmd, data->env, data);
 		if (ft_check_condition_to_execute(data) == 1)
 		{
 			ft_exec_command(cmd, data);
