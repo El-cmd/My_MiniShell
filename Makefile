@@ -8,6 +8,7 @@ SRC = main.c \
 	  libft/ft_strjoin.c \
 	  libft/ft_strchr.c \
 	  libft/ft_strncmp.c \
+	  libft/ft_strcmp.c \
 	  libft/ft_strdup.c \
 	  libft/ft_strlcat.c \
 	  libft/ft_strlcpy.c \
@@ -44,6 +45,7 @@ SRC = main.c \
 	  exec/several_cmd.c \
 	  exec/exec.c \
 	  exec/ft_pipex.c \
+	  exec/ft_pipe_exec.c \
 	  builtins/pwd.c \
 	  builtins/echo.c \
 	  builtins/exit.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/17 16:56:54 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/17 18:27:49 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef struct s_cmd
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
+	int			argc;
+	int			fd_in;
+	int			fd_out;
 } t_cmd;
 
 //index redirections
@@ -168,6 +171,7 @@ void 	exec(t_data *data);
 void 	ft_execve(t_cmd *cmd, t_data *data);
 
 void 	ft_pipex(t_data *data);
+void	ft_pipe_exec(t_data *all_data);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);
 
