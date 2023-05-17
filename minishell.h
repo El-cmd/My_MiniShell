@@ -41,12 +41,12 @@ typedef struct s_pipex
 {
 	char	*infile;
 	char	*outfile;
-	char	**paths;
+	//char	**paths;
 	int		prev_fd;
 	int		pipe_fd[2];
 	int		num_commands;
 	int		active_cmds;
-	char	**commands;
+	//char	**commands;
 	int		heredoc_fd;
 }	t_pipex;
 
@@ -93,7 +93,6 @@ typedef struct s_cmd
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
-	t_pipex	*p_cmd;
 } t_cmd;
 
 //index redirections
@@ -125,6 +124,7 @@ typedef struct s_data
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
 	int		exit_return;
+	t_pipex	p_cmd;
 } t_data;
 
 
@@ -168,7 +168,7 @@ pid_t	fork_error(void);
 /* exec.c */
 void 	exec(t_data *data);
 //void 	exec(t_cmdIndex *cmd, char **envp, t_envSom *doberman);
-void 	ft_execve(char *cmd, char **envp, t_data *data);
+void 	ft_execve(t_cmd *cmd, t_data *data);
 
 void 	ft_pipex(t_data *data);
 //void 	ft_pipex(t_cmdIndex *index, char **envp, t_envSom *env);
@@ -176,13 +176,13 @@ void 	ft_pipex(t_data *data);
 char	**ft_getpath(t_envSom *env);
 
 /* one_cmd.c */
-int		simple_cmd(t_envSom *env, t_cmd *cmd, char **e, t_cmdIndex *c, t_data *d);
+int		simple_cmd(t_envSom *env, t_cmd *cmd, t_cmdIndex *c, t_data *d);
 
 /* several_cmd.c */
-void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data* data);
-void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *data);
-void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, t_data *d);
-void	ft_child(t_cmd *cmd, char **envp, t_envSom *env, int fd[2], t_data *data);
+//void	ft_simple_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data* data);
+//void	multi_pipe(t_cmdIndex *index, char **envp, t_envSom *env, t_data *data);
+//void	ft_multi_pipe(t_cmd *cmd, char **envp, t_envSom *env, t_data *d);
+void	ft_child(t_cmd *cmd, t_envSom *env, int fd[2], t_data *data);
 void	ft_parent(int *fd);
 void	ft_exec(t_data *data);
 
