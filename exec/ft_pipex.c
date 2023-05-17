@@ -105,6 +105,11 @@ void	ft_exec_command(t_cmd *cmd, t_data *data)
 		if (dup2(data->p_cmd.pipe_fd[1], OUT) == -1)
 			ft_perror_clean_exit(data, "Dup2 failure in child.");
 		ft_close_fds(data);
+		if (cmd->is_built)
+		{
+			ft_builtins(cmd, data->env, data);
+			exit(data->exit_return);
+		}
 		ft_execve(cmd, data);
 	}
 	else
@@ -120,9 +125,9 @@ void	ft_multiple_pipes(t_data *data)
 	while (cmd)
 	{
 		ft_prepare_pipes(cmd, data);
-		if (cmd->is_built)
-			ft_builtins(cmd, data->env, data);
-		else if (ft_check_condition_to_execute(data) == 1)
+		//if (cmd->is_built)
+		//	ft_builtins(cmd, data->env, data);
+		if (ft_check_condition_to_execute(data) == 1)
 		{
 			ft_exec_command(cmd, data);
 			data->p_cmd.active_cmds++;
