@@ -39,14 +39,10 @@
 
 typedef struct s_pipex
 {
-	char	*infile;
-	char	*outfile;
-	//char	**paths;
 	int		prev_fd;
 	int		pipe_fd[2];
 	int		num_commands;
 	int		active_cmds;
-	//char	**commands;
 	int		heredoc_fd;
 }	t_pipex;
 
