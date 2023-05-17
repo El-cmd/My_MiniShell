@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/17 18:45:15 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:20:30 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void exec(t_data *data)
 	t_cmdIndex *index;
 
 	index = data->cmdIndex;
-	if (index->begin->redir == true)
-		return ;
+	//if (index->begin->redir == true)
+	//	return ;
 	if (index->nb_cmd == 1)
 		ft_exec(data);
 	else if (index->nb_cmd > 1)

@@ -100,9 +100,18 @@ void	ft_exec_command(t_cmd *cmd, t_data *data)
 		ft_perror_clean_exit(data, "Fork failure");
 	if (pid == 0)
 	{
-		if (dup2(data->p_cmd.prev_fd, IN) == -1)
-			ft_perror_clean_exit(data, "Dup2 failure in child.");
+		if (data->p_cmd.outfile != -1)
+			dup2(data->p_cmd.outfile, OUT);
+		else
+		{
+			if (dup2(data->p_cmd.prev_fd, IN) == -1)
+				ft_perror_clean_exit(data, "Dup2 failure in child.");
+		}
 		if (dup2(data->p_cmd.pipe_fd[1], OUT) == -1)
+			ft_perror_clean_exit(data, "Dup2 failure in child.");
+		if (data->p_cmd.infile != -1)
+			dup2(data->p_cmd.infile, IN);
+		if (dup2(data->p_cmd.prev_fd, IN) == -1)
 			ft_perror_clean_exit(data, "Dup2 failure in child.");
 		ft_close_fds(data);
 		if (cmd->is_built)
