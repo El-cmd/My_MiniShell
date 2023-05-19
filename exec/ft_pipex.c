@@ -164,6 +164,7 @@ void	ft_multiple_pipes(t_data *data)
 		{
 			//printf("<<ft_exec_command>>\n");
 			ft_exec_command(cmd, data);
+			spec_built(cmd, data);
 			data->p_cmd.active_cmds++;
 		}
 		cmd = cmd->next;

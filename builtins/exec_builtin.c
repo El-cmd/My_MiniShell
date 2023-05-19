@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:18 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/16 15:05:30 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 14:39:54 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,14 @@ int	ft_builtins(t_cmd *cmd, t_envSom *env, t_data *data)
 		return 0;
 	}
 	else if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
-	{
-		ft_cd(cmd, env, data);
 		return 0;
-	}
 	else if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
 	{
 		ft_echo(cmd, data);
 		return 0;
 	}
 	else if (ft_strncmp(cmd->cmd, "exit", 4) == 0)
-		ft_exit(cmd, data);
+		return 0;
 	else if (ft_strncmp(cmd->cmd, "export", 6) == 0)
 	{
 		ft_export(env, cmd, data);

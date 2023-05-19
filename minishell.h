@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/17 18:27:49 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:43:07 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_cmd
 	bool is_built;
 	char	**argv;
 	bool redir;
+	int	spec_built;
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
@@ -141,6 +142,8 @@ int		ft_echo(t_cmd *cmd, t_data *data);
 /* exec_builtin.c */
 int		ft_builtins(t_cmd *cmd, t_envSom *env, t_data *data);
 void	is_built(t_data *data);
+void	spec_built(t_cmd *cmd, t_data * data);
+void	spec_built_first(t_data *data);
 
 /* exit.c */
 void	ft_exit(t_cmd *cmd, t_data *data);
@@ -170,7 +173,6 @@ pid_t	fork_error(void);
 void 	exec(t_data *data);
 void 	ft_execve(t_cmd *cmd, t_data *data);
 
-void 	ft_pipex(t_data *data);
 void	ft_pipe_exec(t_data *all_data);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);

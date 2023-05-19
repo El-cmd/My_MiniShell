@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:22 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:26:23 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 14:16:55 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void ft_exit(t_cmd *cmd, t_data *data)
             data->exit_return = 0;
     }
 	ft_putstr_fd("exit\n", 1);
+    cmd->spec_built = 1;
     exit(data->exit_return);
 }

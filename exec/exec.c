@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 10:08:03 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:46:15 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,35 @@ void exec(t_data *data)
 	//if (index->begin->redir == true)
 	//	return ;
 	//if (index->nb_cmd == 1)
-	//	ft_exec(data);
+	spec_built_first(data);
 	if (index->nb_cmd)
 	 	ft_multiple_pipes(data);
 	  	//ft_pipe_exec(data);
+}
+
+void spec_built(t_cmd *cmd, t_data * data)
+{
+	if (cmd->spec_built == 1)
+		ft_exit(cmd, data);
+	else if (cmd->spec_built == 2)
+		ft_cd(cmd, data->env, data);
+	else
+		return ;
+}
+
+void spec_built_first(t_data *data)
+{
+	t_cmd *cmd;
+
+	cmd = data->cmdIndex->begin;
+	while (cmd)
+	{
+		if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
+			cmd->spec_built = 2;
+		else if (ft_strncmp(cmd->cmd, "exit", 4) == 0)
+			cmd->spec_built = 1;
+		else
+			cmd->spec_built = 0;
+		cmd = cmd->next;
+	}
 }
