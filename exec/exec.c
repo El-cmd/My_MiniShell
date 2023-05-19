@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/17 19:20:30 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 10:08:03 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void exec(t_data *data)
 	index = data->cmdIndex;
 	//if (index->begin->redir == true)
 	//	return ;
-	if (index->nb_cmd == 1)
-		ft_exec(data);
-	else if (index->nb_cmd > 1)
+	//if (index->nb_cmd == 1)
+	//	ft_exec(data);
+	if (index->nb_cmd)
 	 	ft_multiple_pipes(data);
 	  	//ft_pipe_exec(data);
 }

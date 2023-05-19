@@ -76,16 +76,47 @@ void	ft_prepare_last(t_data *data)
 
 void	ft_prepare_pipes(t_cmd *cmd, t_data *data)
 {
-	if (cmd == data->cmdIndex->begin)
+	printf("cmd @'%p' vs begin @'%p' vs end @'%p'\n", cmd, data->cmdIndex->begin, data->cmdIndex->end);
+	if (cmd == data->cmdIndex->begin && data->cmdIndex->nb_cmd > 1)
+	{
+		printf("\tprepare_first\n");
 		ft_prepare_first(data);
+	}
 	else if (cmd == data->cmdIndex->end)
+	{
+		printf("\tprepare_last\n");
 		ft_prepare_last(data);
+	}
 	else
+	{
+		printf("\tprepare_next\n");
 		ft_prepare_next(data);
+	}
 }	
 
 int	ft_check_condition_to_execute(t_data *data)
 {
+	/* if there is only one cmd set the prev_fd to 0 or infile */
+	if (data->cmdIndex->nb_cmd == 1)
+	{
+		if (data->cmdIndex->begin->redir)
+		{
+			if (data->p_cmd.infile > 0)
+				data->p_cmd.pipe_fd[0] = data->p_cmd.infile;
+			else
+				data->p_cmd.pipe_fd[0] = IN;
+			if (data->p_cmd.outfile > 0)
+				data->p_cmd.pipe_fd[1] = data->p_cmd.outfile;
+			else
+				data->p_cmd.pipe_fd[1] = OUT;
+		}
+		else
+		{
+			data->p_cmd.pipe_fd[0] = IN;
+			data->p_cmd.pipe_fd[1] = OUT;
+		}
+		data->p_cmd.prev_fd = data->p_cmd.pipe_fd[0];
+	}
 	if (data->p_cmd.prev_fd != -1)
 		return (1);
 	return (0);
@@ -100,18 +131,10 @@ void	ft_exec_command(t_cmd *cmd, t_data *data)
 		ft_perror_clean_exit(data, "Fork failure");
 	if (pid == 0)
 	{
-		if (data->p_cmd.outfile != -1)
-			dup2(data->p_cmd.outfile, OUT);
-		else
-		{
-			if (dup2(data->p_cmd.prev_fd, IN) == -1)
-				ft_perror_clean_exit(data, "Dup2 failure in child.");
-		}
-		if (dup2(data->p_cmd.pipe_fd[1], OUT) == -1)
-			ft_perror_clean_exit(data, "Dup2 failure in child.");
-		if (data->p_cmd.infile != -1)
-			dup2(data->p_cmd.infile, IN);
+		//printf("\texec_cmd. prev_fd:'%d'\n", data->p_cmd.prev_fd);
 		if (dup2(data->p_cmd.prev_fd, IN) == -1)
+			ft_perror_clean_exit(data, "Dup2 failure in child.");
+		if (dup2(data->p_cmd.pipe_fd[1], OUT) == -1)
 			ft_perror_clean_exit(data, "Dup2 failure in child.");
 		ft_close_fds(data);
 		if (cmd->is_built)
@@ -130,13 +153,16 @@ void	ft_multiple_pipes(t_data *data)
 	t_cmd		*cmd;
 
 	cmd = data->cmdIndex->begin;
+	//printf("cmd @ '%p', nb_cmd:'%d', cmd:'%s'\n", cmd, data->cmdIndex->nb_cmd, cmd->cmd);
 	ft_init_pipex(data);
 	while (cmd)
 	{
 		redir_fd(cmd, data);
-		ft_prepare_pipes(cmd, data);
+		if (data->cmdIndex->nb_cmd > 1)
+			ft_prepare_pipes(cmd, data);
 		if (ft_check_condition_to_execute(data) == 1)
 		{
+			//printf("<<ft_exec_command>>\n");
 			ft_exec_command(cmd, data);
 			data->p_cmd.active_cmds++;
 		}
