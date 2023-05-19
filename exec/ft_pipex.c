@@ -4,14 +4,10 @@
 
 void	ft_init_pipex(t_data *data)
 {
-	data->p_cmd.infile = -1;
-	data->p_cmd.outfile = -1;
+	data->p_cmd.heredoc_fd = -1;
 	data->p_cmd.prev_fd = -1;
 	data->p_cmd.pipe_fd[0] = -1;
 	data->p_cmd.pipe_fd[1] = -1;
-	data->p_cmd.num_commands = -1;
-	data->p_cmd.active_cmds = 0;
-	data->p_cmd.heredoc_fd = -1;
 }
 
 
@@ -39,7 +35,28 @@ void	ft_perror_clean_exit(t_data *data, char *str)
 	exit(-1);
 }
 
-void	ft_prepare_first(t_data *data)
+/*
+void	ft_set_redirection_fd(t_cmd *cmd, t_data *data, int pipe_in, int pipe_out)
+{
+	if (cmd->redir)
+	{
+		if (data->p_cmd.infile > 0)
+			data->p_cmd.pipe_fd[0] = data->p_cmd.infile;
+		else
+			data->p_cmd.pipe_fd[0] = fd_in;
+		if (data->p_cmd.outfile > 0)
+			data->p_cmd.pipe_fd[1] = data->p_cmd.outfile;
+		else
+			data->p_cmd.pipe_fd[1] = fd_out;
+	}
+	else
+	{
+		data->p_cmd.pipe_fd[0] = fd_in;
+		data->p_cmd.pipe_fd[1] = fd_out;
+	}
+}
+*/
+void	ft_prepare_first(t_cmd *cmd, t_data *data)
 {
 	int	fd[2];
 
@@ -47,12 +64,20 @@ void	ft_prepare_first(t_data *data)
 	fd[1] = -1;
 	if (pipe(fd) == -1)
 		ft_perror_clean_exit(data, "Pipe failure");
-	data->p_cmd.pipe_fd[0] = fd[0];
-	data->p_cmd.pipe_fd[1] = fd[1];
-	data->p_cmd.prev_fd = 0;
+	//ft_set_redirection_fd(cmd, data, fd[0], fd[1]);
+	if (cmd->redir && cmd->fd_in != 0)
+		data->p_cmd.pipe_fd[0] = cmd->fd_in;
+	else
+		data->p_cmd.pipe_fd[0] = fd[0];
+	if (cmd->redir && cmd->fd_out != 1)
+		data->p_cmd.pipe_fd[1] = cmd->fd_out;
+	else
+		data->p_cmd.pipe_fd[1] = fd[1];
+	data->p_cmd.prev_fd = cmd->fd_in;
+	//data->p_cmd.prev_fd = data->p_cmd.pipe_fd[0];
 }
 
-void	ft_prepare_next(t_data *data)
+void	ft_prepare_next(t_cmd *cmd, t_data *data)
 {
 	int	fd[2];
 
@@ -62,61 +87,59 @@ void	ft_prepare_next(t_data *data)
 	close_if(data->p_cmd.pipe_fd[1]);
 	if (pipe(fd) == -1)
 		ft_perror_clean_exit(data, "Pipe failure");
-	data->p_cmd.pipe_fd[0] = fd[0];
-	data->p_cmd.pipe_fd[1] = fd[1];
+	//ft_set_redirection_fd(cmd, data, fd[0], fd[1]);
+	if (cmd->redir && cmd->fd_in != 0)
+		data->p_cmd.pipe_fd[0] = cmd->fd_in;
+	else
+		data->p_cmd.pipe_fd[0] = fd[0];
+	if (cmd->redir && cmd->fd_out != 1)
+		data->p_cmd.pipe_fd[1] = cmd->fd_out;
+	else
+		data->p_cmd.pipe_fd[1] = fd[1];
+	//data->p_cmd.pipe_fd[0] = fd[0];
+	//data->p_cmd.pipe_fd[1] = fd[1];
 }
 
-void	ft_prepare_last(t_data *data)
+void	ft_prepare_last(t_cmd *cmd, t_data *data)
 {
 	close_if(data->p_cmd.pipe_fd[1]);
 	data->p_cmd.prev_fd = data->p_cmd.pipe_fd[0];
-	data->p_cmd.pipe_fd[0] = -1;
-	data->p_cmd.pipe_fd[1] = 1;
+	//ft_set_redirection_fd(cmd, data, -1, 1);
+	data->p_cmd.pipe_fd[0] = cmd->fd_in;
+	data->p_cmd.pipe_fd[1] = cmd->fd_out;
+	//data->p_cmd.pipe_fd[0] = -1;
+	//data->p_cmd.pipe_fd[1] = 1;
 }
 
 void	ft_prepare_pipes(t_cmd *cmd, t_data *data)
 {
-	printf("cmd @'%p' vs begin @'%p' vs end @'%p'\n", cmd, data->cmdIndex->begin, data->cmdIndex->end);
-	if (cmd == data->cmdIndex->begin && data->cmdIndex->nb_cmd > 1)
+	//printf("cmd @'%p' vs begin @'%p' vs end @'%p'\n", cmd, data->cmdIndex->begin, data->cmdIndex->end);
+	if (cmd == data->cmdIndex->begin)
 	{
-		printf("\tprepare_first\n");
-		ft_prepare_first(data);
+		//printf("\tprepare_first\n");
+		if (data->cmdIndex->nb_cmd == 1)
+		{
+			data->p_cmd.pipe_fd[0] = cmd->fd_in;
+			data->p_cmd.pipe_fd[1] = cmd->fd_out;
+			data->p_cmd.prev_fd = cmd->fd_in;
+		}
+		else
+			ft_prepare_first(cmd, data);
 	}
 	else if (cmd == data->cmdIndex->end)
 	{
-		printf("\tprepare_last\n");
-		ft_prepare_last(data);
+		//printf("\tprepare_last\n");
+		ft_prepare_last(cmd, data);
 	}
 	else
 	{
-		printf("\tprepare_next\n");
-		ft_prepare_next(data);
+		//printf("\tprepare_next\n");
+		ft_prepare_next(cmd, data);
 	}
 }	
 
 int	ft_check_condition_to_execute(t_data *data)
 {
-	/* if there is only one cmd set the prev_fd to 0 or infile */
-	if (data->cmdIndex->nb_cmd == 1)
-	{
-		if (data->cmdIndex->begin->redir)
-		{
-			if (data->p_cmd.infile > 0)
-				data->p_cmd.pipe_fd[0] = data->p_cmd.infile;
-			else
-				data->p_cmd.pipe_fd[0] = IN;
-			if (data->p_cmd.outfile > 0)
-				data->p_cmd.pipe_fd[1] = data->p_cmd.outfile;
-			else
-				data->p_cmd.pipe_fd[1] = OUT;
-		}
-		else
-		{
-			data->p_cmd.pipe_fd[0] = IN;
-			data->p_cmd.pipe_fd[1] = OUT;
-		}
-		data->p_cmd.prev_fd = data->p_cmd.pipe_fd[0];
-	}
 	if (data->p_cmd.prev_fd != -1)
 		return (1);
 	return (0);
@@ -131,7 +154,7 @@ void	ft_exec_command(t_cmd *cmd, t_data *data)
 		ft_perror_clean_exit(data, "Fork failure");
 	if (pid == 0)
 	{
-		//printf("\texec_cmd. prev_fd:'%d'\n", data->p_cmd.prev_fd);
+		printf("\texec_cmd. prev_fd:'%d', pipe_fd[0]:'%d', pipe_fd[1]:'%d'\n", data->p_cmd.prev_fd, data->p_cmd.pipe_fd[0], data->p_cmd.pipe_fd[1]);
 		if (dup2(data->p_cmd.prev_fd, IN) == -1)
 			ft_perror_clean_exit(data, "Dup2 failure in child.");
 		if (dup2(data->p_cmd.pipe_fd[1], OUT) == -1)
@@ -157,15 +180,14 @@ void	ft_multiple_pipes(t_data *data)
 	ft_init_pipex(data);
 	while (cmd)
 	{
-		//redir_fd(cmd, data);
-		if (data->cmdIndex->nb_cmd > 1)
-			ft_prepare_pipes(cmd, data);
+		printf("\tinfile:'%d', outfile:'%d'\n", cmd->fd_in, cmd->fd_out);
+
+		ft_prepare_pipes(cmd, data);
 		if (ft_check_condition_to_execute(data) == 1)
 		{
 			//printf("<<ft_exec_command>>\n");
 			ft_exec_command(cmd, data);
-			spec_built(cmd, data);
-			data->p_cmd.active_cmds++;
+			//data->p_cmd.active_cmds++;
 		}
 		cmd = cmd->next;
 	}
@@ -179,7 +201,8 @@ void	ft_wait_for_child_processes(t_data *data)
 	int	status;
 
 	i = 0;
-	while (i < data->p_cmd.active_cmds)
+	//while (i < data->p_cmd.active_cmds)
+	while (i < data->cmdIndex->nb_cmd)
 	{
 		if (wait(&status) == -1)
 			ft_perror_clean_exit(data, "Wait Failed");

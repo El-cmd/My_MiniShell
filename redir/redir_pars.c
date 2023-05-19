@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 18:17:24 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 18:22:03 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void    redir_fd(t_cmd *cmd)
     if (o == 0)
         cmd->fd_out = 1;
     if (i == 0)
-        cmd->cmd = 0;
+        cmd->fd_in = 0;
     return ;
 }
 

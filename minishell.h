@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 18:03:22 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 18:58:32 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_pipex
 {
 	//int 	infile;
 	//int		outfile;
+	//int		num_commands;
 	int		prev_fd;
 	int		pipe_fd[2];
-	int		num_commands;
 	int		active_cmds;
 	int		heredoc_fd;
 }	t_pipex;
@@ -261,9 +261,9 @@ int 	is_redir_or_cmd(char c);
 void	ft_multiple_pipes(t_data *data);
 void	ft_init_pipex(t_data *data);
 void	ft_prepare_pipes(t_cmd *cmd, t_data *data);
-void	ft_prepare_first(t_data *data);
-void	ft_prepare_next(t_data *data);
-void	ft_prepare_last(t_data *data);
+void	ft_prepare_first(t_cmd *cmd, t_data *data);
+void	ft_prepare_next(t_cmd *cmd, t_data *data);
+void	ft_prepare_last(t_cmd *cmd, t_data *data);
 int		ft_check_condition_to_execute(t_data *data);
 void	ft_exec_command(t_cmd *cmd, t_data *data);
 void	ft_wait_for_child_processes(t_data *data);
