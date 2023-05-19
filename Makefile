@@ -63,7 +63,8 @@ SRC = main.c \
 	  utils/utils.c \
 	  redir/redir_pars.c \
 	  utils/utils_nd.c \
-	  parsing/cut.c
+	  parsing/cut.c \
+	  meta/meta.c
 
 OBJS = $(SRC:.c=.o)
 

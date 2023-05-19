@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/17 16:56:49 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 18:03:58 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	malloc_all(t_data *data)
     exec_find_cmd(data);
     is_built(data);
     cut_arg(data);
+    boucle_redir(data);
+    is_meta(data);
 }
 
 //Open des file parser plus haut, dans lexec si fd = -1 exit le process
@@ -45,7 +47,7 @@ void    begin_end_file(int i, t_redir *red, char *str)
     ft_open(red);    
 }
 
-void    redir_fd(t_cmd *cmd, t_data *data)
+void    redir_fd(t_cmd *cmd)
 {
     t_redir *redir;
 
@@ -55,11 +57,23 @@ void    redir_fd(t_cmd *cmd, t_data *data)
         while (redir)
         {
             if (redir->type == R_IN)
-                data->p_cmd.infile = redir->fd;
+                cmd->fd_in = redir->fd;
             if (redir->type == R_OUT || redir->type == APPEND)
-                data->p_cmd.outfile = redir->fd;
+                cmd->fd_out = redir->fd;
             redir = redir->next;
         }
     }
     return ;
+}
+
+void boucle_redir(t_data *data)
+{
+    t_cmd *cmd;
+
+    cmd = data->cmdIndex->begin;
+    while (cmd)
+    {
+        redir_fd(cmd);
+        cmd = cmd->next;
+    }
 }

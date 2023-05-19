@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 14:43:07 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 18:03:22 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 
 typedef struct s_pipex
 {
-	int 	infile;
-	int		outfile;
+	//int 	infile;
+	//int		outfile;
 	int		prev_fd;
 	int		pipe_fd[2];
 	int		num_commands;
@@ -89,6 +89,7 @@ typedef struct s_cmd
 	char	**argv;
 	bool redir;
 	int	spec_built;
+	bool have_meta;
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
@@ -237,7 +238,8 @@ int 			lookIfRedir(char *line);
 /* redir_pars.c */
 void	malloc_all(t_data *data);
 void    begin_end_file(int i, t_redir *red, char *str);
-void    redir_fd(t_cmd *cmd, t_data *data);
+void    redir_fd(t_cmd *cmd);
+void 	boucle_redir(t_data *data);
 
 /* SIGNAUX */
 /* signal_handler.c */
@@ -268,6 +270,9 @@ void	ft_wait_for_child_processes(t_data *data);
 void	ft_perror_clean_exit(t_data *data, char *str);
 void	ft_close_fds(t_data *data);
 int		close_if(int fd);
+
+//meta
+void is_meta(t_data *data);
 
 extern t_global	global;
 
