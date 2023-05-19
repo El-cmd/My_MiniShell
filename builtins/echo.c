@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:26:15 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 16:17:18 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,29 @@
 //echo sans le \n mais encore quelque bug
 int ft_echo_n(char *str, t_cmd *cmd)
 {
-	str = cmd->cmd + 8;
+	if (cmd->redir)
+		str = cmd->just_cmd + 8;
+	else
+		str = cmd->cmd + 8;
 	str = ft_strtrim(str, " ");
 	ft_putstr_fd(str, 1);
 	return 0;
+}
+
+void echo_redir(t_cmd *cmd, t_data *data, char *str)
+{
+	if (ft_strncmp(cmd->just_cmd, "echo -n ", 8)== 0)
+	{
+		ft_echo_n(str, cmd);
+		data->exit_return = 0;
+	}
+	else
+	{
+		str = cmd->just_cmd + 5;
+		str = ft_strtrim(str, " ");
+		ft_putendl_fd(str, 1);
+		data->exit_return = 0;
+	}
 }
 
 //execute echo mais encore quelques truc a regler
@@ -28,17 +47,22 @@ int	ft_echo(t_cmd *cmd, t_data *data)
 	char *str;
 
 	str = NULL;
-	if (ft_strncmp(cmd->cmd, "echo -n ", 8)== 0)
-	{
-		ft_echo_n(str, cmd);
-		data->exit_return = 0;
-	}
+	if (cmd->redir)
+		echo_redir(cmd, data, str);
 	else
 	{
-		str = cmd->cmd + 5;
-		str = ft_strtrim(str, " ");
-		ft_putendl_fd(str, 1);
-		data->exit_return = 0;
+		if (ft_strncmp(cmd->cmd, "echo -n ", 8)== 0)
+		{
+			ft_echo_n(str, cmd);
+			data->exit_return = 0;
+		}
+		else
+		{
+			str = cmd->cmd + 5;
+			str = ft_strtrim(str, " ");
+			ft_putendl_fd(str, 1);
+			data->exit_return = 0;
+		}
 	}
 	return 0;
 }
