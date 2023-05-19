@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 18:03:58 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/19 18:17:24 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,33 @@ void    redir_fd(t_cmd *cmd)
 {
     t_redir *redir;
 
+    int i;
+    int o;
+    
+    o = 0;
+    i = 0;    
     if (cmd->redir)
     {
         redir = cmd->lredir->begin;
         while (redir)
         {
             if (redir->type == R_IN)
+            {
                 cmd->fd_in = redir->fd;
+                i++;
+            }
             if (redir->type == R_OUT || redir->type == APPEND)
+            {
                 cmd->fd_out = redir->fd;
+                o++;
+            }
             redir = redir->next;
         }
     }
+    if (o == 0)
+        cmd->fd_out = 1;
+    if (i == 0)
+        cmd->cmd = 0;
     return ;
 }
 

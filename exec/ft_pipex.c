@@ -157,7 +157,7 @@ void	ft_multiple_pipes(t_data *data)
 	ft_init_pipex(data);
 	while (cmd)
 	{
-		redir_fd(cmd, data);
+		//redir_fd(cmd, data);
 		if (data->cmdIndex->nb_cmd > 1)
 			ft_prepare_pipes(cmd, data);
 		if (ft_check_condition_to_execute(data) == 1)
