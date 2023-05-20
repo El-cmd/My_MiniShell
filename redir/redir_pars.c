@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 18:22:03 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/20 12:32:26 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,21 @@ void    redir_fd(t_cmd *cmd)
         {
             if (redir->type == R_IN)
             {
-                cmd->fd_in = redir->fd;
+                cmd->in_file = redir->fd;
                 i++;
             }
             if (redir->type == R_OUT || redir->type == APPEND)
             {
-                cmd->fd_out = redir->fd;
+                cmd->out_file = redir->fd;
                 o++;
             }
             redir = redir->next;
         }
     }
     if (o == 0)
-        cmd->fd_out = 1;
+        cmd->out_file = -1;
     if (i == 0)
-        cmd->fd_in = 0;
+        cmd->in_file = -1;
     return ;
 }
 

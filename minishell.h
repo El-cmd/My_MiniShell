@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 18:58:32 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:27:43 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef struct s_pipex
 	//int 	infile;
 	//int		outfile;
 	//int		num_commands;
-	int		prev_fd;
-	int		pipe_fd[2];
-	int		active_cmds;
+	//int		prev_fd;
+	//int		pipe_fd[2];
+	//int		active_cmds;
 	int		heredoc_fd;
 }	t_pipex;
 
@@ -83,19 +83,21 @@ typedef struct s_cmdIndex
 //liste chainée des commandes
 typedef struct s_cmd
 {
-	char *cmd; // si il ny a pas de redirection regarder cette string
-	char *just_cmd; // si il y a des redirection regarder cette string
-	bool is_built;
-	char	**argv;
-	bool redir;
-	int	spec_built;
-	bool have_meta;
+	char		*cmd; // si il ny a pas de redirection regarder cette string
+	char		*just_cmd; // si il y a des redirection regarder cette string
+	bool		is_built;
+	char		**argv;
+	bool		redir;
+	int			spec_built;
+	bool		have_meta;
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
 	int			argc;
 	int			fd_in;
 	int			fd_out;
+	int			in_file;
+	int			out_file;
 } t_cmd;
 
 //index redirections
@@ -268,7 +270,7 @@ int		ft_check_condition_to_execute(t_data *data);
 void	ft_exec_command(t_cmd *cmd, t_data *data);
 void	ft_wait_for_child_processes(t_data *data);
 void	ft_perror_clean_exit(t_data *data, char *str);
-void	ft_close_fds(t_data *data);
+void	ft_close_fds(t_cmd *cmd);
 int		close_if(int fd);
 
 //meta
