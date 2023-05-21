@@ -6,12 +6,11 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 16:17:18 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/21 23:38:42 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 //echo sans le \n mais encore quelque bug
 int ft_echo_n(char *str, t_cmd *cmd)

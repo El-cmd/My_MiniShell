@@ -20,30 +20,9 @@ void	redirect_in_out(t_cmd *cmd, int *fd)
 
 void	child_process(t_data *data, t_cmd *cmd, int *fd)
 {
-	//if (cmd->skip_cmd)
-	//	data->exit_code = 1;
-	//else if (is_built_in(cmd->cmd_param[0]))
-	//{
-	//	close(fd[0]);
-	//	if (cmd->outfile < 0 && cmd->next)
-	//		cmd->outfile = fd[1];
-	//	else
-	//		close(fd[1]);
-	//	launch_built_in(data, cmd);
-	//}
-	//if (command_exist(data, cmd))
-	//{
 	redirect_in_out(cmd, fd);
 	ft_execve(cmd, data);
 	exit_process(data, fd);
-		//print_error_command(cmd->cmd_param[0], 1);
-		//data->exit_code = 126;
-	//}
-	//else
-	//{
-	//	print_error_command(cmd->cmd_param[0], 2);
-	//	data->exit_code = 127;
-	//}
 }
 
 void	ft_launch_cmd(t_data *data, t_cmd *cmd, int *fd)
@@ -55,11 +34,6 @@ void	ft_launch_cmd(t_data *data, t_cmd *cmd, int *fd)
 	{
 		if (cmd->argv[0])
 			child_process(data, cmd, fd);
-		//else
-		//{
-		//	data->exit_code = 0;
-		//	exit_process(data, fd);
-		//}
 	}
 	else
 		parent_process(cmd, fd);
@@ -71,14 +45,19 @@ int	ft_ft_exec(t_data *data)
 	int		fd[2];
 
 	cmd = data->cmdIndex->begin;
-	//if (cmds && cmds->skip_cmd == false && !cmds->next 
-	//&& (cmds->cmd_param[0] && is_built_in(cmds->cmd_param[0])))
-	//	launch_built_in(data, cmds);
 	while (cmd)
 	{
-		if (pipe(fd) == -1)
-			return (-1);
-		ft_launch_cmd(data, cmd, fd);
+		if (cmd->spec_built)
+			spec_built(cmd, data);
+		else
+		{
+        	if (pipe(fd) == -1)
+				return (-1);
+			if (cmd->is_built)
+				ft_builtins(cmd, data->env, data);
+			else
+				ft_launch_cmd(data, cmd, fd);
+		}
 		cmd = cmd->next;
 	}
 	wait_all_and_finish(data, data->cmdIndex->begin);

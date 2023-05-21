@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/21 15:42:47 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/21 22:35:46 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ typedef struct s_cmd
 	struct s_redirIndex *lredir;
 	struct s_cmd *next;
 	struct s_cmd *back;
-	int			argc;
-	int			fd_in;
-	int			fd_out;
 	int			in_file;
 	int			out_file;
 } t_cmd;

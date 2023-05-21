@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:18 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 15:02:47 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/21 23:47:24 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,21 @@ int ft_builtins_sec(t_cmd * cmd, t_envSom * env, t_data * data)
 
 int	ft_builtins(t_cmd *cmd, t_envSom *env, t_data *data)
 {
-	if (ft_strncmp(cmd->cmd, "env", 3) == 0 && ft_strlen(cmd->cmd) == 3)
+	if ((!cmd->redir && ft_strncmp(cmd->cmd, "env", 3) == 0 && ft_strlen(cmd->cmd) == 3) \
+	|| ((cmd->redir && ft_strncmp(cmd->just_cmd, "env", 3) == 0 && ft_strlen(cmd->just_cmd) == 3)))
 	{
 		ft_env(env, data);
 		return 0;
 	}
-	else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0 && ft_strlen(cmd->cmd) == 3)
+	else if ((!cmd->redir && ft_strncmp(cmd->cmd, "pwd", 3) == 0 && ft_strlen(cmd->cmd) == 3) \
+	|| (cmd->redir && ft_strncmp(cmd->just_cmd, "pwd", 3) == 0 && ft_strlen(cmd->just_cmd) == 3))
 	{
 		ft_pwd(data);
 		return 0;
 	}
 	else if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
 		return 0;
-	else if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
+	else if ((!cmd->redir && !ft_strncmp(cmd->cmd, "echo", 4)) || (cmd->redir && !ft_strncmp(cmd->just_cmd, "echo", 4)))
 	{
 		ft_echo(cmd, data);
 		return 0;
