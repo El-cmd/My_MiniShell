@@ -1,0 +1,25 @@
+total 208
+drwxr-xr-x 14 vloth 2021_paris  4096 May 21 15:49 .
+drwxr-xr-x  9 vloth 2021_paris  4096 May 19 17:09 ..
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:42 builtins
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:42 error
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:45 exec
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:42 free
+drwxr-xr-x  8 vloth 2021_paris  4096 May 21 14:56 .git
+-rw-r--r--  1 vloth 2021_paris    30 May 19 13:53 .gitignore
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:42 init
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:42 libft
+-rw-r--r--  1 vloth 2021_paris  1429 May 19 13:53 main.c
+-rw-r--r--  1 vloth 2021_paris  2440 May 21 15:42 main.o
+-rw-r--r--  1 vloth 2021_paris  1910 May 21 15:42 Makefile
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:43 meta
+-rwxr-xr-x  1 vloth 2021_paris 53744 May 21 15:45 Minishell
+-rw-r--r--  1 vloth 2021_paris 65329 May 19 13:53 Minishell.drawio
+-rw-r--r--  1 vloth 2021_paris  6951 May 21 15:42 minishell.h
+-rw-r--r--  1 vloth 2021_paris  1037 May 19 13:53 notee.txt
+-rw-r--r--  1 vloth 2021_paris   145 May 21 15:49 out
+-rw-r--r--  1 vloth 2021_paris     0 May 21 15:49 out2
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:43 parsing
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:43 redir
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:42 signaux
+drwxr-xr-x  2 vloth 2021_paris  4096 May 21 15:43 utils

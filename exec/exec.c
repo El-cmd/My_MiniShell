@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 14:46:15 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/21 15:41:09 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void exec(t_data *data)
 	//if (index->nb_cmd == 1)
 	spec_built_first(data);
 	if (index->nb_cmd)
-	 	ft_multiple_pipes(data);
+		ft_ft_exec(data);
+	 	//ft_multiple_pipes(data);
 	  	//ft_pipe_exec(data);
 }
 

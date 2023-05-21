@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/20 14:27:43 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/21 15:42:47 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,15 @@ void	ft_wait_for_child_processes(t_data *data);
 void	ft_perror_clean_exit(t_data *data, char *str);
 void	ft_close_fds(t_cmd *cmd);
 int		close_if(int fd);
+
+//Test
+void	wait_all_and_finish(t_data *data, t_cmd *cmds);
+void	exit_process(t_data *data, int *fd);
+void	parent_process(t_cmd *cmd, int *fd);
+int		ft_ft_exec(t_data *data);
+void	ft_launch_cmd(t_data *data, t_cmd *cmd, int *fd);
+void	child_process(t_data *data, t_cmd *cmd, int *fd);
+void	redirect_in_out(t_cmd *cmd, int *fd);
 
 //meta
 void is_meta(t_data *data);
