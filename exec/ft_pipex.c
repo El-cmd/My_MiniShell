@@ -196,7 +196,7 @@ void	ft_multiple_pipes(t_data *data)
 		ft_prepare_pipes(cmd, data);
 	
 		printf("\tinfile:'%d', outfile:'%d'\tfd_in:'%d', fd_out:'%d'\n", cmd->in_file, cmd->out_file, cmd->fd_in, cmd->fd_out);
-
+		spec_built(cmd, data);
 		ft_exec_command(cmd, data);
 		/*
 		if (ft_check_condiion_to_execute(data) == 1)
