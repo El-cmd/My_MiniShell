@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/21 22:35:46 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/22 09:08:11 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,19 @@
 # define BUFFER_SIZE_MAX 2048
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 
-typedef struct s_pipex
+typedef struct s_here
 {
-	//int 	infile;
-	//int		outfile;
-	//int		num_commands;
-	//int		prev_fd;
-	//int		pipe_fd[2];
-	//int		active_cmds;
+	char	*str;
+	int		len;
+	int		capacity;
 	int		heredoc_fd;
-}	t_pipex;
+}	t_here;
 
 //global
 typedef struct s_global
 {
 	pid_t	pid;
+	int		last_status;
 }	t_global;
 
 
@@ -126,7 +124,7 @@ typedef struct s_data
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
 	int		exit_return;
-	t_pipex	p_cmd;
+	t_here	here;
 } t_data;
 
 
@@ -172,8 +170,8 @@ pid_t	fork_error(void);
 /* exec.c */
 void 	exec(t_data *data);
 void 	ft_execve(t_cmd *cmd, t_data *data);
+int		ft_ft_exec(t_data *data);
 
-void	ft_pipe_exec(t_data *all_data);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);
 

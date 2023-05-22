@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   redir_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/21 21:25:05 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/22 10:17:25 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //malloc les redirections pour toute les cmd
+/*
+	I have added file which suppose to handle heredoc. We need to understand when to create the heredoc file..
+	
+
+*/
 void	malloc_all(t_data *data)
 {
 	redirOrNot(data->cmdIndex);
@@ -21,6 +26,8 @@ void	malloc_all(t_data *data)
     exec_find_cmd(data);
     is_built(data);
     cut_arg(data);
+	/* maybe we can process heredoc here to get its fd before (boucle_redir).. see heredoc.c */
+	// ft_heredoc();
     boucle_redir(data);
     is_meta(data);
 }
@@ -58,7 +65,7 @@ void    redir_fd(t_cmd *cmd)
         redir = cmd->lredir->begin;
         while (redir)
         {
-            if (redir->type == R_IN)
+            if (redir->type == R_IN || redir->type == HERD)
             {
                 if (cmd->in_file >= 0)
                     close(cmd->in_file);
@@ -86,3 +93,32 @@ void boucle_redir(t_data *data)
         cmd = cmd->next;
     }
 }
+/*
+void    redir_fd(t_cmd *cmd)
+{
+    t_redir *redir;
+
+    cmd->in_file = -2;
+    cmd->out_file = -2;
+    if (cmd->redir)
+    {
+        redir = cmd->lredir->begin;
+        while (redir)
+        {
+            if (redir->type == R_IN)
+            {
+                if (cmd->in_file >= 0)
+                    close(cmd->in_file);
+                cmd->in_file = redir->fd;
+            }
+            if (redir->type == R_OUT || redir->type == APPEND)
+            {
+                if (cmd->out_file >= 0)
+                    close(cmd->out_file);
+                cmd->out_file = redir->fd;
+            }
+            redir = redir->next;
+        }
+    }
+}
+*/
