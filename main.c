@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/16 15:09:46 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/22 15:42:48 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	eternal_loop(t_data *data)
 		splitOrNot(str, data->cmdIndex);
 		//init redirection token
 		malloc_all(data);
+		//printf("%s\n", data->cmdIndex->begin->argv[0]);
 		exec(data);
 		free(str);
 	}
@@ -35,6 +36,7 @@ void	eternal_loop(t_data *data)
 int main(int argc, char **argv, char **envp)
 {
 	t_data data;
+
 	the_arg(argc, argv);
 	init_data(&data, envp);
 	eternal_loop(&data);

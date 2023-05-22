@@ -1,4 +1,19 @@
-"hello minishell "
-"hello minishell 2"
-"wake up, New"
-"follow the white rabbit.."
+builtins
+error
+exec
+free
+infile
+init
+libft
+main.c
+main.o
+Makefile
+meta
+Minishell
+Minishell.drawio
+minishell.h
+notee.txt
+parsing
+redir
+signaux
+utils

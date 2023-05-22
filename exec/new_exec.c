@@ -53,8 +53,12 @@ int	ft_ft_exec(t_data *data)
 		{
         	if (pipe(fd) == -1)
 				return (-1);
-			if (cmd->is_built)
+			if (cmd->is_built && !cmd->spec_built)
+			{
 				ft_builtins(cmd, data->env, data);
+				//if (cmd->next != NULL)
+				//	dup2(1);
+			}
 			else
 				ft_launch_cmd(data, cmd, fd);
 		}

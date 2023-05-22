@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/21 23:09:33 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:40:34 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void ft_execve(t_cmd *cmd, t_data *data)
 	int y;
 	char *exec;
 
-	no_str(cmd->cmd);
+	//no_str(cmd->cmd);
 	y = 0;
 	while (data->path_exec[++y])
 	{
@@ -70,9 +70,9 @@ void spec_built_first(t_data *data)
 	cmd = data->cmdIndex->begin;
 	while (cmd)
 	{
-		if (ft_strncmp(cmd->cmd, "cd", 2) == 0)
+		if (ft_strcmp(cmd->argv[0], "cd") == 0)
 			cmd->spec_built = 2;
-		else if (ft_strncmp(cmd->cmd, "exit", 4) == 0)
+		else if (ft_strcmp(cmd->argv[0], "exit") == 0)
 			cmd->spec_built = 1;
 		else
 			cmd->spec_built = 0;

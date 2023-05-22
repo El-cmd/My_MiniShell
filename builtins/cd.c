@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:11 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 14:22:39 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:28:04 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 //et regarde si cest juste cd ou un cd /repertoir
 int settings_cd(t_cmd *cmd)
 {
-	int i;
-
-	i = 2;
-	while (cmd->cmd[i] == ' ')
-		i++;
-	if (cmd->cmd[i] == '\0')
+	if (cmd->argv[1] == NULL)
 		return (0);
 	return (1);
 }
@@ -37,7 +32,7 @@ void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data)
 	if (settings_cd(cmd) == 0)
 		path = getenv("HOME");
 	else
-		path = cmd->cmd + 3;
+		path = cmd->argv[1];
 	if (chdir(path) == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
