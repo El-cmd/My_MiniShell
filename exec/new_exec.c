@@ -58,8 +58,6 @@ int	ft_ft_exec(t_data *data)
 		{
         	if (pipe(fd) == -1)
 				return (-1);
-			//if (cmd->is_built && !cmd->spec_built)
-			//	ft_builtins(cmd, data->env, data);
 			else
 				ft_launch_cmd(data, cmd, fd);
 		}
@@ -98,10 +96,6 @@ void	exit_process(t_data *data, int *fd)
 	}
 	close(fd[0]);
 	close(fd[1]);
-	//free_cmd(&data->cmd);
-	//free_token_lst(data);
-	//free_tab_str(&data->test, -1);
-	//free_env(data->env);
 	exit(data->exit_return);
 }
 

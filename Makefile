@@ -1,7 +1,14 @@
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 NAME = Minishell
-
+_NC=`tput sgr0`
+_RED=\033[0;31m
+_GREEN=\033[0;32m
+_YELLOW=\033[0;33m
+_BLUE=\033[0;34m
+_PURPLE=\033[0;95m
+_CYAN=\033[0;36m
+_WHITE=\033[0;37m
 
 SRC = main.c \
 	  libft/ft_strlen.c \
@@ -72,18 +79,19 @@ INCL = minishell.h
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME) -lreadline -g
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME) -lreadline -g
 	@printf "\e[92;5;118m\n>>> Executable ready\n\e[0m"
 
 %.o: %.c $(INCL)
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	@printf "$(_CYAN)Generating $(NAME) objects...$(_BLUE)%-33.33s\r$(_NC)" $@
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 	@printf "\033[00;31m>>> objects removed.\n\033[00m"
 
 fclean:	clean
-		rm -rf $(NAME)
+		@rm -rf $(NAME)
 		@printf "\033[00;31m>>> executable removed.\n\033[00m"
 
 re : fclean all
