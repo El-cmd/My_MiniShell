@@ -44,8 +44,6 @@ SRC = main.c \
 	  exec/one_cmd.c \
 	  exec/several_cmd.c \
 	  exec/exec.c \
-	  exec/ft_pipex.c \
-	  exec/ft_pipe_exec.c \
 	  builtins/pwd.c \
 	  builtins/echo.c \
 	  builtins/exit.c \
