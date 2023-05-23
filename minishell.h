@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 09:08:11 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/05/23 05:58:19 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,7 @@
 # define ERR 2
 # define BUFFER_SIZE_MAX 2048
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
-
-typedef struct s_here
-{
-	char	*str;
-	int		len;
-	int		capacity;
-	int		heredoc_fd;
-}	t_here;
+# define HERE_DOC_FILE ".mini_here_doc"
 
 //global
 typedef struct s_global
@@ -124,7 +117,6 @@ typedef struct s_data
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
 	int		exit_return;
-	t_here	here;
 } t_data;
 
 
@@ -227,6 +219,7 @@ int 	malloc_out(char *str, int *i, t_redirIndex *tmp);
 int 	malloc_in(char *str, int *i, t_redirIndex *tmp);
 int 	malloc_redir(t_data *data);
 
+void	ft_here_doc(t_cmd *cmd);
 /* init_redir.c */
 t_redirIndex	*init_redirI(void);
 void			pushback_redir(t_redirIndex *i, int type, int index, char *str);
@@ -254,6 +247,7 @@ void	get_file(char *str, int *i);
 void	printTitle(void);
 int 	is_redir_or_cmd(char c);
 
+int		get_next_line(int fd, char **line);
 //ft_pipex
 void	ft_multiple_pipes(t_data *data);
 void	ft_init_pipex(t_data *data);

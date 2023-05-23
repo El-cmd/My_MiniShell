@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 14:40:34 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/23 05:53:01 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ void exec(t_data *data)
 	index = data->cmdIndex;
 	//if (index->begin->redir == true)
 	//	return ;
-	//if (index->nb_cmd == 1)
+	//if (index->nb_cmd)
 	spec_built_first(data);
 	if (index->nb_cmd)
+	{
 		ft_ft_exec(data);
-	 	//ft_multiple_pipes(data);
-	  	//ft_pipe_exec(data);
+		//ft_multiple_pipes(data);
+		//ft_pipe_exec(data);
+	}
 }
 
 void spec_built(t_cmd *cmd, t_data * data)

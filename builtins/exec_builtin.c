@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:18 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 15:41:36 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/23 05:57:55 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 void is_built_redir(t_cmd *cmd)
 {
-	if ((!ft_strcmp(cmd->argv[0], "env")) \
-		 || (!ft_strcmp(cmd->argv[0], "pwd"))\
-		 || (!ft_strcmp(cmd->argv[0], "cd")) \
-		 || (!ft_strcmp(cmd->argv[0], "echo")) \
-		 || (!ft_strcmp(cmd->argv[0], "exit")) \
-		 || (!ft_strcmp(cmd->argv[0], "export")) \
-		 || (!ft_strcmp(cmd->argv[0], "unset")))
+	if (cmd->argv[0]
+		&& ((!ft_strcmp(cmd->argv[0], "env"))
+		|| (!ft_strcmp(cmd->argv[0], "pwd"))
+		|| (!ft_strcmp(cmd->argv[0], "cd"))
+		|| (!ft_strcmp(cmd->argv[0], "echo"))
+		|| (!ft_strcmp(cmd->argv[0], "exit"))
+		|| (!ft_strcmp(cmd->argv[0], "export"))
+		|| (!ft_strcmp(cmd->argv[0], "unset"))))
 		cmd->is_built = true;
 	else
 		cmd->is_built = false;
