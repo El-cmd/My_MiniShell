@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:23:43 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:46:20 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ int		is_end_redir(char c)
 }
 
 //regarde si la commande est vide
-void no_str(char *cmd)
+int no_str(char *cmd)
 {
 	int i;
 
 	i = 0;
-	while (cmd[i] == ' ')
+	while (cmd[i] == ' ' || cmd[i] == '\t')
 		i++;
 	if (cmd[i] == '\0')
-		exit(0);
+		return (1);
+	return (0);
 }
 
 void	get_file(char *str, int *i)

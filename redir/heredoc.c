@@ -1,78 +1,15 @@
 #include "../minishell.h"
 
-/* malloc.. **delim need to be freed 
-static void	get_here_doc_delimiters(t_cmd *cmd, t_redir *redir)
-{
-	int		i;
-
-	cmd->here.delim = NULL;
-	redir = cmd->lredir->begin;
-	cmd->here.num = 0;
-	while (redir)
-	{
-		if (redir->type == HERD)
-			cmd->here.num++;
-		redir = redir->next;
-	}
-	if (cmd->here.num == 0)
-		return ;
-	cmd->here.delim = (char **)malloc(sizeof(char *) * (cmd->here.num + 1));
-	if (!cmd->here.delim)
-		return ;
-	redir = cmd->lredir->begin;
-	i = -1;
-	while (redir)
-	{
-		if (redir->type == HERD)
-			cmd->here.delim[++i] = ft_strdup(redir->file);
-		redir = redir->next;
-	}
-	cmd->here.delim[++i] = NULL;
-}
-*/
-
-/*
-static void	ft_free_delimiters(char **str)
-{
-	int	i;
-
-	i = -1;
-	if (**str)
-	{
-		while (str[++i])
-			free(str[i]);
-		free(str);
-	}
-}
-
-static int	number_of_delimiters(t_redir *redir)
-{
-	int	count;
-
-	count = 0;
-	while (redir)
-	{
-		if (redir->type == HERD)
-			count++;
-		redir = redir->next;
-	}
-	return (count);
-}
-*/
-
-/* here_doc works fine as it is ! 
-** however, it is necessary to quit properly in case of ctrl^C !! */
-static void	ft_create_here_doc(char *delimiter)
+int	ft_here_doc(char *eof)
 {
 	int		fd;
 	char	*buffer;
 
 	buffer = NULL;
-	fd = open(HERE_DOC_FILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	fd = open("herDoc", O_RDONLY | O_WRONLY | O_CREAT, 0644);
 	while (get_next_line(0, &buffer) > 0)
 	{
-		/* we need to handle the case of ctrl^C / ctrl^D */
-		if (!ft_strncmp(buffer, delimiter, ft_strlen(buffer)))
+		if (!ft_strncmp(buffer, eof, ft_strlen(buffer)))
 			break ;
 		else
 		{
@@ -82,18 +19,96 @@ static void	ft_create_here_doc(char *delimiter)
 		free(buffer);
 	}
 	free(buffer);
-	close(fd);
+	return (fd);
+}
+/*
+int	ft_first_cmd(int fd[2])
+{
+	int	fd_file;
+
+	fd_file = open("/tmp/herDoc", O_RDONLY);
+	dup2(fd_file, 0);
+	dup2(fd[1], 1);
+	close(fd_file);
+	unlink("/tmp/herDoc");
+	close(fd[0]);
+	return (1);
+}
+*/
+/* GNL */
+int			get_next_line(int fd, char **line);
+void		paste_line(char **readed_line, char *buff);
+static int	result(char **line, char **readed_line, int fd, int readed);
+static void	ft_strdel(char **str);
+
+int	get_next_line(int fd, char **line)
+{
+	static char	*readed_line[64];
+	char		*buff;
+	int			readed;
+
+	if (fd < 0 || line == NULL || BUFFER_SIZE_MAX < 1)
+		return (-1);
+	buff = (char *)malloc((BUFFER_SIZE_MAX + 1) * sizeof(char));
+	if (!(buff))
+		return (-1);
+	readed = 1;
+	while (readed > 0)
+	{
+		readed = read(fd, buff, BUFFER_SIZE_MAX);
+		buff[readed] = '\0';
+		if (!(readed_line[fd]))
+			readed_line[fd] = ft_strdup(buff);
+		else
+			paste_line(&readed_line[fd], buff);
+		if (ft_strchr(buff, '\n'))
+			break ;
+	}
+	free(buff);
+	return (result(line, readed_line, fd, readed));
 }
 
-void	ft_here_doc(t_cmd *cmd)
+void	paste_line(char **readed_line, char *buff)
 {
-	t_redir	*redir;
+	char		*tmp;
 
-	redir = cmd->lredir->begin;
-	while (redir)
+	tmp = ft_strjoin(*readed_line, buff);
+	free(*readed_line);
+	*readed_line = tmp;
+}
+
+static int	result(char **line, char **readed_line, int fd, int readed)
+{
+	int		len;
+	char	*tmp;
+
+	if (readed < 0)
+		return (-1);
+	else if (readed == 0 && readed_line[fd] == NULL && *line)
+		return (0);
+	len = 0;
+	while (readed_line[fd][len] != '\n' && readed_line[fd][len] != '\0')
+		len++;
+	if (readed_line[fd][len] == '\n')
 	{
-		if (redir->type == HERD)
-			ft_create_here_doc(redir->file);
-		redir = redir->next;
+		*line = ft_substr(readed_line[fd], 0, len);
+		tmp = ft_strdup(&readed_line[fd][len + 1]);
+		free(readed_line[fd]);
+		readed_line[fd] = tmp;
+		if (readed_line[fd][0] == '\0')
+			ft_strdel(&readed_line[fd]);
+		return (1);
+	}
+	*line = ft_strdup(readed_line[fd]);
+	ft_strdel(&readed_line[fd]);
+	return (0);
+}
+
+static void	ft_strdel(char **str)
+{
+	if (str)
+	{
+		free(*str);
+		*str = NULL;
 	}
 }

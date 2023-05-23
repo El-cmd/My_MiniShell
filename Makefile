@@ -67,9 +67,7 @@ SRC = main.c \
 	  redir/init.c \
 	  utils/utils.c \
 	  redir/redir_pars.c \
-	  redir/heredoc.c \
 	  utils/utils_nd.c \
-	  utils/get_next_line.c \
 	  parsing/cut.c \
 	  meta/meta.c \
 	  exec/new_exec.c

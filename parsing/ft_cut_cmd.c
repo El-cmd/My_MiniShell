@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:33:00 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:47:02 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	splitage(char *line, t_cmdIndex *cmdIndex)
 // par rapport a la commande regarde sil doit split ou pas
 void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 {
+	if (no_str(line) == 1)
+		return ;
 	if (ft_pipeError(line) == 1)
 		return ;
 	else if (ft_pipeError(line) == 2)
