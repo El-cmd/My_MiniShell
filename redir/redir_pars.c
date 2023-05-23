@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 14:59:51 by vloth            ###   ########.fr       */
+/*   Updated: 2023/05/23 06:00:04 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void    ft_open(t_redir *red)
         red->fd = open(red->file,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
     else if (red->type == R_IN)
         red->fd = open(red->file, O_RDONLY, 0644);
+    else if (red->type == HERD)
+        red->fd = open(HERE_DOC_FILE, O_RDONLY, 0644);
 }
 
 //decoupe les fichier de redirection et open les file en en mettant les fd dans ls struct
@@ -89,7 +91,11 @@ void boucle_redir(t_data *data)
     cmd = data->cmdIndex->begin;
     while (cmd)
     {
-        redir_fd(cmd);
+		if (cmd->redir)
+		{
+			ft_here_doc(cmd);
+			redir_fd(cmd);
+		}
         cmd = cmd->next;
     }
 }
