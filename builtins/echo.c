@@ -13,55 +13,27 @@
 #include "../minishell.h"
 
 //echo sans le \n mais encore quelque bug
-int ft_echo_n(char *str, t_cmd *cmd)
+int ft_echo_n(t_cmd *cmd)
 {
-	if (cmd->redir)
-		str = cmd->just_cmd + 8;
-	else
-		str = cmd->cmd + 8;
-	str = ft_strtrim(str, " ");
-	ft_putstr_fd(str, 1);
+	if (cmd->argv[2])
+		ft_putstr_fd(cmd->argv[2], 1);
 	return 0;
-}
-
-void echo_redir(t_cmd *cmd, t_data *data, char *str)
-{
-	if (ft_strncmp(cmd->just_cmd, "echo -n ", 8)== 0)
-	{
-		ft_echo_n(str, cmd);
-		data->exit_return = 0;
-	}
-	else
-	{
-		str = cmd->just_cmd + 5;
-		str = ft_strtrim(str, " ");
-		ft_putendl_fd(str, 1);
-		data->exit_return = 0;
-	}
 }
 
 //execute echo mais encore quelques truc a regler
 int	ft_echo(t_cmd *cmd, t_data *data)
 {
-	char *str;
-
-	str = NULL;
-	if (cmd->redir)
-		echo_redir(cmd, data, str);
+	if (cmd->argv[1] && !ft_strcmp(cmd->argv[0], "echo") && !ft_strcmp(cmd->argv[1], "-n"))
+	{
+		ft_echo_n(cmd);
+		data->exit_return = 0;
+	}
 	else
 	{
-		if (ft_strncmp(cmd->cmd, "echo -n ", 8)== 0)
-		{
-			ft_echo_n(str, cmd);
-			data->exit_return = 0;
-		}
-		else
-		{
-			str = cmd->cmd + 5;
-			str = ft_strtrim(str, " ");
-			ft_putendl_fd(str, 1);
-			data->exit_return = 0;
-		}
+		if (cmd->argv[1])
+			ft_putstr_fd(cmd->argv[1], 1);
+		ft_putstr_fd("\n", 1);
+		data->exit_return = 0;
 	}
-	return 0;
+	return 0;	
 }

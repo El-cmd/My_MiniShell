@@ -124,6 +124,7 @@ typedef struct s_data
 	t_cmdIndex *cmdIndex;
 	char	**path_exec;
 	int		exit_return;
+	char	*line;
 	t_here	here;
 } t_data;
 
@@ -134,7 +135,7 @@ int 	settings_cd(t_cmd *cmd);
 void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data);
 
 /* echo.c */
-int		ft_echo_n(char *str, t_cmd *cmd);
+int		ft_echo_n(t_cmd *cmd);
 int		ft_echo(t_cmd *cmd, t_data *data);
 
 /* exec_builtin.c */
@@ -192,7 +193,7 @@ void	free_tab(char **str);
 /* INIT */
 /* init_datdas.c */
 void	init_data(t_data *data, char **en);
-void 	init_data_cmd(t_data *data);
+void 	init_data_cmd(t_data *data, char *line);
 
 /* PARSING */
 /* ft_cut_cmd.c */
