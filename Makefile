@@ -70,7 +70,9 @@ SRC = main.c \
 	  utils/utils_nd.c \
 	  parsing/cut.c \
 	  meta/meta.c \
-	  exec/new_exec.c
+	  exec/new_exec.c \
+	  utils/gnl.c \
+	  redir/heredoc.c
 
 OBJS = $(SRC:.c=.o)
 

@@ -36,6 +36,7 @@
 # define ERR 2
 # define BUFFER_SIZE_MAX 2048
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
+# define HERE_DOC_FILE "/tmp/mini_here_doc_tmp_file"
 
 typedef struct s_here
 {
@@ -277,9 +278,11 @@ int		ft_ft_exec(t_data *data);
 void	ft_launch_cmd(t_data *data, t_cmd *cmd, int *fd);
 void	child_process(t_data *data, t_cmd *cmd, int *fd);
 void	redirect_in_out(t_cmd *cmd, int *fd);
+void	ft_create_here_doc(char *delimiter);
+int		get_next_line(int fd, char **line);
 
 //meta
-void is_meta(t_data *data);
+void 	is_meta(t_data *data);
 
 extern t_global	global;
 

@@ -41,6 +41,11 @@ void    ft_open(t_redir *red)
         red->fd = open(red->file,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
     else if (red->type == R_IN)
         red->fd = open(red->file, O_RDONLY, 0644);
+    else if (red->type == HERD)
+    {
+        ft_create_here_doc(red->file);
+        red->fd = open(HERE_DOC_FILE, O_RDONLY, 0644); 
+    }    
 }
 
 //decoupe les fichier de redirection et open les file en en mettant les fd dans ls struct
