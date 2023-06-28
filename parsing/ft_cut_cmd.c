@@ -20,15 +20,34 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex);
 // regarde sil y a des pipe ou non
 //et aussi si il y a des || ou des pipe invalide genre 
 // ls | grep truc | \0
+
+int    parseur_quotes(char *str, int i, int c)
+{
+    while (str[i])
+    {
+        if (str[i] == c)
+            break ;
+        i++;
+    }
+    return (i);
+}
+
 int	ft_pipeError(char *line)
 {
 	int i;
 	int j;
+	int q;
 
 	i = 0;
 	j = 0;
+	q = 0;
 	while (line[i])
 	{
+		if (line[i] == '"' || line[i] == '\'')
+		{
+			i = parseur_quotes(line, i + 1, line[i]);
+			q++;
+		}
 		if (line[i] == '|')
 		{
 			if (line[i + 1] == '|')
@@ -39,11 +58,12 @@ int	ft_pipeError(char *line)
 		}
 		i++;
 	}
-	if (j > 0)
+	if (j > 0 && q == 0)
 		return (0);
+	if ((q > 0))
+		return (3);
 	return (2);
 }
-
 
 //split le buffer par rapport au pipe et enleve les espace
 //au debut et a la fin de chaque commande
@@ -64,7 +84,7 @@ void	splitage(char *line, t_cmdIndex *cmdIndex)
 	i = 0;
 	while (line_second[i])
 	{
-		pushback_cmd(line_second[i], cmdIndex);
+		pushback_cmd(line_second[i], cmdIndex, 0);
 		i++;
 	}
 }
@@ -76,10 +96,15 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 		return ;
 	if (ft_pipeError(line) == 1)
 		return ;
+	else if (ft_pipeError(line) == 3) //a faire : isoler les quote
+	{
+		split_quotes(line, cmdIndex);
+		return ;
+	}
 	else if (ft_pipeError(line) == 2)
 	{
 		line = ft_strtrim(line, " ");
-		pushback_cmd(line, cmdIndex);
+		pushback_cmd(line, cmdIndex, 0);
 	}
 	else if (ft_pipeError(line) == 0)
 		splitage(line, cmdIndex);

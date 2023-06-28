@@ -53,6 +53,21 @@ typedef struct s_global
 	int		last_status;
 }	t_global;
 
+typedef struct s_quIndex
+{
+	int size;
+	struct s_quote *begin;
+	struct s_quote *end;
+} t_quIndex;
+
+typedef struct s_quote
+{
+	bool	simple;
+	bool	double_q;
+	char 	*str;
+	struct s_quote *next;
+	struct s_quote *back;
+}	t_quote;
 
 //environnement
 typedef struct s_env
@@ -86,6 +101,8 @@ typedef struct s_cmd
 	char		*just_cmd; // si il y a des redirection regarder cette string
 	bool		is_built;
 	char		**argv;
+	bool 		quotes;
+	struct      s_quIndex *quote;
 	bool		redir;
 	int			spec_built;
 	bool		have_meta;
@@ -208,7 +225,7 @@ void 		exec_find_cmd(t_data *data);
 
 /* ft_init_list.c */
 t_cmdIndex *init_cmd(void);
-void 		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
+void 		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote);
 void 		print_list(t_cmdIndex *cmdIndex);
 
 /* init_env.c */
@@ -220,6 +237,13 @@ t_envSom	*init_envp(char **envp);
 
 /* parsing.c */
 void cut_arg(t_data *data);
+void split_quotes(char *str, t_cmdIndex *cmdIndex);
+int count_simple_quote(char *str);
+int count_double_quote(char *str);
+int    parseur_quotes(char *str, int i, int c);
+
+
+
 
 /* REDIR */
 /* init.c */

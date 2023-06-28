@@ -33,7 +33,7 @@ t_cmdIndex *init_cmd(void)
 }
 
 //tout est dans le nom ne pas oublier de mettre le type
-void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex)
+void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
 {
 	t_cmd *element;
 
@@ -41,6 +41,10 @@ void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex)
 	if (!element)
 		exit(EXIT_FAILURE);
 	element->cmd = cmd;
+	if (quote)
+		element->quotes = true;
+	else
+		element->quotes = false;
 	element->next = NULL;
 	element->back = NULL;
 	if (cmdIndex->nb_cmd == 0)
