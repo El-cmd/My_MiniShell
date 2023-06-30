@@ -19,7 +19,11 @@ void	cut(t_cmd *cmd, int *i)
 
 	start = *i;
 	while (is_redir_or_cmd(cmd->cmd[*i]) == 0 && cmd->cmd[*i] != '\0')
+	{
+		if (cmd->cmd[*i] == '"' || cmd->cmd[*i] == '\'')
+			*i = parseur_quotes(cmd->cmd, *i + 1, cmd->cmd[*i]);
 		(*i)++;
+	}
 	end = *i;
 	cmd->just_cmd = ft_substr(cmd->cmd, start, (end - start));
 }

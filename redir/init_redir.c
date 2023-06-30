@@ -70,7 +70,7 @@ int lookIfRedir(char *line)
 		//if (i > 0 && line[i] == '<' && line[i - 1] == '<')
 		if (line[i] == '"' || line[i] == '\'')
 			i = parseur_quotes(line, i + 1, line[i]);
-		if (line[i] == '<' && line[i + 1] == '<')
+		else if (line[i] == '<' && line[i + 1] == '<')
 			return (1);
 		else if (line[i] == '<')
 			return (1);

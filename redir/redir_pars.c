@@ -53,7 +53,11 @@ void    begin_end_file(int i, t_redir *red, char *str)
 {
     red->begin = i;
     while (str[i] && str[i] != '>' && str[i] != '<' && str[i] != ' ')
+    {
+        if (str[i] == '"' || str[i] == '\'')
+            i = parseur_quotes(str, i + 1, str[i]);
         i++;
+    }
     red->len = i - red->begin;
     red->file = ft_substr(str, red->begin, red->len);
     ft_open(red);    

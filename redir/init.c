@@ -116,7 +116,9 @@ int malloc_redir(t_data *data)
 			i = 0;
 			while (tmp->cmd[i])
 			{
-				if (malloc_out(tmp->cmd, &i, tmp->lredir) == 1)
+				if (tmp->cmd[i] == '"' || tmp->cmd[i] == '\'')
+					i = parseur_quotes(tmp->cmd, i + 1, tmp->cmd[i]);
+				else if (malloc_out(tmp->cmd, &i, tmp->lredir) == 1)
 					return (EXIT_FAILURE);
 				else if (malloc_in(tmp->cmd, &i, tmp->lredir) == 1)
 					return (EXIT_FAILURE);

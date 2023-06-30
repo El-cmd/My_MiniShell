@@ -53,7 +53,11 @@ int no_str(char *cmd)
 void	get_file(char *str, int *i)
 {
 	while (str[*i] && str[*i] != '>' && str[*i] != '<' && str[*i] != ' ')
+	{
+		if (str[*i] == '"' || str[*i] == '\'')
+			(*i) = parseur_quotes(str, *i + 1, str[*i]);
 		(*i)++;
+	}
 }
 
 void   printTitle(void)
