@@ -102,7 +102,6 @@ typedef struct s_cmd
 	bool		is_built;
 	char		**argv;
 	bool 		quotes;
-	struct      s_quIndex *quote;
 	bool		redir;
 	int			spec_built;
 	bool		have_meta;
