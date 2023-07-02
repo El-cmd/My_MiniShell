@@ -21,11 +21,17 @@ void ft_execve(t_cmd *cmd, t_data *data)
 {
 	int y;
 	char *exec;
+	int i;
 
-	//no_str(cmd->cmd);
 	y = 0;
+	i = 0;
 	while (data->path_exec[++y])
 	{
+		if (i == 0)
+		{
+			execve(cmd->argv[0], cmd->argv, data->envp);
+			i++;
+		}
 		exec = ft_strjoin(ft_strjoin(data->path_exec[y], "/"), cmd->argv[0]);
 		data->exit_return = execve(exec, cmd->argv, data->envp);
 		free(exec);

@@ -22,12 +22,8 @@ void	eternal_loop(t_data *data)
 		str = readline("MS#🤖: ");
 		add_history(str);
 		init_data_cmd(data, str);
-
-		// il faut que je clean a partir d'ici
 		splitOrNot(str, data->cmdIndex);
-		//init redirection token
 		malloc_all(data);
-		//printf("%s\n", data->cmdIndex->begin->argv[1]);
 		exec(data);
 		free(str);
 	}
