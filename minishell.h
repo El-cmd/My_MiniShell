@@ -53,26 +53,13 @@ typedef struct s_global
 	int		last_status;
 }	t_global;
 
-typedef struct s_quIndex
-{
-	int size;
-	struct s_quote *begin;
-	struct s_quote *end;
-} t_quIndex;
-
-typedef struct s_quote
-{
-	bool	simple;
-	bool	double_q;
-	char 	*str;
-	struct s_quote *next;
-	struct s_quote *back;
-}	t_quote;
 
 //environnement
 typedef struct s_env
 {
 	char *name;
+	char *value_split;
+	char *name_split;
 	struct s_env *next;
 	struct s_env *back;
 } t_env;
@@ -193,13 +180,6 @@ int		ft_ft_exec(t_data *data);
 /* getPath.c */
 char	**ft_getpath(t_envSom *env);
 
-/* one_cmd.c */
-int		simple_cmd(t_envSom *env, t_cmd *cmd, t_cmdIndex *c, t_data *d);
-
-/* several_cmd.c */
-void	ft_child(t_cmd *cmd, t_envSom *env, int fd[2], t_data *data);
-void	ft_parent(int *fd);
-void	ft_exec(t_data *data);
 
 /* FREE */
 /* free.c */
@@ -279,20 +259,6 @@ void	get_file(char *str, int *i);
 void	printTitle(void);
 int 	is_redir_or_cmd(char c);
 
-//ft_pipex
-void	ft_multiple_pipes(t_data *data);
-void	ft_init_pipex(t_data *data);
-void	ft_prepare_pipes(t_cmd *cmd, t_data *data);
-void	ft_prepare_first(t_cmd *cmd, t_data *data);
-void	ft_prepare_next(t_cmd *cmd, t_data *data);
-void	ft_prepare_last(t_cmd *cmd, t_data *data);
-int		ft_check_condition_to_execute(t_data *data);
-void	ft_exec_command(t_cmd *cmd, t_data *data);
-void	ft_wait_for_child_processes(t_data *data);
-void	ft_perror_clean_exit(t_data *data, char *str);
-void	ft_close_fds(t_cmd *cmd);
-int		close_if(int fd);
-
 //Test
 void	wait_all_and_finish(t_data *data, t_cmd *cmds);
 void	exit_process(t_data *data, int *fd);
@@ -306,6 +272,10 @@ int		get_next_line(int fd, char **line);
 
 //meta
 void 	is_meta(t_data *data);
+int is_meta_second(char *str);
+int is_simple_quote(char *str);
+int ft_valid_meta(char *str, t_data *data);
+char *ft_getenv(char *str, t_data *data);
 
 extern t_global	global;
 

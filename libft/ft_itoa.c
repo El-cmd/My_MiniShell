@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-long int	static	ft_isneg(long int n)
+long int	ft_isneg(long int n)
 {
 	if (n < 0)
 		return (n * (-1));
 	return (n);
 }
 
-int static 	ft_len(long int n)
+int 	ft_len(long int n)
 {
 	int	len;
 

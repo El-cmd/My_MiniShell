@@ -29,6 +29,7 @@ SRC = main.c \
 	  libft/ft_memchr.c \
 	  libft/ft_memcmp.c \
 	  libft/ft_memccpy.c \
+	  libft/ft_itoa.c \
 	  libft/ft_calloc.c \
 	  libft/ft_isalpha.c \
 	  libft/ft_isdigit.c \
@@ -48,8 +49,6 @@ SRC = main.c \
 	  parsing/ft_init_list.c \
 	  parsing/parsing.c \
 	  exec/getPath.c \
-	  exec/one_cmd.c \
-	  exec/several_cmd.c \
 	  exec/exec.c \
 	  builtins/pwd.c \
 	  builtins/echo.c \

@@ -23,6 +23,60 @@ void cut_quote(t_data *data)
     }
 }
 
+char *fait_le_cafe(char **test, t_data *data)
+{
+    char *cmd;
+    int j;
+
+    j = 0;
+    cmd = NULL;
+    while (test[j])
+    {
+        if (j == 0)
+        {
+            if (!ft_valid_meta(test[j], data))
+                cmd = ft_strdup(test[j]);
+            else
+                cmd = ft_getenv(test[j], data);
+        }
+        else
+        {
+            if (!ft_valid_meta(test[j], data))
+                cmd = ft_strjoin(cmd, test[j]);
+            else
+                cmd = ft_strjoin(cmd, ft_getenv(test[j], data));
+        }
+        j++;
+    }
+    return (cmd);
+}
+
+void do_meta(t_data *data)
+{
+    t_cmd *cmd;
+    int i;
+    char **test;
+
+    i = 0;
+    cmd = data->cmdIndex->begin;
+    while (cmd)
+    {
+        if (cmd->have_meta)
+        {
+            while (cmd->argv[i])
+            {
+                if (is_meta_second(cmd->argv[i]) && !is_simple_quote(cmd->argv[i]))
+                {
+                    test = ft_split(cmd->argv[i], '$');
+                    cmd->argv[i] = fait_le_cafe(test, data);
+                }
+                i++;
+            }
+        }
+        cmd = cmd->next;
+    }
+}
+
 void cut_arg(t_data *data)
 {
     t_cmd *cmd;
@@ -36,6 +90,7 @@ void cut_arg(t_data *data)
             cmd->argv = ft_split(cmd->cmd, ' ');
         cmd = cmd->next;
     }
+    do_meta(data);
     cut_quote(data);
 }
 

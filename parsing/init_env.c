@@ -37,11 +37,15 @@ t_envSom	*init_envSom(void)
 void	push_env(char *envp, t_envSom *som)
 {
 	t_env *env;
+	char **tmp;
 	
+	tmp = ft_split(envp, '=');
 	env = malloc(sizeof(t_env));
     if(!env)
 		exit(EXIT_FAILURE);
 	env->name = ft_strdup(envp);
+	env->value_split= tmp[1];
+	env->name_split = tmp[0];
 	malloc_error(env->name);
 	env->next = NULL;
 	env->back = NULL;

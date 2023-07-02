@@ -20,14 +20,13 @@
 */
 void	malloc_all(t_data *data)
 {
+    is_meta(data);
 	redirOrNot(data->cmdIndex);
 	initRedirOrnot(data->cmdIndex);
 	malloc_redir(data);
     exec_find_cmd(data);
     cut_arg(data);
     is_built(data);
-	/* maybe we can process heredoc here to get its fd before (boucle_redir).. see heredoc.c */
-	// ft_heredoc();
     boucle_redir(data);
     is_meta(data);
 }
