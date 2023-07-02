@@ -32,6 +32,7 @@ char *fait_le_cafe(char **test, t_data *data)
     cmd = NULL;
     while (test[j])
     {
+        test[j] = ft_strtrim(test[j], "\"");
         if (j == 0)
         {
             if (!ft_valid_meta(test[j], data))
@@ -67,6 +68,7 @@ void do_meta(t_data *data)
             {
                 if (is_meta_second(cmd->argv[i]) && !is_simple_quote(cmd->argv[i]))
                 {
+                    cmd->argv[i] = ft_strtrim(cmd->argv[i], "\"");
                     test = ft_split(cmd->argv[i], '$');
                     cmd->argv[i] = fait_le_cafe(test, data);
                 }

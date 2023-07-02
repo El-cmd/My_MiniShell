@@ -12,10 +12,6 @@
 
 #include "../minishell.h"
 
-/*
-void exec(t_cmdIndex *cmd, char **envp, t_envSom *envp_nodes);
-void ft_execve(char *cmd, char **envp);
-*/
 // fonction d'execution
 void ft_execve(t_cmd *cmd, t_data *data)
 {
@@ -29,7 +25,7 @@ void ft_execve(t_cmd *cmd, t_data *data)
 	{
 		if (i == 0)
 		{
-			execve(cmd->argv[0], cmd->argv, data->envp);
+			data->exit_return = execve(cmd->argv[0], cmd->argv, data->envp);
 			i++;
 		}
 		exec = ft_strjoin(ft_strjoin(data->path_exec[y], "/"), cmd->argv[0]);
@@ -42,21 +38,14 @@ void ft_execve(t_cmd *cmd, t_data *data)
 	exit(data->exit_return);
 }
 
-//regarde quel execution faire si une ou plusieur cmd
-//void exec(t_cmdIndex *cmd, char **envp, t_envSom *envp_nodes)
 void exec(t_data *data)
 {
 	t_cmdIndex *index;
 
 	index = data->cmdIndex;
-	//if (index->begin->redir == true)
-	//	return ;
-	//if (index->nb_cmd == 1)
 	spec_built_first(data);
 	if (index->nb_cmd)
 		ft_ft_exec(data);
-	 	//ft_multiple_pipes(data);
-	  	//ft_pipe_exec(data);
 }
 
 void spec_built(t_cmd *cmd, t_data * data)
