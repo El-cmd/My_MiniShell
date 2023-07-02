@@ -34,7 +34,7 @@ void ft_execve(t_cmd *cmd, t_data *data)
 	}
 	ft_putstr_fd(cmd->argv[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
-	data->exit_return = errno;
+	data->exit_return = 127;
 	exit(data->exit_return);
 }
 
