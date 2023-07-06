@@ -72,6 +72,8 @@ t_env *pop_front_dlist_env(t_envSom *index)
 	t_env *tmp;
 
 	tmp = index->begin;
+	if (index->size == 0)
+		return (tmp);
 	if (index->size == 1)
 	{
 		free(tmp->name);
@@ -97,6 +99,7 @@ t_env *pop_front_dlist_env(t_envSom *index)
 //{
 //	t_env *tmp;
 //
+//	tmp = l->begin;
 //	if (l->size > 1)
 //	{
 //		free(tmp->name);

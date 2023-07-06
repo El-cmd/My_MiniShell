@@ -24,7 +24,7 @@ void	eternal_loop(t_data *data)
 		{
 			printf("CTRL-D\nExit\n");
 			free(str);
-			//data_env(data);
+			data_env(data);
 			exit(0);
 		}
 		add_history(str);

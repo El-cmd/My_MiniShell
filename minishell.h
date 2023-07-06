@@ -38,14 +38,6 @@
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 # define HERE_DOC_FILE "/tmp/mini_here_doc_tmp_file"
 
-typedef struct s_here
-{
-	char	*str;
-	int		len;
-	int		capacity;
-	int		heredoc_fd;
-}	t_here;
-
 //global
 typedef struct s_global
 {
@@ -129,7 +121,6 @@ typedef struct s_data
 	char	**path_exec;
 	int		exit_return;
 	char	*line;
-	t_here	here;
 } t_data;
 
 
