@@ -35,6 +35,6 @@ void ft_exit(t_cmd *cmd, t_data *data)
 	ft_putstr_fd("exit\n", 1);
     cmd->spec_built = 1;
     n = data->exit_return;
-    //free_list(data->cmdIndex);
+    data_env(data);
     exit(n);
 }

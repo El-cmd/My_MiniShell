@@ -23,15 +23,23 @@ t_cmd *pop_front_dlist(t_cmdIndex *index)
 	t_cmd *tmp;
 
 	tmp = index->begin;
+	if (index->nb_cmd == 0)
+		return (tmp);
 	if (index->nb_cmd == 1)
 	{
 		free(tmp->cmd);
+		if (tmp->redir)
+			free(tmp->just_cmd);
+		free_tab(tmp->argv);
 		index->begin = NULL;
 		index->end = NULL;
 	}
 	else
 	{
 		free(tmp->cmd);
+		if (tmp->redir)
+			free(tmp->just_cmd);
+		free_tab(tmp->argv);
 		index->begin = index->begin->next;
 		index->begin->back = NULL;
 	}
@@ -93,35 +101,6 @@ t_env *pop_front_dlist_env(t_envSom *index)
 	index->size--;
 	return (tmp);
 }
-
-
-//t_env	*pop_front_dlist_env(t_envSom *l)
-//{
-//	t_env *tmp;
-//
-//	tmp = l->begin;
-//	if (l->size > 1)
-//	{
-//		free(tmp->name);
-//		free(tmp->name_split);
-//		free(tmp->value_split);
-//		tmp = l->begin;
-//		l->begin = l->begin->next;
-//		l->begin->back = NULL;
-//		l->size--;
-//	}
-//	else
-//	{
-//		free(tmp->name);
-//		free(tmp->name_split);
-//		free(tmp->value_split);
-//		tmp = l->begin;
-//		l->begin = NULL;
-//		l->end = NULL;
-//		l->size = 0;
-//	}
-//	return (tmp);
-//}
 
 void data_env(t_data *data)
 {

@@ -25,6 +25,7 @@ void	eternal_loop(t_data *data)
 			printf("CTRL-D\nExit\n");
 			free(str);
 			data_env(data);
+			free_list(data->cmdIndex);
 			exit(0);
 		}
 		add_history(str);
