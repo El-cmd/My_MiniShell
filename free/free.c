@@ -66,3 +66,70 @@ void	free_tab(char **str)
 	free(str);
 	str = NULL;
 }
+
+t_env *pop_front_dlist_env(t_envSom *index)
+{
+	t_env *tmp;
+
+	tmp = index->begin;
+	if (index->size == 1)
+	{
+		free(tmp->name);
+		free(tmp->name_split);
+		free(tmp->value_split);
+		index->begin = NULL;
+		index->end = NULL;
+	}
+	else
+	{
+		free(tmp->name);
+		free(tmp->name_split);
+		free(tmp->value_split);
+		index->begin = index->begin->next;
+		index->begin->back = NULL;
+	}
+	index->size--;
+	return (tmp);
+}
+
+
+//t_env	*pop_front_dlist_env(t_envSom *l)
+//{
+//	t_env *tmp;
+//
+//	if (l->size > 1)
+//	{
+//		free(tmp->name);
+//		free(tmp->name_split);
+//		free(tmp->value_split);
+//		tmp = l->begin;
+//		l->begin = l->begin->next;
+//		l->begin->back = NULL;
+//		l->size--;
+//	}
+//	else
+//	{
+//		free(tmp->name);
+//		free(tmp->name_split);
+//		free(tmp->value_split);
+//		tmp = l->begin;
+//		l->begin = NULL;
+//		l->end = NULL;
+//		l->size = 0;
+//	}
+//	return (tmp);
+//}
+
+void data_env(t_data *data)
+{
+	t_env *tmp;
+
+	tmp = data->env->begin;
+	while (tmp)
+	{
+		tmp = pop_front_dlist_env(data->env);
+		free(tmp);
+	}
+	free(data->env);
+	data->env = NULL;
+}

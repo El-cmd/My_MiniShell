@@ -16,7 +16,9 @@
 // Gestion de l'exit
 void ft_exit(t_cmd *cmd, t_data *data)
 {
-	    if (cmd->redir == false)
+    int n;
+
+	if (cmd->redir == false)
     {
         if (ft_strlen(cmd->cmd) > 4)
             data->exit_return = ft_atoi_exit(cmd->cmd + 4);
@@ -32,5 +34,7 @@ void ft_exit(t_cmd *cmd, t_data *data)
     }
 	ft_putstr_fd("exit\n", 1);
     cmd->spec_built = 1;
-    exit(data->exit_return);
+    n = data->exit_return;
+    //free_list(data->cmdIndex);
+    exit(n);
 }

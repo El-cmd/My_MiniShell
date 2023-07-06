@@ -85,7 +85,7 @@ $(NAME): $(OBJS)
 	@printf "\e[92;5;118m\n>>> Executable ready\n\e[0m"
 
 %.o: %.c $(INCL)
-	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o) -g
 	@printf "$(_CYAN)Generating $(NAME) objects...$(_BLUE)%-33.33s\r$(_NC)" $@
 
 clean:

@@ -39,7 +39,7 @@ void	sigint_handler(int sig)
 void sigquit_handler(int sig)
 {
 	(void)sig;
-	ft_putendl_fd("CTRL-D = Segmentation fault", 2);
+	ft_putendl_fd("Segmentation fault", 2);
 	exit(128);
 }
 

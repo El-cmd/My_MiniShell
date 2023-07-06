@@ -186,6 +186,7 @@ char	**ft_getpath(t_envSom *env);
 t_cmd 	*pop_front_dlist(t_cmdIndex *index);
 void	free_list(t_cmdIndex *index);
 void	free_tab(char **str);
+void data_env(t_data *data);
 
 /* INIT */
 /* init_datdas.c */
@@ -276,6 +277,7 @@ int is_meta_second(char *str);
 int is_simple_quote(char *str);
 int ft_valid_meta(char *str, t_data *data);
 char *ft_getenv(char *str, t_data *data);
+void	free_list(t_cmdIndex *index);
 
 extern t_global	global;
 

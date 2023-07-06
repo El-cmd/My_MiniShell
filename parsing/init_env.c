@@ -39,11 +39,11 @@ void	push_env(char *envp, t_envSom *som)
 	t_env *env;
 	char **tmp;
 	
-	tmp = ft_split(envp, '=');
 	env = malloc(sizeof(t_env));
     if(!env)
 		exit(EXIT_FAILURE);
 	env->name = ft_strdup(envp);
+	tmp = ft_split(envp, '=');
 	env->value_split= tmp[1];
 	env->name_split = tmp[0];
 	malloc_error(env->name);
@@ -68,11 +68,14 @@ void	push_env(char *envp, t_envSom *som)
 void	change_pwd(t_envSom *env)
 {	
 	t_env	*tmp;
-	
+	char	*tmppwd;
+
+	tmppwd = getcwd(NULL, 0);
 	tmp = env->begin;
 	while (tmp && ft_strncmp(tmp->name, "PWD=", 4))
 		tmp = tmp->next;
-	tmp->name = ft_strjoin("PWD=", getcwd(NULL, 0));
+	tmp->name = ft_strjoin("PWD=", tmppwd);
+	free(tmppwd);
 }
 
 //mes a jours la varible oldpwd dans mon env

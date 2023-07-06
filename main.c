@@ -20,6 +20,13 @@ void	eternal_loop(t_data *data)
 	while(1)
 	{
 		str = readline("MS#🤖: ");
+		if (!str)
+		{
+			printf("CTRL-D\nExit\n");
+			free(str);
+			//data_env(data);
+			exit(0);
+		}
 		add_history(str);
 		init_data_cmd(data, str);
 		splitOrNot(str, data->cmdIndex);

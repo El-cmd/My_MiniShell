@@ -87,6 +87,7 @@ void	splitage(char *line, t_cmdIndex *cmdIndex)
 		pushback_cmd(line_second[i], cmdIndex, 0);
 		i++;
 	}
+	free_tab(line_second);
 }
 
 // par rapport a la commande regarde sil doit split ou pas
@@ -105,6 +106,7 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 	{
 		line = ft_strtrim(line, " ");
 		pushback_cmd(line, cmdIndex, 0);
+		free(line);
 	}
 	else if (ft_pipeError(line) == 0)
 		splitage(line, cmdIndex);

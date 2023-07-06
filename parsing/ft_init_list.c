@@ -40,7 +40,7 @@ void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
 	element = malloc(sizeof(t_cmd));
 	if (!element)
 		exit(EXIT_FAILURE);
-	element->cmd = cmd;
+	element->cmd = ft_strdup(cmd);
 	if (quote)
 		element->quotes = true;
 	else
