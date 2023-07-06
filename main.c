@@ -6,7 +6,7 @@
 /*   By: thhusser <thhusser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/06 22:09:14 by thhusser         ###   ########.fr       */
+/*   Updated: 2023/07/06 22:09:33 by thhusser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	eternal_loop(t_data *data)
 		{
 			printf("CTRL-D\nExit\n");
 			free(str);
-			// data_env(data);
+			data_env(data);
 			exit(0);
 		}
-		add_history(str);
-		init_data_cmd(data, str);
-		splitOrNot(str, data->cmdIndex);
-		malloc_all(data);
-		exec(data);
+		// add_history(str);
+		// init_data_cmd(data, str);
+		// splitOrNot(str, data->cmdIndex);
+		// malloc_all(data);
+		// exec(data);
 		free(str);
 	}
 }
