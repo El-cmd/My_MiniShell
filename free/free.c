@@ -23,7 +23,7 @@ t_cmd *pop_front_dlist(t_cmdIndex *index)
 	t_cmd *tmp;
 
 	tmp = index->begin;
-	if (index->nb_cmd == 0)
+	if (index->nb_cmd == 0 || index->begin == NULL)
 		return (tmp);
 	if (index->nb_cmd == 1)
 	{
@@ -66,6 +66,8 @@ void	free_tab(char **str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		free(str[i]);

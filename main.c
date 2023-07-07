@@ -20,15 +20,19 @@ void	eternal_loop(t_data *data)
 	while(1)
 	{
 		str = readline("MS#🤖: ");
+		add_history(str);
 		if (!str)
 		{
 			printf("CTRL-D\nExit\n");
 			free(str);
 			data_env(data);
-			free_list(data->cmdIndex);
+			if (data->cmdIndex)
+			{
+				free_list(data->cmdIndex);
+			}
+			free_tab(data->path_exec);
 			exit(0);
 		}
-		add_history(str);
 		init_data_cmd(data, str);
 		splitOrNot(str, data->cmdIndex);
 		malloc_all(data);

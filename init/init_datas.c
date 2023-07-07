@@ -68,12 +68,13 @@ void	init_data(t_data *data, char **en)
 	data->env = init_envp(en);
 	global.pid = 42;
 	signal_handler();
+	data->cmdIndex = init_cmd();
+	data->path_exec = NULL;
 }
 
 //init les datas dans la boucle
 void init_data_cmd(t_data *data, char *line)
 {
-	data->cmdIndex = init_cmd();
 	data->path_exec = ft_getpath(data->env);
 	data->line = line;
 }
