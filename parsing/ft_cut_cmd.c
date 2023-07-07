@@ -71,20 +71,17 @@ int	ft_pipeError(char *line)
 void	splitage(char *line, t_cmdIndex *cmdIndex)
 {
 	char	**line_second;
+	char	*tmp;
 	int i;
 
 	i = 0;
-	//toujours ne pas oublier les leaks et d'opti split
 	line_second = ft_split(line, '|');
-	while (line_second[i])
-	{
-		line_second[i] = ft_strtrim(line_second[i], " ");
-		i++;
-	}
 	i = 0;
 	while (line_second[i])
 	{
-		pushback_cmd(line_second[i], cmdIndex, 0);
+		tmp = ft_strtrim(line_second[i], " ");
+		pushback_cmd(tmp, cmdIndex, 0);
+		free(tmp);
 		i++;
 	}
 	free_tab(line_second);

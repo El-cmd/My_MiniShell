@@ -27,9 +27,7 @@ void	eternal_loop(t_data *data)
 			free(str);
 			data_env(data);
 			if (data->cmdIndex)
-			{
 				free_list(data->cmdIndex);
-			}
 			free_tab(data->path_exec);
 			exit(0);
 		}
