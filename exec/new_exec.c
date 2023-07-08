@@ -63,7 +63,8 @@ int	ft_ft_exec(t_data *data)
 		}
 		cmd = cmd->next;
 	}
-	wait_all_and_finish(data, data->cmdIndex->begin);
+	wait_all_and_finish(data, data->cmdIndex->begin);	
+	free_list_second(data->cmdIndex);
 	return (1);
 }
 

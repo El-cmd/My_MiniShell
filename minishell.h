@@ -178,6 +178,8 @@ t_cmd 	*pop_front_dlist(t_cmdIndex *index);
 void	free_list(t_cmdIndex *index);
 void	free_tab(char **str);
 void data_env(t_data *data);
+void free_everything(t_data *data);
+void	free_list_second(t_cmdIndex *index);
 
 /* INIT */
 /* init_datdas.c */

@@ -61,6 +61,18 @@ void	free_list(t_cmdIndex *index)
 	index = NULL;
 }
 
+void	free_list_second(t_cmdIndex *index)
+{
+	t_cmd	*tmp;
+
+	tmp = index->begin;
+	while (tmp)
+	{
+		tmp = pop_front_dlist(index);
+		free(tmp);
+	}
+}
+
 void	free_tab(char **str)
 {
 	int i;
@@ -116,4 +128,12 @@ void data_env(t_data *data)
 	}
 	free(data->env);
 	data->env = NULL;
+}
+
+void free_everything(t_data *data)
+{
+	data_env(data);
+	if (data->cmdIndex)
+		free_list(data->cmdIndex);
+	free_tab(data->path_exec);
 }
