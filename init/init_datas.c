@@ -71,9 +71,3 @@ void	init_data(t_data *data, char **en)
 	data->cmdIndex = init_cmd();
 	data->path_exec = ft_getpath(data->env);
 }
-
-//init les datas dans la boucle
-void init_data_cmd(t_data *data, char *line)
-{
-	data->line = line;
-}

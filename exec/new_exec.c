@@ -24,7 +24,9 @@ void	child_process(t_data *data, t_cmd *cmd, int *fd)
 	if (cmd->is_built && !cmd->spec_built)
 	{
 		ft_builtins(cmd, data->env, data);
-		exit(data->exit_return);
+		int n = data->exit_return;
+		free_everything(data);
+		exit(n);
 	}
 	ft_execve(cmd, data);
 	exit_process(data, fd);

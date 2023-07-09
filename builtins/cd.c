@@ -44,5 +44,6 @@ void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data)
 		data->exit_return = 0;
 		change_pwd(env);
 		change_oldpwd(env, olpwd);
+		free(olpwd);
 	}
 }
