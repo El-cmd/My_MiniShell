@@ -35,6 +35,7 @@ void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data)
 		path = cmd->argv[1];
 	if (chdir(path) == -1)
 	{
+		free(olpwd);
 		ft_putstr_fd("cd: no such file or directory: ", 2);
 		ft_putendl_fd(path, 2);
 		data->exit_return = 1;
