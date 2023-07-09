@@ -61,16 +61,18 @@ void	free_list(t_cmdIndex *index)
 	index = NULL;
 }
 
-void	free_list_second(t_cmdIndex *index)
+void	free_list_second(t_data *data)
 {
 	t_cmd	*tmp;
 
-	tmp = index->begin;
+	tmp = data->cmdIndex->begin;
 	while (tmp)
 	{
-		tmp = pop_front_dlist(index);
+		tmp = pop_front_dlist(data->cmdIndex);
 		free(tmp);
 	}
+	//	if (data->path_exec != NULL)
+	//		free_tab(data->path_exec);
 }
 
 void	free_tab(char **str)
@@ -135,5 +137,6 @@ void free_everything(t_data *data)
 	data_env(data);
 	if (data->cmdIndex)
 		free_list(data->cmdIndex);
-	free_tab(data->path_exec);
+	if (data->path_exec != NULL)
+		free_tab(data->path_exec);
 }

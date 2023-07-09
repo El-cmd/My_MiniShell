@@ -46,6 +46,7 @@ void	push_env(char *envp, t_envSom *som)
 	tmp = ft_split(envp, '=');
 	env->value_split= ft_strdup(tmp[1]);
 	env->name_split = ft_strdup(tmp[0]);
+	
 	free_tab(tmp);
 	malloc_error(env->name);
 	env->next = NULL;

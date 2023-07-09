@@ -64,7 +64,7 @@ int	ft_ft_exec(t_data *data)
 		cmd = cmd->next;
 	}
 	wait_all_and_finish(data, data->cmdIndex->begin);	
-	free_list_second(data->cmdIndex);
+	free_list_second(data);
 	return (1);
 }
 
@@ -97,6 +97,7 @@ void	exit_process(t_data *data, int *fd)
 	}
 	close(fd[0]);
 	close(fd[1]);
+	free_everything(data);
 	exit(data->exit_return);
 }
 
