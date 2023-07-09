@@ -180,6 +180,8 @@ void	free_tab(char **str);
 void data_env(t_data *data);
 void free_everything(t_data *data);
 void	free_list_second(t_data *data);
+t_redir	*pop_front_dlist_redir(t_redirIndex *redir);
+void free_redir(t_redirIndex* redir);
 
 /* INIT */
 /* init_datdas.c */

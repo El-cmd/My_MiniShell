@@ -29,7 +29,10 @@ t_cmd *pop_front_dlist(t_cmdIndex *index)
 	{
 		free(tmp->cmd);
 		if (tmp->redir)
+		{
 			free(tmp->just_cmd);
+			free_redir(tmp->lredir);
+		}
 		free_tab(tmp->argv);
 		index->begin = NULL;
 		index->end = NULL;
@@ -38,7 +41,11 @@ t_cmd *pop_front_dlist(t_cmdIndex *index)
 	{
 		free(tmp->cmd);
 		if (tmp->redir)
+		{
 			free(tmp->just_cmd);
+			free_redir(tmp->lredir);
+
+		}
 		free_tab(tmp->argv);
 		index->begin = index->begin->next;
 		index->begin->back = NULL;
@@ -130,6 +137,43 @@ void data_env(t_data *data)
 	}
 	free(data->env);
 	data->env = NULL;
+}
+
+t_redir	*pop_front_dlist_redir(t_redirIndex *redir)
+{
+	t_redir *tmp;
+
+	tmp = redir->begin;
+	if (redir->size == 0)
+		return (tmp);
+	if (redir->size == 1)
+	{
+		free(tmp->file);
+		redir->begin = NULL;
+		redir->end = NULL;
+	}
+	else
+	{
+		free(tmp->file);
+		redir->begin = redir->begin->next;
+		redir->begin->back = NULL;
+	}
+	redir->size--;
+	return (tmp);
+}
+
+void free_redir(t_redirIndex* redir)
+{
+	t_redir *tmp;
+
+	tmp = redir->begin;
+	while (tmp)
+	{
+		tmp = pop_front_dlist_redir(redir);
+		free(tmp);
+	}
+	free(redir);
+	redir = NULL;
 }
 
 void free_everything(t_data *data)
