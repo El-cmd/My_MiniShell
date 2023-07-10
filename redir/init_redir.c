@@ -6,37 +6,28 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:24:48 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 16:26:39 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-t_redirIndex	*init_redirI(void);
-void			pushback_redir(t_redirIndex *i, int type);
-int 			lookIfRedir(char *line);
-*/
-//init le sommaire de la liste chaine des redir
 t_redirIndex	*init_redirI(void)
 {
-	t_redirIndex *redirI;
+	t_redirIndex	*redirI;
 
 	redirI = malloc(sizeof(t_redirIndex));
 	if (!redirI)
-		exit(EXIT_FAILURE);
+		exit (EXIT_FAILURE);
 	redirI->begin = NULL;
 	redirI->end = NULL;
 	redirI->size = 0;
 	return (redirI);
 }
 
-
-//tout est dans le nom ne pas oublier de mettre le type
-//et de parser le file 
 void	pushback_redir(t_redirIndex *i, int type, int index, char *str)
 {
-	t_redir *redir;
+	t_redir	*redir;
 
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
@@ -60,14 +51,13 @@ void	pushback_redir(t_redirIndex *i, int type, int index, char *str)
 }
 
 // parse pour voir si dans la cmd il y a des redirection
-int lookIfRedir(char *line)
+int	lookIfRedir(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] != '\0')
 	{
-		//if (i > 0 && line[i] == '<' && line[i - 1] == '<')
 		if (line[i] == '"' || line[i] == '\'')
 			i = parseur_quotes(line, i + 1, line[i]);
 		else if (line[i] == '<' && line[i + 1] == '<')

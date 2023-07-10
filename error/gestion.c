@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:06 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:26:07 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:22:58 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		malloc_error(char *str);
 pid_t	fork_error(void);
 */
 // Gestion des arguments
-void the_arg(int ac, char **av)
+void	the_arg(int ac, char **av)
 {
 	(void)av;
 	if (ac != 1)
@@ -37,9 +37,9 @@ int	malloc_error(char *str)
 }
 
 //fork error
-pid_t fork_error(void)
+pid_t	fork_error(void)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)

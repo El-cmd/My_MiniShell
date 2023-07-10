@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_exec.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 15:26:30 by vloth             #+#    #+#             */
+/*   Updated: 2023/07/10 15:28:13 by vloth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	redirect_in_out(t_cmd *cmd, int *fd)
@@ -20,11 +32,13 @@ void	redirect_in_out(t_cmd *cmd, int *fd)
 
 void	child_process(t_data *data, t_cmd *cmd, int *fd)
 {
+	int	n;
+
 	redirect_in_out(cmd, fd);
 	if (cmd->is_built && !cmd->spec_built)
 	{
 		ft_builtins(cmd, data->env, data);
-		int n = data->exit_return;
+		n = data->exit_return;
 		free_everything(data);
 		exit(n);
 	}
@@ -58,14 +72,14 @@ int	ft_ft_exec(t_data *data)
 			spec_built(cmd, data);
 		else
 		{
-        	if (pipe(fd) == -1)
+			if (pipe(fd) == -1)
 				return (-1);
 			else
 				ft_launch_cmd(data, cmd, fd);
 		}
 		cmd = cmd->next;
 	}
-	wait_all_and_finish(data, data->cmdIndex->begin);	
+	wait_all_and_finish(data, data->cmdIndex->begin);
 	free_list_second(data);
 	return (1);
 }

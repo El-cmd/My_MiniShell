@@ -1,4 +1,4 @@
-		/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_cut_cmd.c                                       :+:      :+:    :+:   */
@@ -6,37 +6,28 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/23 16:47:02 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:58:57 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-int		ft_pipeError(char *line);
-void	splitage(char *line, t_cmdIndex *cmdIndex);
-void	splitOrNot(char *line, t_cmdIndex *cmdIndex);
-*/
-// regarde sil y a des pipe ou non
-//et aussi si il y a des || ou des pipe invalide genre 
-// ls | grep truc | \0
-
-int    parseur_quotes(char *str, int i, int c)
+int	parseur_quotes(char *str, int i, int c)
 {
-    while (str[i])
-    {
-        if (str[i] == c)
-            break ;
-        i++;
-    }
-    return (i);
+	while (str[i])
+	{
+		if (str[i] == c)
+			break ;
+		i++;
+	}
+	return (i);
 }
 
 int	ft_pipeError(char *line)
 {
-	int i;
-	int j;
-	int q;
+	int	i;
+	int	j;
+	int	q;
 
 	i = 0;
 	j = 0;
@@ -65,14 +56,11 @@ int	ft_pipeError(char *line)
 	return (2);
 }
 
-//split le buffer par rapport au pipe et enleve les espace
-//au debut et a la fin de chaque commande
-//et enfin les ajoute dans la liste chainé
 void	splitage(char *line, t_cmdIndex *cmdIndex)
 {
 	char	**line_second;
 	char	*tmp;
-	int i;
+	int		i;
 
 	i = 0;
 	line_second = ft_split(line, '|');
@@ -94,7 +82,7 @@ void	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 		return ;
 	if (ft_pipeError(line) == 1)
 		return ;
-	else if (ft_pipeError(line) == 3) //a faire : isoler les quote
+	else if (ft_pipeError(line) == 3)
 	{
 		split_quotes(line, cmdIndex);
 		return ;

@@ -6,21 +6,15 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:01 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/19 14:15:25 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 16:00:37 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-t_cmdIndex *init_cmd(void);
-void 		pushback_cmd(char *cmd, t_cmdIndex *cmdIndex);
-void 		print_list(t_cmdIndex *cmdIndex);
-*/
-//init le sommaire de la liste chaine des cmd
-t_cmdIndex *init_cmd(void)
+t_cmdIndex	*init_cmd(void)
 {
-	t_cmdIndex *cmdIndex;
+	t_cmdIndex	*cmdIndex;
 
 	cmdIndex = malloc(sizeof(t_cmdIndex));
 	if (!cmdIndex)
@@ -33,9 +27,9 @@ t_cmdIndex *init_cmd(void)
 }
 
 //tout est dans le nom ne pas oublier de mettre le type
-void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
+void	pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
 {
-	t_cmd *element;
+	t_cmd	*element;
 
 	element = malloc(sizeof(t_cmd));
 	if (!element)
@@ -63,9 +57,9 @@ void pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
 }
 
 //print les commande
-void print_list(t_cmdIndex *cmdIndex)
+void	print_list(t_cmdIndex *cmdIndex)
 {
-	t_cmd *p;
+	t_cmd	*p;
 
 	p = cmdIndex->begin;
 	while (p)
@@ -74,4 +68,3 @@ void print_list(t_cmdIndex *cmdIndex)
 		p = p->next;
 	}
 }
-

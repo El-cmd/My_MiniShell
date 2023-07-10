@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:11 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 14:28:04 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 14:42:16 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //passe les espaces a parir des 2 caractere de cd
 //et regarde si cest juste cd ou un cd /repertoir
-int settings_cd(t_cmd *cmd)
+int	settings_cd(t_cmd *cmd)
 {
 	if (cmd->argv[1] == NULL)
 		return (0);
@@ -26,9 +26,10 @@ int settings_cd(t_cmd *cmd)
 //genre si cest        cd /repertoire
 void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data)
 {
-	char *path;
-	char *olpwd = getcwd(NULL, 0);
+	char	*path;
+	char	*olpwd;
 
+	olpwd = getcwd(NULL, 0);
 	if (settings_cd(cmd) == 0)
 		path = getenv("HOME");
 	else

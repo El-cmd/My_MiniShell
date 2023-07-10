@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:51 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:25:52 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:31:04 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,19 @@
 //Recup PATH dans mon env et le split avec : pour mon exec
 char	**ft_getpath(t_envSom *env)
 {
-	//char	*tmpa;
 	char	**path;
-	t_env 	*tmp;
+	t_env	*tmp;
 
 	tmp = env->begin;
 	while (tmp && ft_strncmp(tmp->name, "PATH=", 5))
 		tmp = tmp->next;
-	//tmpa = ft_substr(tmp->name, 5, ft_strlen(tmp->name));
-	//penser a opti mon split et pas mon slip ;)
 	path = ft_split(tmp->name, ':');
-	//free(tmpa);
 	return (path);
 }
 
-int ft_valid_meta(char *str, t_data *data)
+int	ft_valid_meta(char *str, t_data *data)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = data->env->begin;
 	if (str[0] == '?' && str[1] == '\0')
@@ -45,9 +41,9 @@ int ft_valid_meta(char *str, t_data *data)
 	return (0);
 }
 
-char *ft_getenv(char *str, t_data *data)
+char	*ft_getenv(char *str, t_data *data)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = data->env->begin;
 	if (str[0] == '?')

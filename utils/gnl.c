@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 16:28:29 by vloth             #+#    #+#             */
+/*   Updated: 2023/07/10 16:29:01 by vloth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-/* GNL */
-static void		paste_line(char **readed_line, char *buff);
+static void	paste_line(char **readed_line, char *buff);
 static int	result(char **line, char **readed_line, int fd, int readed);
 static void	ft_strdel(char **str);
 

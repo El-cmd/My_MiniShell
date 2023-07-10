@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 16:22:39 by vloth             #+#    #+#             */
-/*   Updated: 2021/06/15 15:31:50 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:42:03 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long int	ft_isneg(long int n)
 	return (n);
 }
 
-int 	ft_len(long int n)
+int	ft_len(long int n)
 {
 	int	len;
 

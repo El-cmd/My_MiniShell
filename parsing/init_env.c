@@ -6,23 +6,16 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:04 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:25:05 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:52:05 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-t_envSom	*init_envSom(void);
-void		push_env(char *envp, t_envSom *som);
-void		change_pwd(t_envSom *env);
-void		change_oldpwd(t_envSom *env, char *oldpwd);
-t_envSom	*init_envp(char **envp);
-*/
 //init le sommaire de ma double lchainee de env
 t_envSom	*init_envSom(void)
 {
-	t_envSom *envSom;
+	t_envSom	*envSom;
 
 	envSom = malloc(sizeof(t_envSom));
 	if (!envSom)
@@ -36,15 +29,15 @@ t_envSom	*init_envSom(void)
 //pushback les variable denv dans ma liste
 void	push_env(char *envp, t_envSom *som)
 {
-	t_env *env;
-	char **tmp;
-	
+	t_env	*env;
+	char	**tmp;
+
 	env = malloc(sizeof(t_env));
-    if(!env)
+	if (!env)
 		exit(EXIT_FAILURE);
 	env->name = ft_strdup(envp);
 	tmp = ft_split(envp, '=');
-	env->value_split= ft_strdup(tmp[1]);
+	env->value_split = ft_strdup(tmp[1]);
 	env->name_split = ft_strdup(tmp[0]);
 	free_tab(tmp);
 	malloc_error(env->name);
@@ -64,7 +57,6 @@ void	push_env(char *envp, t_envSom *som)
 	som->size++;
 }
 
-
 //change la variable pwd dans ma liste de env
 void	change_pwd(t_envSom *env)
 {	
@@ -83,7 +75,7 @@ void	change_pwd(t_envSom *env)
 //mes a jours la varible oldpwd dans mon env
 void	change_oldpwd(t_envSom *env, char *oldpwd)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env->begin;
 	while (tmp && ft_strncmp(tmp->name, "OLDPWD=", 7))
@@ -100,8 +92,8 @@ void	change_oldpwd(t_envSom *env, char *oldpwd)
 //mes toute les variable dans ma liste
 t_envSom	*init_envp(char **envp)
 {
-	t_envSom *env;
-	int i;
+	t_envSom	*env;
+	int			i;
 
 	i = 0;
 	env = init_envSom();

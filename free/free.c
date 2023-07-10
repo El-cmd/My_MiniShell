@@ -6,21 +6,15 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:38 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:25:39 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:34:51 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-t_cmd 	*pop_front_dlist(t_cmdIndex *index);
-void	free_list(t_cmdIndex *index);
-void	free_tab(char **str);
-*/
-
-t_cmd *pop_front_dlist(t_cmdIndex *index)
+t_cmd	*pop_front_dlist(t_cmdIndex *index)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
 
 	tmp = index->begin;
 	if (index->nb_cmd == 0 || index->begin == NULL)
@@ -44,7 +38,6 @@ t_cmd *pop_front_dlist(t_cmdIndex *index)
 		{
 			free(tmp->just_cmd);
 			free_redir(tmp->lredir);
-
 		}
 		free_tab(tmp->argv);
 		index->begin = index->begin->next;
@@ -78,13 +71,11 @@ void	free_list_second(t_data *data)
 		tmp = pop_front_dlist(data->cmdIndex);
 		free(tmp);
 	}
-	//	if (data->path_exec != NULL)
-	//		free_tab(data->path_exec);
 }
 
 void	free_tab(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -98,9 +89,9 @@ void	free_tab(char **str)
 	str = NULL;
 }
 
-t_env *pop_front_dlist_env(t_envSom *index)
+t_env	*pop_front_dlist_env(t_envSom *index)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = index->begin;
 	if (index->size == 0)
@@ -125,9 +116,9 @@ t_env *pop_front_dlist_env(t_envSom *index)
 	return (tmp);
 }
 
-void data_env(t_data *data)
+void	data_env(t_data *data)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = data->env->begin;
 	while (tmp)
@@ -141,7 +132,7 @@ void data_env(t_data *data)
 
 t_redir	*pop_front_dlist_redir(t_redirIndex *redir)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	tmp = redir->begin;
 	if (redir->size == 0)
@@ -162,9 +153,9 @@ t_redir	*pop_front_dlist_redir(t_redirIndex *redir)
 	return (tmp);
 }
 
-void free_redir(t_redirIndex* redir)
+void	free_redir(t_redirIndex *redir)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	tmp = redir->begin;
 	while (tmp)
@@ -176,7 +167,7 @@ void free_redir(t_redirIndex* redir)
 	redir = NULL;
 }
 
-void free_everything(t_data *data)
+void	free_everything(t_data *data)
 {
 	data_env(data);
 	if (data->cmdIndex)

@@ -6,19 +6,11 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/21 22:08:01 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 16:28:02 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-/*
-void	newline(void);
-void	sigint_handler(int sig);
-void 	sigquit_handler(int sig);
-void	signal_handler(void);
-*/
-//GESTION DES SIGNAUX
 
 void	newline(void)
 {
@@ -36,7 +28,7 @@ void	sigint_handler(int sig)
 		rl_redisplay();
 }
 
-void sigquit_handler(int sig)
+void	sigquit_handler(int sig)
 {
 	(void)sig;
 	ft_putendl_fd("Segmentation fault", 2);

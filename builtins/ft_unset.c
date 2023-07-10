@@ -6,16 +6,15 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:31 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:26:32 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 14:40:29 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 //renvoie la la place du egale dans la cmd
-int search_egal(char *str)
+int	search_egal(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -28,10 +27,10 @@ int search_egal(char *str)
 }
 
 //cherche et enleve la variable demandé
-int ft_unset(t_envSom *env, t_cmd *cmd, t_data *data)
+int	ft_unset(t_envSom *env, t_cmd *cmd, t_data *data)
 {
-	t_env *tmp;
-	char **name;
+	t_env	*tmp;
+	char	**name;
 
 	tmp = env->begin;
 	name = ft_split(cmd->cmd, ' ');

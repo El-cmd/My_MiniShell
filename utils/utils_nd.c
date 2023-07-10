@@ -6,15 +6,15 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:01 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:24:02 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 16:30:47 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int is_redir_or_cmd(char c)
+int	is_redir_or_cmd(char c)
 {
-    if (c == '<' || c == '>')
-        return 1;
-    return 0;
+	if (c == '<' || c == '>')
+		return (1);
+	return (0);
 }

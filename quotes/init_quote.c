@@ -1,8 +1,20 @@
-# include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_quote.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 16:10:15 by vloth             #+#    #+#             */
+/*   Updated: 2023/07/10 16:11:42 by vloth            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_quIndex *init_quote(void)
+#include "../minishell.h"
+
+t_quIndex	*init_quote(void)
 {
-	t_quIndex *quIndex;
+	t_quIndex	*quIndex;
 
 	quIndex = malloc(sizeof(t_quIndex));
 	if (!quIndex)
@@ -13,9 +25,9 @@ t_quIndex *init_quote(void)
 	return (quIndex);
 }
 
-void pushback_quote(char *str, t_quIndex *quIndex)
+void	pushback_quote(char *str, t_quIndex *quIndex)
 {
-	t_quote *element;
+	t_quote	*element;
 
 	element = malloc(sizeof(t_quote));
 	if (!element)

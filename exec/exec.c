@@ -6,18 +6,18 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 14:40:34 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 15:26:02 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // fonction d'execution
-void ft_execve(t_cmd *cmd, t_data *data)
+void	ft_execve(t_cmd *cmd, t_data *data)
 {
-	int y;
-	char *exec;
-	int i;
+	int		y;
+	char	*exec;
+	int		i;
 
 	y = 0;
 	i = 0;
@@ -38,9 +38,9 @@ void ft_execve(t_cmd *cmd, t_data *data)
 	exit(data->exit_return);
 }
 
-void exec(t_data *data)
+void	exec(t_data *data)
 {
-	t_cmdIndex *index;
+	t_cmdIndex	*index;
 
 	index = data->cmdIndex;
 	spec_built_first(data);
@@ -48,7 +48,7 @@ void exec(t_data *data)
 		ft_ft_exec(data);
 }
 
-void spec_built(t_cmd *cmd, t_data * data)
+void	spec_built(t_cmd *cmd, t_data *data)
 {
 	if (cmd->spec_built == 1)
 		ft_exit(cmd, data);
@@ -58,9 +58,9 @@ void spec_built(t_cmd *cmd, t_data * data)
 		return ;
 }
 
-void spec_built_first(t_data *data)
+void	spec_built_first(t_data *data)
 {
-	t_cmd *cmd;
+	t_cmd	*cmd;
 
 	cmd = data->cmdIndex->begin;
 	while (cmd)

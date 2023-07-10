@@ -6,18 +6,19 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 15:42:48 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 16:34:28 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-t_global global;
-//tout est dans le titre de ma fonction
+
+t_global	global;
+
 void	eternal_loop(t_data *data)
 {
-	char *str;
+	char	*str;
 
-	while(1)
+	while (1)
 	{
 		str = readline("MS#🤖: ");
 		if (!str)
@@ -35,9 +36,9 @@ void	eternal_loop(t_data *data)
 	}
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
+	t_data	data;
 
 	the_arg(argc, argv);
 	init_data(&data, envp);

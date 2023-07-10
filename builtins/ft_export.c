@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/22 15:27:57 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/10 14:34:25 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 //execute la cmd export en affichant notre liste chainee mais pas
 //dans lordre alpha, a faire
 //ou rajoute une variable dans notre env
-int ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
+int	ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env->begin;
 	if (cmd->argv[1] == NULL)
