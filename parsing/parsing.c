@@ -15,6 +15,7 @@
 void	cut_quote(t_data *data)
 {
 	t_cmd	*cmd;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -25,8 +26,14 @@ void	cut_quote(t_data *data)
 		{
 			while (cmd->argv[i])
 			{
-				cmd->argv[i] = ft_strtrim(cmd->argv[i], "\"");
-				cmd->argv[i] = ft_strtrim(cmd->argv[i], "\'");
+				tmp = ft_strtrim(cmd->argv[i], "\"");
+				free(cmd->argv[i]);
+				cmd->argv[i] = ft_strdup(tmp);
+				free(tmp);
+				tmp = ft_strtrim(cmd->argv[i], "\'");
+				free(cmd->argv[i]);
+				cmd->argv[i] = ft_strdup(tmp);
+				free(tmp);
 				i++;
 			}
 			i = 0;
@@ -38,13 +45,17 @@ void	cut_quote(t_data *data)
 char	*fait_le_cafe(char **test, t_data *data)
 {
 	char	*cmd;
+	char	*tmp;
 	int		j;
 
 	j = 0;
 	cmd = NULL;
 	while (test[j])
 	{
-		test[j] = ft_strtrim(test[j], "\"");
+		tmp = ft_strtrim(test[j], "\"");
+		free(test[j]);
+		test[j] = ft_strdup(tmp);
+		free(tmp);
 		if (j == 0)
 		{
 			if (!ft_valid_meta(test[j], data))
@@ -69,6 +80,7 @@ void	do_meta(t_data *data)
 	t_cmd	*cmd;
 	int		i;
 	char	**test;
+	char	*tmp;
 
 	i = 0;
 	cmd = data->cmdIndex->begin;
@@ -81,9 +93,13 @@ void	do_meta(t_data *data)
 				if (is_meta_second(cmd->argv[i]) \
 				&& !is_simple_quote(cmd->argv[i]))
 				{
-					cmd->argv[i] = ft_strtrim(cmd->argv[i], "\"");
+					tmp = ft_strtrim(cmd->argv[i], "\"");
+					free(cmd->argv[i]);
+					cmd->argv[i] = ft_strdup(tmp);
+					free(tmp);
 					test = ft_split(cmd->argv[i], '$');
 					cmd->argv[i] = fait_le_cafe(test, data);
+					free_tab(test);
 				}
 				i++;
 			}
