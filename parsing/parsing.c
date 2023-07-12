@@ -98,6 +98,7 @@ void	do_meta(t_data *data)
 					cmd->argv[i] = ft_strdup(tmp);
 					free(tmp);
 					test = ft_split(cmd->argv[i], '$');
+					free(cmd->argv[i]);
 					cmd->argv[i] = fait_le_cafe(test, data);
 					free_tab(test);
 				}
