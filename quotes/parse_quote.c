@@ -36,6 +36,7 @@ void	splitage_quote(t_cmdIndex *cmdI, char *str)
 	int		i;
 	int		start;
 	int		q;
+	char	*tmp;
 
 	i = 0;
 	start = 0;
@@ -50,10 +51,17 @@ void	splitage_quote(t_cmdIndex *cmdI, char *str)
 		if (str[i] == '|' || str[i + 1] == '\0')
 		{
 			cmd = ft_substr(str, start, i - start + 1);
-			cmd = ft_strtrim(cmd, "|");
-			cmd = ft_strtrim(cmd, " ");
+			tmp = ft_strtrim(cmd, "|");
+			free(cmd);
+			cmd = ft_strdup(tmp);
+			free(tmp);
+			tmp = ft_strtrim(cmd, " ");
+			free(cmd);
+			cmd = ft_strdup(tmp);
+			free(tmp);
 			start = i;
 			pushback_cmd(cmd, cmdI, q);
+			free(cmd);
 			q = 0;
 		}
 		i++;
