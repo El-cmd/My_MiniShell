@@ -29,9 +29,13 @@ void	eternal_loop(t_data *data)
 			exit(0);
 		}
 		add_history(str);
-		splitOrNot(str, data->cmdIndex);
-		malloc_all(data);
-		exec(data);
+		if (!splitOrNot(str, data->cmdIndex))
+		{
+			malloc_all(data);
+			exec(data);
+		}
+		else
+			free_everything(data);
 		free(str);
 	}
 }

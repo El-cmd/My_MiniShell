@@ -187,7 +187,7 @@ void			init_data(t_data *data, char **en);
 /* ft_cut_cmd.c */
 int				ft_pipeError(char *line);
 void			splitage(char *line, t_cmdIndex *cmdIndex);
-void			splitOrNot(char *line, t_cmdIndex *cmdIndex);
+int				splitOrNot(char *line, t_cmdIndex *cmdIndex);
 
 /* cut.c */
 void			cut(t_cmd *cmd, int *i);
@@ -207,7 +207,7 @@ t_envSom		*init_envp(char **envp);
 
 /* parsing.c */
 void			cut_arg(t_data *data);
-void			split_quotes(char *str, t_cmdIndex *cmdIndex);
+int				split_quotes(char *str, t_cmdIndex *cmdIndex);
 int				count_simple_quote(char *str);
 int				count_double_quote(char *str);
 int				parseur_quotes(char *str, int i, int c);

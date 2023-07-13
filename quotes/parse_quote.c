@@ -68,27 +68,27 @@ void	splitage_quote(t_cmdIndex *cmdI, char *str)
 	}
 }
 
-void	split_quotes(char *str, t_cmdIndex *cmdIndex)
+int	split_quotes(char *str, t_cmdIndex *cmdIndex)
 {
 	int	nb_cmd;
 
 	nb_cmd = 0;
 	if (count_double_quote(str) == 1 || count_simple_quote(str) == 1)
-		return ;
+		return (-1);
 	nb_cmd = how_many_cmd(str);
 	if (nb_cmd == -1)
 	{
 		ft_putstr_fd("Error: pipe\n", 2);
-		return ;
+		return (nb_cmd);
 	}
 	else if (nb_cmd == 1)
 	{
 		pushback_cmd(str, cmdIndex, 1);
-		return ;
+		return nb_cmd;
 	}
 	else
 	{
 		splitage_quote(cmdIndex, str);
-		return ;
+		return nb_cmd;
 	}
 }
