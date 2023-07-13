@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:23:35 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/13 14:26:45 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	malloc_all(t_data *data)
 	cut_arg(data);
 	is_built(data);
 	boucle_redir(data);
-	is_meta(data);
 }
 
 void	ft_open(t_redir *red)
