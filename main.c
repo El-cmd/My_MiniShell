@@ -35,7 +35,7 @@ void	eternal_loop(t_data *data)
 			exec(data);
 		}
 		else
-			free_everything(data);
+			free_list_second(data);
 		free(str);
 	}
 }

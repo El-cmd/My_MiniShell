@@ -80,7 +80,7 @@ void	splitage(char *line, t_cmdIndex *cmdIndex)
 // par rapport a la commande regarde sil doit split ou pas
 int	splitOrNot(char *line, t_cmdIndex *cmdIndex)
 {
-	if (no_str(line) == 1)
+	if (no_str(line) == 1 || others_char(line))
 		return (1);
 	if (ft_pipeError(line) == 1)
 		return (1);

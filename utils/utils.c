@@ -37,7 +37,24 @@ int	no_str(char *cmd)
 	while (cmd[i] == ' ' || cmd[i] == '\t')
 		i++;
 	if (cmd[i] == '\0')
+		return (1);	
+	return (0);
+}
+
+int others_char(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] == ' ' || cmd[i] == '\t' || cmd[i] == '>' || cmd[i] == '<'
+		|| cmd[i] == ';' || cmd[i] == '&' || cmd[i] == '|' || cmd[i] == '('
+		|| cmd[i] == ')')
+		i++;
+	if (cmd[i] == '\0')
+	{
+		ft_putstr_fd(ERROR_TOKEN, 2);
 		return (1);
+	}
 	return (0);
 }
 

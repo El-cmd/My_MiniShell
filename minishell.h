@@ -186,6 +186,7 @@ void			init_data(t_data *data, char **en);
 /* PARSING */
 /* ft_cut_cmd.c */
 int				ft_pipeError(char *line);
+int				others_char(char *cmd);
 void			splitage(char *line, t_cmdIndex *cmdIndex);
 int				splitOrNot(char *line, t_cmdIndex *cmdIndex);
 
