@@ -29,6 +29,11 @@ void	ft_cd(t_cmd *cmd, t_envSom *env, t_data *data)
 	char	*path;
 	char	*olpwd;
 
+	if (cmd->argv[2])
+	{
+		ft_putstr_fd("Error: 3 arguments\n", 2);
+		return ;
+	}
 	olpwd = getcwd(NULL, 0);
 	if (settings_cd(cmd) == 0)
 		path = getenv("HOME");

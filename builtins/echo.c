@@ -21,15 +21,20 @@ int	ft_echo_n(t_cmd *cmd)
 	i = 1;
 	j = 0;
 	int y = 0;
+	int p = 0;
 	while (cmd->argv[i])
 	{
-		if (cmd->argv[i][0] == '-' && cmd->argv[i][1] == 'n')
+		if (cmd->argv[i][0] == '-' && cmd->argv[i][1] == 'n' && p != -1)
 		{
+			p = 1;
 			if (j == 0 || j == 1)
 				j = 2;
 			while (cmd->argv[i] && cmd->argv[i][j] == 'n')
 				j++;
 		}
+		else
+			p = -1;
+
 		if (cmd->argv[i][j] != '\0')
 			j = 0;
 		while (cmd->argv[i][j])
