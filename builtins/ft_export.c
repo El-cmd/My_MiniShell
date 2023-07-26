@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/26 22:45:52 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/26 22:49:04 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ int have_egal(char *str)
 	return (0);
 }
 
-int is-valid(char *str)
+int is_valid(char *str)
 {
+	int i;
+
+	i = 0;
+	if (str[0] == '=')
+		return (0);
 	
 }
 
