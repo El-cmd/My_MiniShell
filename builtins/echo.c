@@ -6,22 +6,29 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 14:54:11 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/26 20:57:56 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+//void	print(char **str)
+//{
+//		
+//}
 
 //echo sans le \n mais encore quelque bug
 int	ft_echo_n(t_cmd *cmd)
 {
 	int	i;
 	int	j;
+	int	p;
+	int	y;
 
 	i = 1;
 	j = 0;
-	int y = 0;
-	int p = 0;
+	p = 0;
+	y = 0;
 	while (cmd->argv[i])
 	{
 		if (cmd->argv[i][0] == '-' && cmd->argv[i][1] == 'n' && p != -1)
@@ -34,7 +41,6 @@ int	ft_echo_n(t_cmd *cmd)
 		}
 		else
 			p = -1;
-
 		if (cmd->argv[i][j] != '\0')
 			j = 0;
 		while (cmd->argv[i][j])

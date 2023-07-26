@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:04 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 15:52:05 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/26 22:38:15 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ void	push_env(char *envp, t_envSom *som)
 	if (!env)
 		exit(EXIT_FAILURE);
 	env->name = ft_strdup(envp);
-	tmp = ft_split(envp, '=');
-	env->value_split = ft_strdup(tmp[1]);
-	env->name_split = ft_strdup(tmp[0]);
-	free_tab(tmp);
+	if (have_egal(envp))
+	{
+		tmp = ft_split(envp, '=');
+		env->value_split = ft_strdup(tmp[1]);
+		env->name_split = ft_strdup(tmp[0]);
+		free_tab(tmp);
+	}
 	malloc_error(env->name);
 	env->next = NULL;
 	env->back = NULL;

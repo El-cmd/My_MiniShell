@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/11 14:27:33 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/26 22:39:03 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int				have_olpwd(char **envp);
 
 /* ft_export.c */
 int				ft_export(t_envSom *env, t_cmd *cmd, t_data *data);
+int				have_egal(char *str);
 
 /* ft_unset.c */
 int				search_egal(char *str);
