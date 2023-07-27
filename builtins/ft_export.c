@@ -6,15 +6,11 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/27 14:07:03 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/27 14:22:38 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-//execute la cmd export en affichant notre liste chainee mais pas
-//dans lordre alpha, a faire
-//ou rajoute une variable dans notre env
 
 int have_egal(char *str)
 {
@@ -61,8 +57,10 @@ int	ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
 {
 	t_env	*tmp;
 	int i;
+	int retour;
 
 	i = 1;
+	retour = 0;
 	tmp = env->begin;
 	if (cmd->argv[1] == NULL)
 	{
@@ -76,12 +74,18 @@ int	ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
 	}
 	else
 	{
-		if (is_valid(cmd->argv[i]))
+		while (cmd->argv[i])
 		{
-			push_env(cmd->argv[i], env);
+			if (is_valid(cmd->argv[i]))
+				push_env(cmd->argv[i], env);
+			else
+				retour = 1;
 			i++;
 		}
 	}
-	data->exit_return = 0;
+	if (retour == 1)
+		data->exit_return = 1;
+	else
+		data->exit_return = 0;
 	return (0);
 }
