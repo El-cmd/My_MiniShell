@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/31 16:56:36 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/31 16:58:41 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	already_exist(char *str, t_envSom *env)
 					return (1);
 				}
 				tmp2 = tmp2->next;
+			
 			}
 			free_tab(tmp);
 		}
