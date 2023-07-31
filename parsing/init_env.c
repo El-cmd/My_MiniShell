@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:04 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/26 22:38:15 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/27 20:00:22 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	push_env(char *envp, t_envSom *som)
 		env->name_split = ft_strdup(tmp[0]);
 		free_tab(tmp);
 	}
+	else
+		env->name_split = ft_strdup(env->name);
 	malloc_error(env->name);
 	env->next = NULL;
 	env->back = NULL;

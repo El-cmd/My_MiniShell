@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/27 14:22:38 by vloth            ###   ########.fr       */
+/*   Updated: 2023/07/31 16:56:36 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,50 @@ int is_valid(char *str)
 	return (1);
 }
 
+void remplace(t_env *tmp2, char **tmp, char *str)
+{
+	tmp2->name_split = strdup(tmp[0]);
+	if (tmp[1])
+		tmp2->value_split = strdup(tmp[1]);
+	tmp2->name = ft_strdup(str);
+}
+
+int	already_exist(char *str, t_envSom *env)
+{
+	int i;
+	char **tmp;
+	t_env *tmp2;
+	
+	i = 0;
+	tmp2 = env->begin;
+	while (str[i])
+	{
+		if (str[i] == '=')
+		{
+			tmp = ft_split(str, '=');
+			while (tmp2)
+			{
+				if (!ft_strcmp(tmp[0], tmp2->name_split))
+				{
+					remplace(tmp2, tmp, str);
+					free_tab(tmp);
+					return (1);
+				}
+				tmp2 = tmp2->next;
+			}
+			free_tab(tmp);
+		}
+		i++;
+	}
+	while (tmp2)
+	{
+		if (!ft_strcmp(str, tmp2->name_split))
+			return (1);
+		tmp2 = tmp2->next;
+	}
+	return (0);
+}
+
 int	ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
 {
 	t_env	*tmp;
@@ -75,8 +119,8 @@ int	ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
 	else
 	{
 		while (cmd->argv[i])
-		{
-			if (is_valid(cmd->argv[i]))
+		{		
+			if (is_valid(cmd->argv[i]) && !already_exist(cmd->argv[i], env))
 				push_env(cmd->argv[i], env);
 			else
 				retour = 1;
