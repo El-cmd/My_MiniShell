@@ -30,24 +30,28 @@ int	search_egal(char *str)
 int	ft_unset(t_envSom *env, t_cmd *cmd, t_data *data)
 {
 	t_env	*tmp;
-	char	**name;
 
 	tmp = env->begin;
-	name = ft_split(cmd->cmd, ' ');
-	if (name[1] == NULL)
+	if (cmd->argv[1] == NULL)
 	{
 		data->exit_return = 0;
 		return (0);
 	}
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->name, name[1], search_egal(tmp->name)) == 0)
+		if (ft_strcmp(cmd->argv[1], tmp->name_split) == 0)
 		{
 			free(tmp->name);
+			free(tmp->name_split);
+			free(tmp->value_split);
 			tmp->name = NULL;
+			tmp->name_split = NULL;
+			tmp->value_split = NULL;
+			env->size--;
 			if (tmp->next == NULL)
 			{
 				tmp->back->next = NULL;
+				env->end = tmp->back;
 				return (0);
 			}
 			tmp->next->back = tmp->back;
