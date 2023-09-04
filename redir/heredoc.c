@@ -3,35 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:27:00 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:27:01 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 23:00:58 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static int	open_here_doc_file(void)
+{
+	int	fd;
+
+	fd = open(HERE_DOC_FILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	return (fd);
+}
+
+static char	*read_input_line(void)
+{
+	char	*line;
+
+	line = readline("> ");
+	return (line);
+}
+
+static void	write_line_to_file(int fd, const char *line)
+{
+	char	*mutable_line;
+
+	mutable_line = strdup(line);
+	ft_putstr_fd(mutable_line, fd);
+	write(fd, "\n", 1);
+	free(mutable_line);
+}
+
+static void	close_and_cleanup(int fd, char *line)
+{
+	if (line != NULL)
+	{
+		free(line);
+	}
+	close(fd);
+}
+
 void	ft_create_here_doc(char *delimiter)
 {
 	int		fd;
-	char	*buffer;
+	char	*line;
 
-	buffer = NULL;
-	fd = open(HERE_DOC_FILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	write(1, "> ", 2);
-	while (get_next_line(0, &buffer) > 0)
+	sigint_heredoc_handler();
+	fd = open_here_doc_file();
+	line = read_input_line();
+	while (line != NULL)
 	{
-		if (!ft_strncmp(buffer, delimiter, ft_strlen(buffer)))
-			break ;
-		else
+		if ((!strcmp(line, delimiter)))
 		{
-			ft_putstr_fd(buffer, fd);
-			write(fd, "\n", 1);
+			free(line);
+			break ;
 		}
-		free(buffer);
-		write(1, "> ", 2);
+		write_line_to_file(fd, line);
+		free(line);
+		line = read_input_line();
 	}
-	free(buffer);
-	close (fd);
+	close_and_cleanup(fd, NULL);
+	signal_handler();
 }

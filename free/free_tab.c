@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/12 16:20:58 by vloth             #+#    #+#             */
-/*   Updated: 2021/06/12 16:34:10 by vloth            ###   ########.fr       */
+/*   Created: 2023/08/04 18:09:21 by nspeciel          #+#    #+#             */
+/*   Updated: 2023/08/30 01:23:26 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-int	ft_lstsize(t_list *lst)
+void	free_tab(char **str)
 {
-	int	size;
+	int	i;
 
-	size = 0;
-	while (lst != NULL)
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
 	{
-		size++;
-		lst = lst->next;
+		free(str[i]);
+		i++;
 	}
-	return (size);
+	free(str);
 }

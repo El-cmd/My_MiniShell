@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   init_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:26:39 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:24:09 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_redirIndex	*init_redirI(void)
+t_redirindex	*init_redir_i(void)
 {
-	t_redirIndex	*redirI;
+	t_redirindex	*redir_i;
 
-	redirI = malloc(sizeof(t_redirIndex));
-	if (!redirI)
+	redir_i = malloc(sizeof(t_redirindex));
+	if (!redir_i)
 		exit (EXIT_FAILURE);
-	redirI->begin = NULL;
-	redirI->end = NULL;
-	redirI->size = 0;
-	return (redirI);
+	redir_i->begin = NULL;
+	redir_i->end = NULL;
+	redir_i->size = 0;
+	return (redir_i);
 }
 
-void	pushback_redir(t_redirIndex *i, int type, int index, char *str)
+void	pushback_redir(t_redirindex *i, int type, int index, char *str)
 {
 	t_redir	*redir;
 
@@ -51,7 +51,7 @@ void	pushback_redir(t_redirIndex *i, int type, int index, char *str)
 }
 
 // parse pour voir si dans la cmd il y a des redirection
-int	lookIfRedir(char *line)
+int	look_if_redir(char *line)
 {
 	int	i;
 

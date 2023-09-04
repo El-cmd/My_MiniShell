@@ -6,13 +6,13 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:25 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 15:06:30 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 15:12:33 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 //execute la cmd env en affichant notre liste chainee 
-int	ft_env(t_envSom *env, t_data *data)
+int	ft_env(t_env_som *env, t_data *data)
 {
 	t_env	*tmp;
 

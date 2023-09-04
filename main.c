@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:34:28 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 18:50:56 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_global	global;
+t_global	g_global;
 
 void	eternal_loop(t_data *data)
 {
@@ -20,6 +20,8 @@ void	eternal_loop(t_data *data)
 
 	while (1)
 	{
+		signal_handler();
+		g_global.pid = 0;
 		str = readline("MS#🤖: ");
 		if (!str)
 		{
@@ -29,14 +31,13 @@ void	eternal_loop(t_data *data)
 			exit(0);
 		}
 		add_history(str);
-		if (!splitOrNot(str, data->cmdIndex))
+		if (!split_or_not(str, data->cmd_index))
 		{
 			malloc_all(data);
 			exec(data);
 		}
 		else
 			free_list_second(data);
-		free(str);
 	}
 }
 

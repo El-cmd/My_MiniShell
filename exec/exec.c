@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/26 22:09:26 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 21:06:54 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	ft_execve(t_cmd *cmd, t_data *data)
 
 void	exec(t_data *data)
 {
-	t_cmdIndex	*index;
+	t_cmd_index	*index;
 
-	index = data->cmdIndex;
+	index = data->cmd_index;
 	spec_built_first(data);
 	if (index->nb_cmd)
 		ft_ft_exec(data);
@@ -70,19 +70,25 @@ void	spec_built_first(t_data *data)
 {
 	t_cmd	*cmd;
 
-	cmd = data->cmdIndex->begin;
+	cmd = data->cmd_index->begin;
 	while (cmd)
 	{
-		if (ft_strcmp(cmd->argv[0], "cd") == 0)
-			cmd->spec_built = 2;
-		else if (ft_strcmp(cmd->argv[0], "exit") == 0)
-			cmd->spec_built = 1;
-		else if (ft_strcmp(cmd->argv[0], "export") == 0)
-			cmd->spec_built = 3;
-		else if (ft_strcmp(cmd->argv[0], "unset") == 0)
-			cmd->spec_built = 4;
+		if (cmd != NULL && cmd->argv != NULL && cmd->argv[0] != NULL)
+		{
+			if (ft_strcmp(cmd->argv[0], "cd") == 0)
+				cmd->spec_built = 2;
+			else if (ft_strcmp(cmd->argv[0], "exit") == 0)
+				cmd->spec_built = 1;
+			else if (ft_strcmp(cmd->argv[0], "export") == 0)
+				cmd->spec_built = 3;
+			else if (ft_strcmp(cmd->argv[0], "unset") == 0)
+				cmd->spec_built = 4;
+			else
+				cmd->spec_built = 0;
+		}
 		else
-			cmd->spec_built = 0;
+		{	
+		}
 		cmd = cmd->next;
 	}
 }

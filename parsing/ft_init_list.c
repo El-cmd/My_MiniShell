@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:01 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:00:37 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:00:31 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_cmdIndex	*init_cmd(void)
+t_cmd_index	*init_cmd(void)
 {
-	t_cmdIndex	*cmdIndex;
+	t_cmd_index	*cmd_index;
 
-	cmdIndex = malloc(sizeof(t_cmdIndex));
-	if (!cmdIndex)
+	cmd_index = malloc(sizeof(t_cmd_index));
+	if (!cmd_index)
 		exit(EXIT_FAILURE);
-	cmdIndex->begin = NULL;
-	cmdIndex->end = NULL;
-	cmdIndex->nb_cmd = 0;
-	cmdIndex->nb_pipe = 0;
-	return (cmdIndex);
+	cmd_index->begin = NULL;
+	cmd_index->end = NULL;
+	cmd_index->nb_cmd = 0;
+	cmd_index->nb_pipe = 0;
+	return (cmd_index);
 }
 
 //tout est dans le nom ne pas oublier de mettre le type
-void	pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
+void	pushback_cmd(char *cmd, t_cmd_index *cmd_index, int quote)
 {
 	t_cmd	*element;
 
@@ -41,27 +41,27 @@ void	pushback_cmd(char *cmd, t_cmdIndex *cmdIndex, int quote)
 		element->quotes = false;
 	element->next = NULL;
 	element->back = NULL;
-	if (cmdIndex->nb_cmd == 0)
+	if (cmd_index->nb_cmd == 0)
 	{
-		cmdIndex->begin = element;
-		cmdIndex->end = element;
+		cmd_index->begin = element;
+		cmd_index->end = element;
 	}
 	else
 	{
-		cmdIndex->end->next = element;
-		element->back = cmdIndex->end;
-		cmdIndex->end = element;
-		cmdIndex->nb_pipe++;
+		cmd_index->end->next = element;
+		element->back = cmd_index->end;
+		cmd_index->end = element;
+		cmd_index->nb_pipe++;
 	}
-	cmdIndex->nb_cmd++;
+	cmd_index->nb_cmd++;
 }
 
 //print les commande
-void	print_list(t_cmdIndex *cmdIndex)
+void	print_list(t_cmd_index *cmd_index)
 {
 	t_cmd	*p;
 
-	p = cmdIndex->begin;
+	p = cmd_index->begin;
 	while (p)
 	{
 		printf("%s\n", p->cmd);

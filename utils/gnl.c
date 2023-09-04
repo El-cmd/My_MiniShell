@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:28:29 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:29:01 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/31 20:07:56 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,16 @@ static int	result(char **line, char **readed_line, int fd, int readed)
 	else if (readed == 0 && readed_line[fd] == NULL && *line)
 		return (0);
 	len = 0;
-	while (readed_line[fd][len] != '\n' && readed_line[fd][len] != '\0')
+	while (readed_line[fd] && readed_line[fd][len] != '\n'
+	&& readed_line[fd][len] != '\0')
 		len++;
-	if (readed_line[fd][len] == '\n')
+	if (readed_line[fd] && readed_line[fd][len] == '\n')
 	{
 		*line = ft_substr(readed_line[fd], 0, len);
 		tmp = ft_strdup(&readed_line[fd][len + 1]);
 		free(readed_line[fd]);
 		readed_line[fd] = tmp;
-		if (readed_line[fd][0] == '\0')
+		if (readed_line[fd] && readed_line[fd][0] == '\0')
 			ft_strdel(&readed_line[fd]);
 		return (1);
 	}

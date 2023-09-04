@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cut.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:06:51 by vloth             #+#    #+#             */
-/*   Updated: 2023/05/13 18:14:59 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/30 03:44:21 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	exec_find_cmd(t_data *data)
 {
 	t_cmd	*tmp;
 
-	tmp = data->cmdIndex->begin;
+	tmp = data->cmd_index->begin;
 	while (tmp)
 	{
 		if (tmp->redir == true)

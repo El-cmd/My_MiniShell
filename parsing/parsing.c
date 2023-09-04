@@ -3,63 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/13 15:05:13 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/04 02:00:36 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	cut_quote(t_data *data)
-{
-	t_cmd	*cmd;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	cmd = data->cmdIndex->begin;
-	while (cmd)
-	{
-		if (cmd->quotes)
-		{
-			while (cmd->argv[i])
-			{
-				tmp = ft_strtrim(cmd->argv[i], "\"");
-				free(cmd->argv[i]);
-				cmd->argv[i] = ft_strdup(tmp);
-				free(tmp);
-				tmp = ft_strtrim(cmd->argv[i], "\'");
-				free(cmd->argv[i]);
-				cmd->argv[i] = ft_strdup(tmp);
-				free(tmp);
-				i++;
-			}
-			i = 0;
-		}
-		cmd = cmd->next;
-	}
-}
-
 char	*fait_le_cafe(char **test, t_data *data)
 {
 	char	*cmd;
-	char	*tmp;
 	int		j;
 
 	j = 0;
-	cmd = NULL;
 	while (test[j])
 	{
-		tmp = ft_strtrim(test[j], "\"");
-		free(test[j]);
-		test[j] = ft_strdup(tmp);
-		free(tmp);
+		fait_le_cafe_second(test, j);
 		if (j == 0)
 		{
 			if (!ft_valid_meta(test[j], data))
-				cmd = ft_strdup(test[j]);
+				cmd = 0;
 			else
 				cmd = ft_getenv(test[j], data);
 		}
@@ -79,11 +44,9 @@ void	do_meta(t_data *data)
 {
 	t_cmd	*cmd;
 	int		i;
-	char	**test;
-	char	*tmp;
 
 	i = 0;
-	cmd = data->cmdIndex->begin;
+	cmd = data->cmd_index->begin;
 	while (cmd)
 	{
 		if (cmd->have_meta)
@@ -92,16 +55,7 @@ void	do_meta(t_data *data)
 			{
 				if (is_meta_second(cmd->argv[i]) \
 				&& !is_simple_quote(cmd->argv[i]))
-				{
-					tmp = ft_strtrim(cmd->argv[i], "\"");
-					free(cmd->argv[i]);
-					cmd->argv[i] = ft_strdup(tmp);
-					free(tmp);
-					test = ft_split(cmd->argv[i], '$');
-					free(cmd->argv[i]);
-					cmd->argv[i] = fait_le_cafe(test, data);
-					free_tab(test);
-				}
+					do_meta_second(data, i, cmd);
 				i++;
 			}
 		}
@@ -114,7 +68,7 @@ void	cut_arg(t_data *data)
 {
 	t_cmd	*cmd;
 
-	cmd = data->cmdIndex->begin;
+	cmd = data->cmd_index->begin;
 	while (cmd)
 	{
 		if (cmd->redir)

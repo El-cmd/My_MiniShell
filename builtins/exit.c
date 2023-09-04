@@ -3,36 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:22 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 14:37:52 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/04 01:41:17 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 // Gestion de l'exit
+bool	is_numeric(const char *str)
+{
+	while (*str)
+	{
+		if (!isdigit(*str) && *str != '\"' && *str != '\'')
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
 void	ft_exit(t_cmd *cmd, t_data *data)
 {
-	int	n;
+	const char	*arg;
 
-	if (cmd->redir == false)
+	printf("exit\n");
+	arg = cmd->cmd + 4;
+	while (*arg && (*arg == ' ' || *arg == '\t'))
+		arg++;
+	if (*arg)
 	{
-		if (ft_strlen(cmd->cmd) > 4)
-			data->exit_return = ft_atoi_exit(cmd->cmd + 4);
-		else
-			data->exit_return = 0;
+		if ((*arg == '\"' || *arg == '\'') && arg[strlen(arg) - 1] == *arg)
+		{
+			arg++;
+		}
+		if (!is_numeric(arg))
+		{
+			printf("MS#🤖: %s: numeric argument required\n", arg);
+			exit(2);
+		}
+		exit(atoi(arg));
 	}
-	else
-	{
-		if (ft_strlen(cmd->just_cmd) > 4)
-			data->exit_return = ft_atoi_exit(cmd->just_cmd + 4);
-		else
-			data->exit_return = 0;
-	}
-	ft_putstr_fd("exit\n", 1);
-	cmd->spec_built = 1;
-	n = data->exit_return;
 	free_everything(data);
-	exit(n);
+	exit(0);
 }

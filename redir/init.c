@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:17:24 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/04 15:24:09 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	redirOrNot(t_cmdIndex *index)
+void	redir_or_not(t_cmd_index *index)
 {
 	t_cmd	*tmp;
 
 	tmp = index->begin;
 	while (tmp)
 	{
-		if (lookIfRedir(tmp->cmd) == 1)
+		if (look_if_redir(tmp->cmd) == 1)
 			tmp->redir = true;
 		else
 			tmp->redir = false;
@@ -27,7 +27,7 @@ void	redirOrNot(t_cmdIndex *index)
 	}
 }
 
-void	initRedirOrnot(t_cmdIndex *index)
+void	init_redir_or_not(t_cmd_index *index)
 {
 	t_cmd	*tmp;
 
@@ -35,7 +35,7 @@ void	initRedirOrnot(t_cmdIndex *index)
 	while (tmp)
 	{
 		if (tmp->redir == true)
-			tmp->lredir = init_redirI();
+			tmp->lredir = init_redir_i();
 		else
 			tmp->lredir = NULL;
 		tmp = tmp->next;
@@ -43,7 +43,7 @@ void	initRedirOrnot(t_cmdIndex *index)
 }
 
 //parsing des redirections out
-int	malloc_out(char *str, int *i, t_redirIndex *tmp)
+int	malloc_out(char *str, int *i, t_redirindex *tmp)
 {
 	if (str[*i] == '>')
 	{
@@ -68,7 +68,7 @@ int	malloc_out(char *str, int *i, t_redirIndex *tmp)
 }
 
 //parsing des redirections in
-int	malloc_in(char *str, int *i, t_redirIndex *tmp)
+int	malloc_in(char *str, int *i, t_redirindex *tmp)
 {
 	if (str[*i] == '<')
 	{
@@ -98,7 +98,7 @@ int	malloc_redir(t_data *data)
 	int		i;
 	t_cmd	*tmp;
 
-	tmp = data->cmdIndex->begin;
+	tmp = data->cmd_index->begin;
 	while (tmp)
 	{
 		if (tmp->redir == true)

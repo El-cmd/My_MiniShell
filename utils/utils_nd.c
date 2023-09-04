@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:01 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:30:47 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 16:41:08 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,26 @@ int	is_redir_or_cmd(char c)
 	if (c == '<' || c == '>')
 		return (1);
 	return (0);
+}
+
+void	print_title(void)
+{
+	printf(".-.   .-..-..-. .-..-. .----..-. .-..----..-.   .-.\n");
+	printf("|  `.'  || ||  `| || |{ {__  | {_} || {_  | |   | |\n");
+	printf("| |\\ /| || || |\\  || |.-._} }| { } || {__ | `--.| |--.\n");
+	printf("`-' ` `-'`-'`-' `-'`-'`----' `-' `-'`----'`----'`----'\n");
+}
+
+char	*debug(char *str)
+{
+	int		n;
+	char	*tmp;
+
+	n = ft_strlen(str);
+	if (str[0] == '\"' && str[n - 1] == '\"')
+	{
+		tmp = ft_strtrim(str, "\"");
+		return (tmp);
+	}
+	return (str);
 }

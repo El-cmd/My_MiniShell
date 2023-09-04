@@ -6,11 +6,12 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:31 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 14:40:29 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 23:10:44 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 //renvoie la la place du egale dans la cmd
 int	search_egal(char *str)
 {
@@ -26,40 +27,57 @@ int	search_egal(char *str)
 	return (-1);
 }
 
-//cherche et enleve la variable demandé
-int	ft_unset(t_envSom *env, t_cmd *cmd, t_data *data)
+//cherche et enleve la variable demandée
+void	remove_variable(t_env_som *env, t_env *var_to_remove)
 {
+	if (env == NULL || var_to_remove == NULL)
+		return ;
+	if (var_to_remove->back == NULL)
+	{
+		env->begin = var_to_remove->next;
+		if (var_to_remove->next != NULL)
+			var_to_remove->next->back = NULL;
+	}
+	else
+	{
+		if (var_to_remove->next != NULL)
+			var_to_remove->next->back = var_to_remove->back;
+		var_to_remove->back->next = var_to_remove->next;
+	}
+	if (var_to_remove == env->end)
+		env->end = var_to_remove->back;
+	free(var_to_remove->name);
+	free(var_to_remove->name_split);
+	free(var_to_remove->value_split);
+	free(var_to_remove);
+	env->size--;
+}
+
+int	ft_unset(t_env_som *env, t_cmd *cmd, t_data *data)
+{
+	int		i;
+	int		removed;
 	t_env	*tmp;
 
-	tmp = env->begin;
-	if (cmd->argv[1] == NULL)
+	i = 1;
+	removed = 0;
+	while (cmd->argv[i])
 	{
-		data->exit_return = 0;
-		return (0);
-	}
-	while (tmp)
-	{
-		if (ft_strcmp(cmd->argv[1], tmp->name_split) == 0)
+		tmp = env->begin;
+		while (tmp)
 		{
-			free(tmp->name);
-			free(tmp->name_split);
-			free(tmp->value_split);
-			tmp->name = NULL;
-			tmp->name_split = NULL;
-			tmp->value_split = NULL;
-			env->size--;
-			if (tmp->next == NULL)
+			if (ft_strcmp(cmd->argv[i], tmp->name_split) == 0)
 			{
-				tmp->back->next = NULL;
-				env->end = tmp->back;
-				return (0);
+				remove_variable(env, tmp);
+				removed = 1;
+				break ;
 			}
-			tmp->next->back = tmp->back;
-			tmp->back->next = tmp->next;
-			return (0);
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
+		i++;
 	}
-	data->exit_return = 0;
+	data->exit_return = 1;
+	if (removed)
+		data->exit_return = 0;
 	return (0);
 }

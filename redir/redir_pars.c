@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/13 14:26:45 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/19 11:22:11 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	malloc_all(t_data *data)
 {
 	is_meta(data);
-	redirOrNot(data->cmdIndex);
-	initRedirOrnot(data->cmdIndex);
+	redir_or_not(data->cmd_index);
+	init_redir_or_not(data->cmd_index);
 	malloc_redir(data);
 	exec_find_cmd(data);
 	cut_arg(data);
@@ -85,7 +85,7 @@ void	boucle_redir(t_data *data)
 {
 	t_cmd	*cmd;
 
-	cmd = data->cmdIndex->begin;
+	cmd = data->cmd_index->begin;
 	while (cmd)
 	{
 		redir_fd(cmd);

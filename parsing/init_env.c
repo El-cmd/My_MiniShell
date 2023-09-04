@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:04 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/27 20:00:22 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/23 13:07:16 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //init le sommaire de ma double lchainee de env
-t_envSom	*init_envSom(void)
+t_env_som	*init_env_som(void)
 {
-	t_envSom	*envSom;
+	t_env_som	*env_som;
 
-	envSom = malloc(sizeof(t_envSom));
-	if (!envSom)
+	env_som = malloc(sizeof(t_env_som));
+	if (!env_som)
 		exit(EXIT_FAILURE);
-	envSom->begin = NULL;
-	envSom->end = NULL;
-	envSom->size = 0;
-	return (envSom);
+	env_som->begin = NULL;
+	env_som->end = NULL;
+	env_som->size = 0;
+	return (env_som);
 }
 
 //pushback les variable denv dans ma liste
-void	push_env(char *envp, t_envSom *som)
+t_env	*create_env_node(char *envp)
 {
 	t_env	*env;
 	char	**tmp;
@@ -48,6 +48,14 @@ void	push_env(char *envp, t_envSom *som)
 	malloc_error(env->name);
 	env->next = NULL;
 	env->back = NULL;
+	return (env);
+}
+
+void	push_env(char *envp, t_env_som *som)
+{
+	t_env	*env;
+
+	env = create_env_node(envp);
 	if (som->size == 0)
 	{
 		som->begin = env;
@@ -62,46 +70,14 @@ void	push_env(char *envp, t_envSom *som)
 	som->size++;
 }
 
-//change la variable pwd dans ma liste de env
-void	change_pwd(t_envSom *env)
-{	
-	t_env	*tmp;
-	char	*tmppwd;
-
-	tmppwd = getcwd(NULL, 0);
-	tmp = env->begin;
-	while (tmp && ft_strncmp(tmp->name, "PWD=", 4))
-		tmp = tmp->next;
-	free(tmp->name);
-	tmp->name = ft_strjoin("PWD=", tmppwd);
-	free(tmppwd);
-}
-
-//mes a jours la varible oldpwd dans mon env
-void	change_oldpwd(t_envSom *env, char *oldpwd)
-{
-	t_env	*tmp;
-
-	tmp = env->begin;
-	while (tmp && ft_strncmp(tmp->name, "OLDPWD=", 7))
-		tmp = tmp->next;
-	if (tmp->name)
-	{
-		free(tmp->name);
-		tmp->name = ft_strjoin("OLDPWD=", oldpwd);
-	}
-	else
-		push_env(ft_strjoin("OLDPWD=", oldpwd), env);
-}
-
 //mes toute les variable dans ma liste
-t_envSom	*init_envp(char **envp)
+t_env_som	*init_envp(char	**envp)
 {
-	t_envSom	*env;
+	t_env_som	*env;
 	int			i;
 
 	i = 0;
-	env = init_envSom();
+	env = init_env_som();
 	while (envp[i])
 	{
 		push_env(envp[i], env);

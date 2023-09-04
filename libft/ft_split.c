@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 11:30:08 by vloth             #+#    #+#             */
-/*   Updated: 2021/06/16 13:48:28 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/30 05:29:58 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static int	numchar(char const *s2, char c, int i)
 	return (lenght);
 }
 
-static char	**freee(char const **dst, int j)
+static char	**freee(char **dst, int j)
 {
 	while (j > 0)
 	{
 		j--;
-		free((void *)dst[j]);
+		free(dst[j]);
 	}
 	free(dst);
 	return (NULL);
@@ -72,15 +72,15 @@ static char	**affect(char const *s, char **dst, char c, int l)
 		k = 0;
 		while (s[i] == c)
 			i++;
-		dst[j] = (char *)malloc(sizeof(char) * numchar(s, c, i) + 1);
+		dst[j] = (char *)malloc(sizeof(char) * (numchar(s, c, i) + 1));
 		if (dst[j] == NULL)
-			return (freee((char const **)dst, j));
+			return (freee(dst, j));
 		while (s[i] != '\0' && s[i] != c)
 			dst[j][k++] = s[i++];
 		dst[j][k] = '\0';
 		j++;
 	}
-	dst[j] = 0;
+	dst[j] = NULL;
 	return (dst);
 }
 

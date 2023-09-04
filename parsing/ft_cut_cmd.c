@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 15:58:57 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/04 20:13:45 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int	parseur_quotes(char *str, int i, int c)
 	return (-1);
 }
 
-int	ft_pipeError(char *line)
+int	check_quotes(char *line)
 {
 	int	i;
-	int	j;
 	int	q;
 
 	i = 0;
-	j = 0;
 	q = 0;
 	while (line[i])
 	{
@@ -41,6 +39,20 @@ int	ft_pipeError(char *line)
 				return (3);
 			q++;
 		}
+		i++;
+	}
+	return (q);
+}
+
+int	check_separators(char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
 		if (line[i] == '|')
 		{
 			if (line[i + 1] == '|')
@@ -51,53 +63,43 @@ int	ft_pipeError(char *line)
 		}
 		i++;
 	}
+	return (j);
+}
+
+int	ft_pipe_error(char *line)
+{
+	int	j;
+	int	q;
+
+	j = check_separators(line);
+	q = check_quotes(line);
 	if (j > 0 && q == 0)
 		return (0);
-	if ((q > 0))
+	if (q > 0)
 		return (3);
 	return (2);
 }
 
-void	splitage(char *line, t_cmdIndex *cmdIndex)
-{
-	char	**line_second;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	line_second = ft_split(line, '|');
-	i = 0;
-	while (line_second[i])
-	{
-		tmp = ft_strtrim(line_second[i], " ");
-		pushback_cmd(tmp, cmdIndex, 0);
-		free(tmp);
-		i++;
-	}
-	free_tab(line_second);
-}
-
 // par rapport a la commande regarde sil doit split ou pas
-int	splitOrNot(char *line, t_cmdIndex *cmdIndex)
+int	split_or_not(char *line, t_cmd_index *cmd_index)
 {
-	if (no_str(line) == 1 || others_char(line))
+	int		pipe_error;
+
+	pipe_error = error(line);
+	if (pipe_error == -1)
 		return (1);
-	if (ft_pipeError(line) == 1)
-		return (1);
-	else if (ft_pipeError(line) == 3)
+	else if (pipe_error == 3)
 	{
-		if (!split_quotes(line, cmdIndex))
+		if (pipe_quote(line, cmd_index))
 			return (1);
-		return (0);
 	}
-	else if (ft_pipeError(line) == 2)
+	else if (pipe_error == 2)
+		not_pipe(line, cmd_index);
+	else if (pipe_error == 0)
 	{
-		line = ft_strtrim(line, " ");
-		pushback_cmd(line, cmdIndex, 0);
-		free(line);
-		return (0);
+		if (pipe_cut(line, cmd_index))
+			return (1);
 	}
-	else if (ft_pipeError(line) == 0)
-		splitage(line, cmdIndex);
+	free(line);
 	return (0);
 }

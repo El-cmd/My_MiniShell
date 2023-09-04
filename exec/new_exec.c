@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:26:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/26 21:43:34 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 18:11:14 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,18 @@ void	child_process(t_data *data, t_cmd *cmd, int *fd)
 
 void	ft_launch_cmd(t_data *data, t_cmd *cmd, int *fd)
 {
-	global.pid = fork();
-	if (global.pid < 0)
-		return ;
-	else if (global.pid == 0)
+	reset_signal_handlers();
+	g_global.pid = fork();
+	if (g_global.pid < 0)
 	{
-		if (cmd->argv[0])
+		perror("fork");
+		return ;
+	}
+	else if (g_global.pid == 0)
+	{
+		if (cmd->argv && cmd->argv[0])
 			child_process(data, cmd, fd);
+		_exit(EXIT_FAILURE);
 	}
 	else
 		parent_process(cmd, fd);
@@ -65,10 +70,12 @@ int	ft_ft_exec(t_data *data)
 	t_cmd	*cmd;
 	int		fd[2];
 
-	cmd = data->cmdIndex->begin;
+	cmd = data->cmd_index->begin;
 	while (cmd)
 	{
-		if (cmd->spec_built)
+		if (cmd->out_file == -1 || cmd->in_file == -1)
+			ft_putstr_fd("Error: redirection\n", 2);
+		else if (cmd->spec_built)
 			spec_built(cmd, data);
 		else
 		{
@@ -79,7 +86,7 @@ int	ft_ft_exec(t_data *data)
 		}
 		cmd = cmd->next;
 	}
-	wait_all_and_finish(data, data->cmdIndex->begin);
+	wait_all_and_finish(data->cmd_index->begin, data);
 	free_list_second(data);
 	return (1);
 }
@@ -96,44 +103,4 @@ void	parent_process(t_cmd *cmd, int *fd)
 	else
 		close(fd[0]);
 	return ;
-}
-
-void	exit_process(t_data *data, int *fd)
-{
-	t_cmd	*current;
-
-	current = data->cmdIndex->begin;
-	while (current)
-	{
-		if (current->in_file >= 0)
-			close(current->in_file);
-		if (current->out_file >= 0)
-			close(current->out_file);
-		current = current->next;
-	}
-	close(fd[0]);
-	close(fd[1]);
-	free_everything(data);
-	exit(data->exit_return);
-}
-
-void	wait_all_and_finish(t_data *data, t_cmd *cmds)
-{
-	int	status;
-	int	pid;
-
-	while (cmds)
-	{
-		pid = waitpid(0, &status, 0);
-		if (pid == global.pid)
-		{
-			if (WIFEXITED(status))
-				data->exit_return = WEXITSTATUS(status);
-		}
-		if (cmds->out_file >= 0)
-			close(cmds->out_file);
-		if (cmds->in_file >= 0)
-			close(cmds->in_file);
-		cmds = cmds->next;
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 16:32:27 by vloth            ###   ########.fr       */
+/*   Updated: 2023/08/04 17:37:08 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	no_str(char *cmd)
 	while (cmd[i] == ' ' || cmd[i] == '\t')
 		i++;
 	if (cmd[i] == '\0')
-		return (1);	
+		return (1);
 	return (0);
 }
 
-int others_char(char *cmd)
+int	others_char(char *cmd)
 {
 	int	i;
 
@@ -66,12 +66,4 @@ void	get_file(char *str, int *i)
 			(*i) = parseur_quotes(str, *i + 1, str[*i]);
 		(*i)++;
 	}
-}
-
-void	printTitle(void)
-{
-	printf(".-.   .-..-..-. .-..-. .----..-. .-..----..-.   .-.\n");
-	printf("|  `.'  || ||  `| || |{ {__  | {_} || {_  | |   | |\n");
-	printf("| |\\ /| || || |\\  || |.-._} }| { } || {__ | `--.| |--.\n");
-	printf("`-' ` `-'`-'`-' `-'`-'`----' `-' `-'`----'`----'`----'\n");
 }

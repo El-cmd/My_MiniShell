@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_datas.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/10 15:37:07 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/03 18:12:25 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int	count_simple_quote(char *str)
 
 void	init_data(t_data *data, char **en)
 {
-	printTitle();
+	print_title();
+	data->exit_return = 0;
 	data->envp = en;
 	data->env = init_envp(en);
-	global.pid = 42;
-	signal_handler();
-	data->cmdIndex = init_cmd();
+	g_global.pid = 42;
+	data->cmd_index = init_cmd();
 	data->path_exec = ft_getpath(data->env);
 }

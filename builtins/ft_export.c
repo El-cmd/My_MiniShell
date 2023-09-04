@@ -3,21 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/07/31 16:58:41 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/04 00:34:25 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int have_egal(char *str)
+void	print_sorted_env(char **env_names, int env_count, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (i < env_count)
+	{
+		printf("declare -x %s\n", env_names[i]);
+		i++;
+	}
+	data->exit_return = 0;
+}
+
+int	have_egal(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
 		if (str[i] == '=')
 			return (1);
@@ -26,16 +39,14 @@ int have_egal(char *str)
 	return (0);
 }
 
-int is_valid(char *str)
+int	is_valid(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (str[0] == '=' || (str[0] >= '0' && str[0] <= '9'))
+	if (str[0] == '=' || (str[0] >= '0' && str[0] <= '9')
+		|| strchr(str, '=') == NULL)
 	{
-		ft_putstr_fd("export: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd(" not a valid identifier\n", 2);
 		return (0);
 	}
 	while (str[i])
@@ -43,9 +54,6 @@ int is_valid(char *str)
 		if (str[i] == '$' || str[i] == '@' || str[i] == '!' || str[i] == '#'
 			|| str[i] == '%' || str[i] == '^' || str[i] == '&' || str[i] == '*')
 		{
-			ft_putstr_fd("export: ", 2);
-			ft_putstr_fd(str, 2);
-			ft_putstr_fd(" not a valid identifier\n", 2);
 			return (0);
 		}
 		i++;
@@ -53,71 +61,30 @@ int is_valid(char *str)
 	return (1);
 }
 
-void remplace(t_env *tmp2, char **tmp, char *str)
+int	ft_export_whithout_arg(t_env_som *env, t_cmd *cmd, t_data *data)
 {
-	tmp2->name_split = strdup(tmp[0]);
-	if (tmp[1])
-		tmp2->value_split = strdup(tmp[1]);
-	tmp2->name = ft_strdup(str);
-}
+	int			env_count;
+	char		**env_names;
 
-int	already_exist(char *str, t_envSom *env)
-{
-	int i;
-	char **tmp;
-	t_env *tmp2;
-	
-	i = 0;
-	tmp2 = env->begin;
-	while (str[i])
+	if (cmd->argv[1] == NULL)
 	{
-		if (str[i] == '=')
-		{
-			tmp = ft_split(str, '=');
-			while (tmp2)
-			{
-				if (!ft_strcmp(tmp[0], tmp2->name_split))
-				{
-					remplace(tmp2, tmp, str);
-					free_tab(tmp);
-					return (1);
-				}
-				tmp2 = tmp2->next;
-			
-			}
-			free_tab(tmp);
-		}
-		i++;
-	}
-	while (tmp2)
-	{
-		if (!ft_strcmp(str, tmp2->name_split))
-			return (1);
-		tmp2 = tmp2->next;
+		alloc_fill(env, &env_names, &env_count);
+		bubble_sort(env_names, env_count);
+		print_sorted_env(env_names, env_count, data);
+		free(env_names);
+		return (1);
 	}
 	return (0);
 }
 
-int	ft_export(t_envSom *env, t_cmd *cmd, t_data *data)
+int	ft_export(t_env_som *env, t_cmd *cmd, t_data *data)
 {
-	t_env	*tmp;
-	int i;
-	int retour;
+	int	i;
+	int	retour;
 
 	i = 1;
 	retour = 0;
-	tmp = env->begin;
-	if (cmd->argv[1] == NULL)
-	{
-		while (tmp)
-		{
-			ft_putstr_fd("declare -x ", 1);
-			ft_putstr_fd(tmp->name, 1);
-			ft_putchar_fd('\n', 1);
-			tmp = tmp->next;
-		}
-	}
-	else
+	if (!ft_export_whithout_arg(env, cmd, data))
 	{
 		while (cmd->argv[i])
 		{		
