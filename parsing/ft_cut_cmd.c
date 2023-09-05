@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cut_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 20:13:45 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/05 20:02:46 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_quotes(char *line)
 		{
 			i = parseur_quotes(line, i + 1, line[i]);
 			if (i == -1)
-				return (3);
+				return (-1);
 			q++;
 		}
 		i++;
@@ -56,9 +56,9 @@ int	check_separators(char *line)
 		if (line[i] == '|')
 		{
 			if (line[i + 1] == '|')
-				return (1);
+				return (-1);
 			if (line[i + 1] == '\0')
-				return (1);
+				return (-1);
 			j++;
 		}
 		i++;
@@ -73,6 +73,11 @@ int	ft_pipe_error(char *line)
 
 	j = check_separators(line);
 	q = check_quotes(line);
+	if (j == -1)
+	{
+		ft_putstr_fd("Error: Invalid command\n", 2);
+		return (-1);
+	}
 	if (j > 0 && q == 0)
 		return (0);
 	if (q > 0)

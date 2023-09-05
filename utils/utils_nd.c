@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:01 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/03 16:41:08 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:27:22 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*debug(char *str)
 	char	*tmp;
 
 	n = ft_strlen(str);
-	if (str[0] == '\"' && str[n - 1] == '\"')
+	if (str[0] == '\"' && str[n] == '\"')
 	{
 		tmp = ft_strtrim(str, "\"");
 		return (tmp);
