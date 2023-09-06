@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 19:08:52 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:19:27 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_separators(char *line)
 			i = parseur_quotes(line, i + 1, line[i]);
 			if (i == -1)
 			{
-				ft_putstr_fd("Pipe Error1\n", 2);
+				ft_putstr_fd("Quote Error\n", 2);
 				return (-1);
 			}
 		}
@@ -102,8 +102,10 @@ int	split_or_not(char *line, t_cmd_index *cmd_index)
 	if (check_separators(line) == 0)
 		not_pipe(line, cmd_index);
 	else
+	{
 		if (pipe_cut(line, cmd_index))
 			return (1);
+	}
 	free(line);
 	return (0);
 }
