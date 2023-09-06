@@ -6,7 +6,7 @@
 /*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 02:24:31 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:41:17 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_separators(char *line)
 			i = parseur_quotes(line, i + 1, line[i]);
 			if (i == -1)
 			{
-				ft_putstr_fd("Pipe Error", 2);
+				ft_putstr_fd("Pipe Error\n", 2);
 				return (-1);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 21:54:01 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/06 02:19:19 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:07:24 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parseur_quotes_special(char *str, int i, int c, int *lenght)
 }
 
 static int	numchar_special(char  *s2, char c, int i)
-{
+{// ou des espace sans toucher a ce quil y a entre
 	int	lenght;
 
 	lenght = 0;
@@ -69,11 +69,11 @@ static int	numchar_special(char  *s2, char c, int i)
 		if (s2[i] == '"' || s2[i] == '\'')
 		{
 			i = parseur_quotes_special(s2, i + 1, s2[i], &lenght);
-			if (i == -1)
-			{
-				ft_putstr_fd("Pipe Error", 2);
-				return (-1);
-			}
+			//if (i == -1)
+			//{
+			//	ft_putstr_fd("Pipe Error", 2);
+			//	return (-1);
+			//}
 		}
 		lenght++;
 		i++;
@@ -83,8 +83,17 @@ static int	numchar_special(char  *s2, char c, int i)
 
 int	special_quotes(char *str, int i, int c, char *s2, int *k)
 {
+	int u;
+
+	u = 1;
 	while (str[i])
 	{
+		if (u == 1)
+		{
+			u = 0;
+			s2[*k] = str[i - 1];
+			*k = *k + 1;
+		}
 		if (str[i] == c)
 			return (i);
 		s2[*k] = str[i];
@@ -115,7 +124,7 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 			if (s[i] == '\'' || s[i] == '\"')
 			{
 				dst[j][k] = s[i];
-				i = special_quotes(s, i, s[i], *dst, &k);
+				i = special_quotes(s, i + 1, s[i], dst[j], &k);
 			}
 			dst[j][k++] = s[i++];
 		}
@@ -134,6 +143,7 @@ char	**ft_split_s(char *s, char c)
 	if (s == NULL)
 		return (NULL);
 	l = numstring_special(s, c);
+	printf("nb de mots %d\n", l);
 	dst = (char **)malloc(sizeof(char *) * (l + 1));
 	if (dst == NULL)
 		return (NULL);
