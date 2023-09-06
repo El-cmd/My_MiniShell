@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:49:39 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/03 22:49:58 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:40:15 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	sigint_heredoc_handler(void)
 {
 	signal(SIGINT, hd_on_sigint);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sig_sbrt(int code)
+{
+	(void) code;
+	write(1, "aborttest\n", 6);
 }
 
 void	sigint_handler(int sig)

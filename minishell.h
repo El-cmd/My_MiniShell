@@ -6,7 +6,7 @@
 /*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 14:53:26 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:40:55 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ void			newline(void);
 void			sigint_handler(int sig);
 void			sigint_heredoc_handler(void);
 void			reset_signal_handlers(void);
+void			sig_sbrt(int code);
 
 /* signal_exec.c */
 void			hd_on_sigint(int sig);
