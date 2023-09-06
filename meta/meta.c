@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:29:24 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/03 16:40:44 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:50:27 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	is_meta(t_data *data)
 	{
 		while (cmd->cmd[i])
 		{
-			if (cmd->cmd[i] == '$' && only_dollar(cmd->cmd, i) == 0)
+			if (cmd->cmd[i] == '$' && only_dollar(cmd->cmd, i) == 0
+				&& cmd->cmd[i + 1] != '>' && cmd->cmd[i + 1] != '<')
 			{
 				cmd->have_meta = true;
 				m = 1;
