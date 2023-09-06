@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 20:12:36 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/06 00:09:21 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,6 +323,7 @@ int				is_simple_quote(char *str);
 int				ft_valid_meta(char *str, t_data *data);
 char			*ft_getenv(char *str, t_data *data);
 void			free_list(t_cmd_index *index);
+char			**ft_split_s(char *s, char c);
 
 extern t_global	g_global;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 11:30:08 by vloth             #+#    #+#             */
-/*   Updated: 2023/08/30 05:29:58 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 00:05:42 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	numchar(char const *s2, char c, int i)
 	return (lenght);
 }
 
-static char	**freee(char **dst, int j)
+char	**freee(char **dst, int j)
 {
 	while (j > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/05 20:02:46 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:24:31 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ int	check_separators(char *line)
 	j = 0;
 	while (line[i])
 	{
+		if (line[i] == '"' || line[i] == '\'')
+		{
+			i = parseur_quotes(line, i + 1, line[i]);
+			if (i == -1)
+			{
+				ft_putstr_fd("Pipe Error", 2);
+				return (-1);
+			}
+		}
+		
 		if (line[i] == '|')
 		{
 			if (line[i + 1] == '|')
@@ -95,7 +105,14 @@ int	split_or_not(char *line, t_cmd_index *cmd_index)
 		return (1);
 	else if (pipe_error == 3)
 	{
-		if (pipe_quote(line, cmd_index))
+		//if (pipe_quote(line, cmd_index))
+		char **test = ft_split_s(line, '|'); //si tu veux le refaire fonctionner comment avant
+		int i = 0;							//Commente cette condition et remet celle
+		while (test[i])						//la en commentaire 
+		{									// jai fini mon split qui split un pipe ou		
+			printf("%s\n", test[i]);		// ou des espace sans toucher a ce quil y a entre
+			i++;
+		}
 			return (1);
 	}
 	else if (pipe_error == 2)
