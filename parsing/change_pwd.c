@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:56:32 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/06 16:05:15 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:31:25 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	change_oldpwd(t_env_som *env, char *oldpwd)
 {
 	t_env	*tmp;
 	char	**t;
-	char	*new_env;
 
 	tmp = env->begin;
 	while (tmp && ft_strncmp(tmp->name_split, "OLDPWD", 6))
@@ -56,9 +55,5 @@ void	change_oldpwd(t_env_som *env, char *oldpwd)
 		free_tab(t);
 	}
 	else
-	{
-		new_env = ft_strjoin("OLDPWD=", oldpwd);
-        push_env(new_env, env);
-        free(new_env);
-	}
+		push_env(ft_strjoin("OLDPWD=", oldpwd), env);
 }

@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:49 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 16:12:16 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:06:54 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	spec_built_first(t_data *data)
 		}
 		else
 		{	
-			cmd->spec_built = -1;
 		}
 		cmd = cmd->next;
 	}
