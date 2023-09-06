@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 21:54:01 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/06 20:29:15 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:27:42 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	numstring_special(char *s1, char c)
 {
 	int	comp;
 	int	cles;
-	int i;
+	int	i;
 
 	comp = 0;
 	i = 0;
@@ -46,19 +46,19 @@ static int	numstring_special(char *s1, char c)
 	return (comp);
 }
 
-int parseur_quotes_special(char *str, int i, int c, int *length)
+int	parseur_quotes_special(char *str, int i, int c, int *length)
 {
-    while (str[i])
-    {
-        if (str[i] == c)
-            return i;
-        i++;
-        (*length)++;
-    }
-    return -1;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+		(*length)++;
+	}
+	return (-1);
 }
 
-static int	numchar_special(char  *s2, char c, int i)
+static int	numchar_special(char *s2, char c, int i)
 {
 	int	lenght;
 
@@ -75,7 +75,7 @@ static int	numchar_special(char  *s2, char c, int i)
 
 int	special_quotes(char *str, int i, int c, char *s2, int *k)
 {
-	int u;
+	int	u;
 
 	u = 1;
 	while (str[i])
@@ -127,24 +127,22 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 	return (dst);
 }
 
-char **ft_split_s(char *s, char c)
+char	**ft_split_s(char *s, char c)
 {
-    char **dst;
-    int l;
+	char	**dst;
+	int		l;
 
-    if (s == NULL)
-        return (NULL);
-    l = numstring_special(s, c);
-    dst = (char **)malloc(sizeof(char *) * (l + 1));
-    if (dst == NULL)
-        return (NULL);
-    dst = affect_special(s, dst, c, l);
-    // Vérifier si l'affectation a échoué
-    if (dst == NULL)
-    {
-        // Libérer la mémoire allouée pour dst
-        free(dst);
-        return (NULL);
-    } 
-    return dst;
+	if (s == NULL)
+		return (NULL);
+	l = numstring_special(s, c);
+	dst = (char **)malloc(sizeof(char *) * (l + 1));
+	if (dst == NULL)
+		return (NULL);
+	dst = affect_special(s, dst, c, l);
+	if (dst == NULL)
+	{
+		free(dst);
+		return (NULL);
+	}
+	return (dst);
 }

@@ -6,45 +6,46 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 20:51:14 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:28:21 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *fait_le_cafe(char **test, t_data *data)
+char	*fait_le_cafe(char **test, t_data *data)
 {
-    char *cmd = NULL; // Initialisez cmd à NULL
+	int		j;
+	char	*cmd;
+	char	*env_value;
+	char	*new_cmd;
 
-    for (int j = 0; test[j]; j++)
-    {
-        fait_le_cafe_second(test, j);
-
-        if (!ft_valid_meta(test[j], data))
-        {
-            // Libérez la mémoire de cmd précédent s'il existe
-            free(cmd);
-            cmd = NULL; // Réinitialisez cmd à NULL
-        }
-        else
-        {
-            char *env_value = ft_getenv(test[j], data);
-            char *new_cmd = NULL;
-
-            if (cmd)
-            {
-                new_cmd = ft_strjoin(cmd, env_value);
-                free(cmd); // Libérez la mémoire de l'ancienne cmd
-            }
-            else
-            {
-                new_cmd = ft_strdup(env_value);
-            }
-            cmd = new_cmd; // Mettez à jour cmd avec la nouvelle valeur
-            free(env_value); // Libérez la mémoire de env_value
-        }
-    }
-    return cmd;
+	j = 0;
+	cmd = NULL;
+	while (test[j])
+	{
+		fait_le_cafe_second(test, j);
+		if (!ft_valid_meta(test[j], data))
+		{
+			free(cmd);
+			cmd = NULL;
+		}
+		else
+		{
+			env_value = ft_getenv(test[j], data);
+			new_cmd = NULL;
+			if (cmd)
+			{
+				new_cmd = ft_strjoin(cmd, env_value);
+				free(cmd);
+			}
+			else
+				new_cmd = ft_strdup(env_value);
+			cmd = new_cmd;
+			free(env_value);
+		}
+		j++;
+	}
+	return (cmd);
 }
 
 void	do_meta(t_data *data)

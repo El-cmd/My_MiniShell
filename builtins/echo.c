@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 18:05:10 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:14:33 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 	i = 1;
 	if (cmd->argv[i] && (!ft_strcmp(cmd->argv[0], "echo")))
 	{
-		//if (echo_quote(cmd))
-		//	return ;
 		if (!ft_strncmp(cmd->argv[i], "-n", 2))
 		{	
 			ft_echo_n(cmd, pass_n(cmd));

@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 20:19:27 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:16:38 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	check_separators(char *line)
 				return (-1);
 			}
 		}
-		
 		if (line[i] == '|')
 		{
 			if (line[i + 1] == '|')
