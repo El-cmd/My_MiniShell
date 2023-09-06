@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 17:07:55 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:24:07 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	cut_arg(t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->cmd_index->begin;
-	printf("%s\n", cmd->cmd);
 	while (cmd)
 	{
 		if (cmd->redir)
@@ -81,10 +80,7 @@ void	cut_arg(t_data *data)
 	cmd = data->cmd_index->begin;
 	int i = 0;
 	while (cmd->argv[i])
-	{
-		printf("first %s\n", cmd->argv[i]);
 		i++;
-	}
 	do_meta(data);
 	cut_quote(data);
 }

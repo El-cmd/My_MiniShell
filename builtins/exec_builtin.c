@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:18 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 16:29:09 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:09:52 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	is_built_redir(t_cmd *cmd)
 		cmd->is_built = false;
 	}
 }
-
 void	is_built(t_data *data)
 {
 	t_cmd	*cmd;
