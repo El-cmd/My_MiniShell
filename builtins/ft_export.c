@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 00:34:25 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:02:48 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,6 @@ int	is_valid(char *str)
 		i++;
 	}
 	return (1);
-}
-
-int	ft_export_whithout_arg(t_env_som *env, t_cmd *cmd, t_data *data)
-{
-	int			env_count;
-	char		**env_names;
-
-	if (cmd->argv[1] == NULL)
-	{
-		alloc_fill(env, &env_names, &env_count);
-		bubble_sort(env_names, env_count);
-		print_sorted_env(env_names, env_count, data);
-		free(env_names);
-		return (1);
-	}
-	return (0);
 }
 
 int	ft_export(t_env_som *env, t_cmd *cmd, t_data *data)

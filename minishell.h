@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 21:40:55 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:04:05 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,10 @@ int				have_olpwd(char **envp);
 int				ft_export(t_env_som *env, t_cmd *cmd, t_data *data);
 int				have_egal(char *str);
 void			remplace(t_env *tmp2, char **tmp, char *str);
+int				ft_export_whithout_arg(t_env_som *env, t_cmd *cmd, t_data *data);
 
 /* ft_export_sort.c */
+void			print_sorted_env(char **env_names, int env_count, t_data *data);
 void			recursive_bubble_sort(char **arr, int n, int i, int swap);
 void			bubble_sort(char **arr, int n);
 void			alloc_fill(t_env_som *env, char ***env_names, int *env_count);
