@@ -6,7 +6,7 @@
 /*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 00:09:21 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:53:26 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void			init_data(t_data *data, char **en);
 
 /* PARSING */
 /* ft_cut_cmd.c */
-int				ft_pipe_error(char *line);
+int				check_error(char *line);
 int				others_char(char *cmd);
 int				split_or_not(char *line, t_cmd_index *cmd_index);
 
@@ -324,6 +324,7 @@ int				ft_valid_meta(char *str, t_data *data);
 char			*ft_getenv(char *str, t_data *data);
 void			free_list(t_cmd_index *index);
 char			**ft_split_s(char *s, char c);
+int				check_quotes(char *line);
 
 extern t_global	g_global;
 

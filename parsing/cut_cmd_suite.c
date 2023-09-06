@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cut_cmd_suite.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:51:35 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 20:15:05 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/06 14:35:52 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@ int	error(char *line)
 		return (-1);
 	}
 	line = debug(line);
-	pipe_error = ft_pipe_error(line);
-	if (pipe_error == 1)
-	{
-		free(line);
-		return (-1);
-	}
+	pipe_error = check_error(line);
 	return (pipe_error);
 }
 
@@ -57,6 +52,6 @@ void	not_pipe(char *line, t_cmd_index *cmd_index)
 	char	*trimmed_line;
 
 	trimmed_line = ft_strtrim(line, " ");
-	pushback_cmd(trimmed_line, cmd_index, 0);
+	pushback_cmd(trimmed_line, cmd_index, check_quotes(line));
 	free(trimmed_line);
 }

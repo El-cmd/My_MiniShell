@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitage.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:48:10 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/04 19:45:24 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:52:33 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	splitage(char *line, t_cmd_index *cmd_index)
 	int		i;
 
 	i = 0;
-	line_second = ft_split(line, '|');
+	line_second = ft_split_s(line, '|');
 	i = 0;
 	if (cmd_vide(line_second))
 	{
@@ -58,7 +58,7 @@ int	splitage(char *line, t_cmd_index *cmd_index)
 	while (line_second[i])
 	{
 		tmp = ft_strtrim(line_second[i], " ");
-		pushback_cmd(tmp, cmd_index, 0);
+		pushback_cmd(tmp, cmd_index, check_quotes(line_second[i]));
 		free(tmp);
 		i++;
 	}

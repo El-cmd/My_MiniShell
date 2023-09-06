@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 02:00:36 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:57:54 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	cut_arg(t_data *data)
 	while (cmd)
 	{
 		if (cmd->redir)
-			cmd->argv = ft_split(cmd->just_cmd, ' ');
+			cmd->argv = ft_split_s(cmd->just_cmd, ' ');
 		else
-			cmd->argv = ft_split(cmd->cmd, ' ');
+			cmd->argv = ft_split_s(cmd->cmd, ' ');
 		cmd = cmd->next;
 	}
 	do_meta(data);
