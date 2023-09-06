@@ -6,38 +6,45 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 18:34:41 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:51:14 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*fait_le_cafe(char **test, t_data *data)
+char *fait_le_cafe(char **test, t_data *data)
 {
-	char	*cmd;
-	int		j;
+    char *cmd = NULL; // Initialisez cmd à NULL
 
-	j = 0;
-	while (test[j])
-	{
-		fait_le_cafe_second(test, j);
-		if (j == 0)
-		{
-			if (!ft_valid_meta(test[j], data))
-				cmd = 0;
-			else
-				cmd = ft_getenv(test[j], data);
-		}
-		else
-		{
-			if (!ft_valid_meta(test[j], data))
-				cmd = ft_strjoin(cmd, test[j]);
-			else
-				cmd = ft_strjoin(cmd, ft_getenv(test[j], data));
-		}
-		j++;
-	}
-	return (cmd);
+    for (int j = 0; test[j]; j++)
+    {
+        fait_le_cafe_second(test, j);
+
+        if (!ft_valid_meta(test[j], data))
+        {
+            // Libérez la mémoire de cmd précédent s'il existe
+            free(cmd);
+            cmd = NULL; // Réinitialisez cmd à NULL
+        }
+        else
+        {
+            char *env_value = ft_getenv(test[j], data);
+            char *new_cmd = NULL;
+
+            if (cmd)
+            {
+                new_cmd = ft_strjoin(cmd, env_value);
+                free(cmd); // Libérez la mémoire de l'ancienne cmd
+            }
+            else
+            {
+                new_cmd = ft_strdup(env_value);
+            }
+            cmd = new_cmd; // Mettez à jour cmd avec la nouvelle valeur
+            free(env_value); // Libérez la mémoire de env_value
+        }
+    }
+    return cmd;
 }
 
 void	do_meta(t_data *data)
