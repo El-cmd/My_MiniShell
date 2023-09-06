@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 18:24:07 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:31:38 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,6 @@ void	cut_arg(t_data *data)
 			cmd->argv = ft_split_s(cmd->cmd, ' ');
 		cmd = cmd->next;
 	}
-	cmd = data->cmd_index->begin;
-	int i = 0;
-	while (cmd->argv[i])
-		i++;
 	do_meta(data);
 	cut_quote(data);
 }
