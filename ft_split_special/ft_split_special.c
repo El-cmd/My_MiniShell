@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 21:54:01 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/06 22:27:42 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:10:51 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 		k = 0;
 		while (s[i] == c)
 			i++;
-		dst[j] = (char *)malloc(sizeof(char) * (numchar_special(s, c, i) + 2));
+		dst[j] = (char *)malloc(sizeof(char) * (numchar_special(s, c, i) + 3));
 		if (dst[j] == NULL)
 			return (freee(dst, j));
 		while (s[i] != '\0' && s[i] != c)
@@ -120,7 +120,7 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 			}
 			dst[j][k++] = s[i++];
 		}
-		dst[j][k] = '\0';
+		dst[j][k] = '\0'; 
 		j++;
 	}
 	dst[j] = NULL;

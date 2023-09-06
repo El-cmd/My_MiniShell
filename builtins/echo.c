@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 22:14:33 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:01:45 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_echo_n(t_cmd *cmd, int i)
 	}
 }
 
-//execute echo mais encore quelques truc a regler
+//execute echo
 void	ft_echo_text(char *text)
 {
 	int	i;
