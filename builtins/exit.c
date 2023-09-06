@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:22 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 01:41:17 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:03:26 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ void	ft_exit(t_cmd *cmd, t_data *data)
 		if (!is_numeric(arg))
 		{
 			printf("MS#🤖: %s: numeric argument required\n", arg);
+			free_everything(data);
 			exit(2);
 		}
-		exit(atoi(arg));
+		errno = atoi(arg);
+		free_everything(data);
+		exit(errno);
 	}
 	free_everything(data);
 	exit(0);

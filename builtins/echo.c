@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 16:57:39 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/04 03:00:39 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 	int	i;
 
 	i = 1;
-	if (cmd->argv[i] && (!ft_strcmp(cmd->argv[0], "echo")))
+	if (cmd->argv[i] && !ft_strcmp(cmd->argv[0], "echo"))
 	{
-		//if (echo_quote(cmd))
-		//	return ;
+		if (echo_quote(cmd))
+			return ;
 		if (!ft_strncmp(cmd->argv[i], "-n", 2))
 		{	
 			ft_echo_n(cmd, pass_n(cmd));

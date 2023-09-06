@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:51:34 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/03 22:53:06 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:04:07 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	remplace(t_env *tmp2, char **tmp, char *str)
 {
 	free(tmp2->name_split);
 	free(tmp2->value_split);
+	free(tmp2->name);
 	tmp2->name_split = strdup(tmp[0]);
 	if (tmp[1])
 		tmp2->value_split = strdup(tmp[1]);

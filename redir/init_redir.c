@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/08/04 15:24:09 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:08:28 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,33 @@ void	pushback_redir(t_redirindex *i, int type, int index, char *str)
 }
 
 // parse pour voir si dans la cmd il y a des redirection
-int	look_if_redir(char *line)
+int look_if_redir(char *line)
 {
-	int	i;
+    int i = 0;
 
-	i = 0;
-	while (line[i] != '\0')
+    while (line[i] != '\0')
 	{
-		if (line[i] == '"' || line[i] == '\'')
-			i = parseur_quotes(line, i + 1, line[i]);
-		else if (line[i] == '<' && line[i + 1] == '<')
-			return (1);
+        if (line[i] == '"' || line[i] == '\'')
+		{
+            i = parseur_quotes(line, i + 1, line[i]);
+            if (i == -1)
+                return 0; // Par exemple, si une citation n'est pas fermée correctement.
+        }
 		else if (line[i] == '<')
-			return (1);
-		else if (line[i] == '>' && line[i + 1] == '>')
-			return (1);
+		{
+            if (line[i + 1] == '<' || line[i + 1] == '\0')
+                return 1; // Redirection d'entrée (<< ou <)
+            i++;
+        } 
 		else if (line[i] == '>')
-			return (1);
-		i++;
-	}
-	return (0);
+		{
+            if (line[i + 1] == '>')
+                return 1; // Redirection de sortie (>>)
+			else if (line[i + 1] == '\0')
+                return 1; // Redirection de sortie (>)
+            i++;
+        }
+        i++;
+    }
+    return 0;
 }
