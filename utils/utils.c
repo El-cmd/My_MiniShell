@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 12:29:29 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:57:05 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	others_char(char *cmd)
 		|| cmd[i] == '<' || cmd[i] == ';' || cmd[i] == '&'
 		|| cmd[i] == '|' || cmd[i] == '(' || cmd[i] == ')')
 	{
-		if (cmd[i] == '|' && (cmd[i + 1] != '\0' && cmd[i + 1] != ' ' && cmd[i + 1] != '\t'))
+		if (cmd[i] == '|' && (cmd[i + 1] != '\0' && \
+		cmd[i + 1] != ' ' && cmd[i + 1] != '\t'))
 		{
 			ft_putstr_fd(ERROR_TOKEN, 2);
 			return (1);

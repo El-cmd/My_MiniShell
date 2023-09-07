@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 14:02:09 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:10:18 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,38 @@ int	is_valid(char *str)
 	return (1);
 }
 
-int	ft_export(t_env_som *env, t_cmd *cmd, t_data *data)
+void	return_export(int retour, t_data *data)
+{
+	if (retour == 1)
+		data->exit_return = 1;
+	else
+		data->exit_return = 0;
+}
+
+int	ft_export(t_env_som *env, t_cmd *c, t_data *data)
 {
 	int	i;
 	int	retour;
 
 	i = 1;
 	retour = 0;
-	if (!ft_export_whithout_arg(env, cmd, data))
+	if (!ft_export_w_arg(env, c, data))
 	{
-		while (cmd->argv[i])
+		while (c->argv[i])
 		{
-			if (is_valid(cmd->argv[i]))
+			if (is_valid(c->argv[i]))
 			{
-				if (!already_exist(cmd->argv[i], env))
-					push_env(cmd->argv[i], env);
+				if (!already_exist(c->argv[i], env))
+					push_env(c->argv[i], env);
 			}
 			else
 			{
 				retour = 1;
-				printf("bash: export: %s: not a valid identifier\n", cmd->argv[i]);
+				printf("bash: export: %s: not a valid identifier\n", c->argv[i]);
 			}
 			i++;
 		}
 	}
-	if (retour == 1)
-		data->exit_return = 1;
-	else
-		data->exit_return = 0;
+	return_export(retour, data);
 	return (0);
 }

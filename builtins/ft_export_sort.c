@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:51:34 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/07 14:02:11 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:04:20 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	alloc_fill(t_env_som *env, char ***env_names, int *env_count)
 	}
 }
 
-int	ft_export_whithout_arg(t_env_som *env, t_cmd *cmd, t_data *data)
+int	ft_export_w_arg(t_env_som *env, t_cmd *cmd, t_data *data)
 {
 	int		env_count;
 	char	**env_names;

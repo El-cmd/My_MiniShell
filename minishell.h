@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 20:24:27 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/07 22:03:43 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define BUFFER_SIZE_MAX 2048
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 # define HERE_DOC_FILE "/tmp/mini_here_doc_tmp_file"
-# define ERROR_ENV "L'environnement est vide ou nul. Le minishell ne peut pas être lancé.\n"
+# define ERROR_ENV "Minishell starting without env: Error\n"
 
 //global
 typedef struct s_global
@@ -157,7 +157,7 @@ int				have_olpwd(char **envp);
 int				ft_export(t_env_som *env, t_cmd *cmd, t_data *data);
 int				have_egal(char *str);
 void			remplace(t_env *tmp2, char **tmp, char *str);
-int				ft_export_whithout_arg(t_env_som *env, t_cmd *cmd, t_data *data);
+int				ft_export_w_arg(t_env_som *env, t_cmd *cmd, t_data *data);
 
 /* ft_export_sort.c */
 void			print_sorted_env(char **env_names, int env_count, t_data *data);
