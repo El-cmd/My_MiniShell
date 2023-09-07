@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 22:26:07 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:49:11 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,13 @@ int	look_if_redir(char *line)
 		}
 		else if (line[i] == '<')
 		{
-			if (line[i + 1] == '<' || line[i + 1] == '\0')
+			if ((line[i + 1] == '<' || line[i + 1] == '\0'))
 				return (1);
 			i++;
 		}
 		else if (line[i] == '>')
 		{
-			if (line[i + 1] == '>')
-				return (1);
-			else if (line[i + 1] == '\0')
+			if (line[i + 1] == '>' || line[i + 1] == '\0')
 				return (1);
 			i++;
 		}

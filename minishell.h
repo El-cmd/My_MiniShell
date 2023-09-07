@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 16:24:46 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/07 20:24:27 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define BUFFER_SIZE_MAX 2048
 # define ERROR_TOKEN "minishell: syntax error near unexpected token `newline'\n"
 # define HERE_DOC_FILE "/tmp/mini_here_doc_tmp_file"
+# define ERROR_ENV "L'environnement est vide ou nul. Le minishell ne peut pas être lancé.\n"
 
 //global
 typedef struct s_global
@@ -325,6 +326,9 @@ void			free_list(t_cmd_index *index);
 char			**ft_split_s(char *s, char c);
 int				check_quotes(char *line);
 char			**ft_split_squote(char *s, char c);
+void			exit_handler(int sig);
+void			signal_handler(int sig);
+void			del_handler(int sig);
 
 extern t_global	g_global;
 

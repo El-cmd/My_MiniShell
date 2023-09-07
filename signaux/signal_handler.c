@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 12:26:43 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:14:32 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,8 @@ void	cmdbloc_signal(void)
 	signal(SIGQUIT, abort_handler);
 }
 
-void	exit_handler(int sig)
-{
-	(void)sig;
-	return ;
-}
-
 void	here_doc_signal(void)
 {
 	signal(SIGINT, ft_signalhd);
 	signal(SIGQUIT, ft_signalhd);
-}
-
-void	signal_handler(int sig)
-{
-	(void)sig;
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	printf("\n");
-	rl_redisplay();
-}
-
-void	del_handler(int sig)
-{
-	(void)sig;
-	printf("\n");
 }

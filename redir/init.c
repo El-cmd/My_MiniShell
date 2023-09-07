@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/08/04 15:24:09 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:50:22 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	redir_or_not(t_cmd_index *index)
 	tmp = index->begin;
 	while (tmp)
 	{
-		if (look_if_redir(tmp->cmd) == 1)
+		if (!look_if_redir(tmp->cmd))
 			tmp->redir = true;
 		else
 			tmp->redir = false;
