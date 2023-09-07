@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 22:02:48 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 07:36:47 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	is_valid(char *str)
 	int	i;
 
 	i = 0;
-	if (str[0] == '=' || (str[0] >= '0' && str[0] <= '9')
+	if (str[0] == '=' || (str[0] >= '0' && str[0] <= '9') || str[i] == '$'
 		|| strchr(str, '=') == NULL)
 	{
 		return (0);
 	}
 	while (str[i])
 	{
-		if (str[i] == '$' || str[i] == '@' || str[i] == '!' || str[i] == '#'
+		if (str[i] == '@' || str[i] == '!' || str[i] == '#'
 			|| str[i] == '%' || str[i] == '^' || str[i] == '&' || str[i] == '*')
 		{
 			return (0);
@@ -75,7 +75,10 @@ int	ft_export(t_env_som *env, t_cmd *cmd, t_data *data)
 			if (is_valid(cmd->argv[i]) && !already_exist(cmd->argv[i], env))
 				push_env(cmd->argv[i], env);
 			else
+			{
+				printf("bash: export: %s: not a valid identifier\n", cmd->argv[i]);
 				retour = 1;
+			}
 			i++;
 		}
 	}
