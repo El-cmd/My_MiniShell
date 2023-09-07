@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:56:32 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/07 12:53:07 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:58:34 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,41 +35,36 @@ void	change_pwd(t_env_som *env)
 }
 
 //mes a jours la varible oldpwd dans mon env
-void change_oldpwd(t_env_som *env, char *oldpwd)
+void	change_oldpwd(t_env_som *env, char *oldpwd)
 {
-    t_env *tmp;
-    char **t;
-    char *new_env;
+	t_env	*tmp;
+	char	**t;
+	char	*new_env;
 
-    tmp = env->begin;
-    while (tmp && ft_strncmp(tmp->name_split, "OLDPWD", 6))
-        tmp = tmp->next;
-
-    if (tmp)
-    {
-        free(tmp->name);
-        tmp->name = ft_strjoin("OLDPWD=", oldpwd);
-        t = ft_split(tmp->name, '=');
-
-        // Vérifiez que t[0] et t[1] sont valides avant de les utiliser
-        if (t && t[0] && t[1])
-        {
-            free(tmp->name_split);
-            tmp->name_split = ft_strdup(t[0]);
-            free(tmp->value_split);
-            tmp->value_split = ft_strdup(t[1]);
-        }
-        else
-        {
-            // Gérez l'erreur ici, par exemple, en affichant un message d'erreur ou en quittant proprement le programme.
-        }
-
-        free_tab(t);
-    }
-    else
-    {
-        new_env = ft_strjoin("OLDPWD=", oldpwd);
-        push_env(new_env, env);
-        free(new_env);
-    }
+	tmp = env->begin;
+	while (tmp && ft_strncmp(tmp->name_split, "OLDPWD", 6))
+		tmp = tmp->next;
+	if (tmp)
+	{
+		free(tmp->name);
+		tmp->name = ft_strjoin("OLDPWD=", oldpwd);
+		t = ft_split(tmp->name, '=');
+		if (t && t[0] && t[1])
+		{
+			free(tmp->name_split);
+			tmp->name_split = ft_strdup(t[0]);
+			free(tmp->value_split);
+			tmp->value_split = ft_strdup(t[1]);
+		}
+		else
+		{
+		}
+		free_tab(t);
+	}
+	else
+	{
+		new_env = ft_strjoin("OLDPWD=", oldpwd);
+		push_env(new_env, env);
+		free(new_env);
+	}
 }
