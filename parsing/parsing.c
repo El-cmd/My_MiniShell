@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 01:20:19 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:45:25 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,29 @@ char	*fait_le_cafe(char **test, t_data *data)
 	return (cmd);
 }
 
-void	do_meta(t_data *data)
+void do_meta(t_data *data)
 {
-	t_cmd	*cmd;
-	int		i;
-
-	i = 0;
-	cmd = data->cmd_index->begin;
-	while (cmd)
-	{
-		if (cmd->have_meta)
-		{
-			while (cmd->argv[i])
-			{
-				if (is_meta_second(cmd->argv[i]) \
-				&& !is_simple_quote(cmd->argv[i]))
-					do_meta_second(data, i, cmd);
-				i++;
-			}
-		}
-		i = 0;
-		cmd = cmd->next;
-	}
+	int i;
+    t_cmd *cmd = data->cmd_index->begin;
+    
+    while (cmd)
+    {
+        if (cmd->have_meta && cmd->argv)
+        {
+            i = 0;
+            while (cmd->argv[i])
+            {
+                if (cmd->argv[i] && is_meta_second(cmd->argv[i]) && !is_simple_quote(cmd->argv[i]))
+                {
+                    do_meta_second(data, i, cmd);
+                }
+                i++;
+            }
+        }
+        cmd = cmd->next;
+    }
 }
+
 
 void	cut_arg(t_data *data)
 {
