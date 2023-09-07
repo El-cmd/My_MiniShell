@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 01:01:45 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:12:04 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,50 @@ int	pass_n(t_cmd *cmd)
 	return (i);
 }
 
-void	ft_echo(t_cmd *cmd, t_data *data)
-{
-	int	i;
+#include <stdbool.h>
 
-	i = 1;
-	if (cmd->argv[i] && (!ft_strcmp(cmd->argv[0], "echo")))
-	{
-		if (!ft_strncmp(cmd->argv[i], "-n", 2))
-		{	
-			ft_echo_n(cmd, pass_n(cmd));
-			data->exit_return = 0;
-			return ;
-		}
-		while (cmd->argv[i])
-		{
-			ft_echo_text(cmd->argv[i]);
-			if (cmd->argv[i + 1])
-				write(1, " ", 1);
-			i++;
-		}
-	}
-	ft_putstr_fd("\n", 1);
-	data->exit_return = 0;
+#include <stdbool.h>
+
+#include <stdbool.h>
+
+void ft_echo(t_cmd *cmd, t_data *data)
+{
+    int i = 1;
+    bool suppressNewline = false;
+
+    if (cmd->argv[i] && (!ft_strcmp(cmd->argv[0], "echo")))
+    {
+        while (cmd->argv[i])
+        {
+            if (!ft_strncmp(cmd->argv[i], "-n", 2))
+            {
+                int j = 2;
+                bool validOption = true;
+                while (cmd->argv[i][j])
+                {
+                    if (cmd->argv[i][j] != 'n')
+                    {
+                        validOption = false;
+                        break;
+                    }
+                    j++;
+                }
+
+                if (validOption)
+                {
+                    suppressNewline = true;
+                    i++;
+                    continue;
+                }
+            }
+            ft_echo_text(cmd->argv[i]);
+
+            if (cmd->argv[i + 1])
+                write(1, " ", 1);
+            i++;
+        }
+    }
+    if (!suppressNewline)
+        ft_putchar_fd('\n', 1);
+    data->exit_return = 0;
 }
