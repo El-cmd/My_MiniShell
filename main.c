@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 12:18:07 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:52:04 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ int	main(int argc, char **argv, char **envp)
 
 	if (!isatty(STDIN_FILENO))
 		return (EXIT_FAILURE);
+	if (envp == NULL || *envp == NULL) 
+	{
+        fprintf(stderr, "L'environnement est vide ou nul. Le minishell ne peut pas être lancé.\n");
+        return (EXIT_FAILURE);
+    }
 	the_arg(argc, argv);
 	init_data(&data, envp);
 	eternal_loop(&data);
