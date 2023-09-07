@@ -1,2 +1,26 @@
-.nfs00000000053a824200000481
+# Fichiers d'exécution
+minishell
 
+# Fichiers de compilation
+*.o
+*.out
+
+# Fichiers générés par l'éditeur
+.vscode/
+.idea/
+
+# Fichiers de sauvegarde
+*~
+
+# Fichiers temporaires
+*.swp
+.DS_Store
+
+# Fichiers de configuration utilisateur
+config.h
+
+# Fichiers de logs
+*.log
+
+# Fichiers de sortie générés
+output.txt
