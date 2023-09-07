@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getPath.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:51 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/03 20:50:13 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:16:08 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ int	ft_valid_meta(char *str, t_data *data)
 		return (1);
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name_split, str)
-			&& strlen(str) == strlen(tmp->name_split))
-		{
+		if (!ft_strncmp(tmp->name_split, str, (ft_strlen(tmp->name_split))))
 			return (1);
-		}
 		tmp = tmp->next;
 	}
 	return (0);
@@ -69,7 +66,7 @@ char	*ft_getenv(char *str, t_data *data)
 		return (ft_itoa(data->exit_return));
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->name_split, str, ft_strlen(str)))
+		if (!ft_strncmp(tmp->name_split, str, ft_strlen(tmp->name_split)))
 			return (ft_strdup(tmp->value_split));
 		tmp = tmp->next;
 	}

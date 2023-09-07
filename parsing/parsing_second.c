@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_second.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:10:02 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/06 20:49:33 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:43:51 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	do_meta_second(t_data *data, int i, t_cmd *cmd)
 	free(cmd->argv[i]);
 	cmd->argv[i] = ft_strdup(tmp);
 	free(tmp);
-	test = ft_split(cmd->argv[i], '$');
+	test = ft_split_squote(cmd->argv[i], '$');
 	free(cmd->argv[i]);
 	cmd->argv[i] = fait_le_cafe(test, data);
 	free_tab(test);

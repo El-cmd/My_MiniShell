@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 14:45:25 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:36:53 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*fait_le_cafe(char **test, t_data *data)
 		fait_le_cafe_second(test, j);
 		if (!ft_valid_meta(test[j], data))
 		{
-			free(cmd);
-			cmd = NULL;
+			
+			cmd = ft_strdup(test[j]);
 		}
 		else
 		{
@@ -43,6 +43,7 @@ char	*fait_le_cafe(char **test, t_data *data)
 			cmd = new_cmd;
 			free(env_value);
 		}
+		//printf("cmd = %s\n", cmd);
 		j++;
 	}
 	return (cmd);
@@ -50,25 +51,25 @@ char	*fait_le_cafe(char **test, t_data *data)
 
 void do_meta(t_data *data)
 {
-	int i;
-    t_cmd *cmd = data->cmd_index->begin;
-    
-    while (cmd)
-    {
-        if (cmd->have_meta && cmd->argv)
-        {
-            i = 0;
-            while (cmd->argv[i])
-            {
-                if (cmd->argv[i] && is_meta_second(cmd->argv[i]) && !is_simple_quote(cmd->argv[i]))
-                {
-                    do_meta_second(data, i, cmd);
-                }
-                i++;
-            }
-        }
-        cmd = cmd->next;
-    }
+	t_cmd	*cmd;
+	int		i;
+
+	i = 0;
+	cmd = data->cmd_index->begin;
+	while (cmd)
+	{
+		if (cmd->have_meta)
+		{
+			while (cmd->argv[i])
+			{
+				if (is_meta_second(cmd->argv[i]))
+					do_meta_second(data, i, cmd);
+				i++;
+			}
+		}
+		i = 0;
+		cmd = cmd->next;
+	}
 }
 
 
