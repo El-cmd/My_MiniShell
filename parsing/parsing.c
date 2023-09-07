@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 18:36:53 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/07 18:50:55 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void do_meta(t_data *data)
 	cmd = data->cmd_index->begin;
 	while (cmd)
 	{
-		if (cmd->have_meta)
+		if (cmd->have_meta && cmd->argv)
 		{
 			while (cmd->argv[i])
 			{
