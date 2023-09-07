@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 20:20:18 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 04:04:26 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	eternal_loop(t_data *data)
 	str = NULL;
 	while (1)
 	{
-		signal_handler();
+		connect_signal();
 		g_global.pid = 0;
 		str = readline("MS#🤖: ");
 		if (!str)

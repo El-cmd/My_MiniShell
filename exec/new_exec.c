@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:26:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/03 18:11:14 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 04:16:17 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	child_process(t_data *data, t_cmd *cmd, int *fd)
 
 void	ft_launch_cmd(t_data *data, t_cmd *cmd, int *fd)
 {
-	reset_signal_handlers();
+	cmdbloc_signal();
 	g_global.pid = fork();
 	if (g_global.pid < 0)
 	{

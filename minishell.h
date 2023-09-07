@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 22:04:05 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 04:43:54 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,17 +287,13 @@ void			boucle_redir(t_data *data);
 
 /* SIGNAUX */
 /* signal_handler.c */
-void			newline(void);
-void			sigint_handler(int sig);
-void			sigint_heredoc_handler(void);
-void			reset_signal_handlers(void);
-void			sig_sbrt(int code);
-
-/* signal_exec.c */
-void			hd_on_sigint(int sig);
-void			sigquit_handler(int sig);
-void			signal_handler(void);
-void			sigint_handler_cmd(int sig);
+void			clear_signal(void);
+void			connect_signal(void);
+void			signal_handler(int sig);
+void			del_handler(int sig);
+void			exit_handler(int sig);
+void			cmdbloc_signal(void);
+void			here_doc_signal(void);
 
 /* UTILS */
 /* utils.c */

@@ -3,35 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 21:41:26 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/07 05:32:56 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	newline(void)
+void	connect_signal(void)
 {
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	abort_handler(int sig)
+{
+	(void)sig;
+	printf("Quit (core dumped)\n");
+}
+
+void cmdbloc_signal(void)
+{
+    signal(SIGINT, del_handler);
+    signal(SIGQUIT, abort_handler);
+}
+
+void	exit_handler(int sig)
+{
+	(void)sig;
+	return ;
+}
+
+void here_doc_signal(void)
+{
+    signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	signal_handler(int sig)
+{
+	(void)sig;
 	rl_on_new_line();
 	rl_replace_line("", 0);
+	printf("\n");
 	rl_redisplay();
 }
 
-void	signal_handler(void)
+void	del_handler(int sig)
 {
-	signal(SIGABRT, &sig_sbrt);
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGSEGV, sigquit_handler);
-	signal(SIGTSTP, SIG_IGN);
-}
-
-void	reset_signal_handlers(void)
-{
-	signal(SIGABRT, &sig_sbrt);
-	signal(SIGINT, sigint_handler_cmd);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTSTP, SIG_IGN);
+	(void)sig;
+	printf("\n");
 }

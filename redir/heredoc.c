@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:27:00 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/03 23:00:58 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 05:37:05 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_create_here_doc(char *delimiter)
 	int		fd;
 	char	*line;
 
-	sigint_heredoc_handler();
+	here_doc_signal();
 	fd = open_here_doc_file();
 	line = read_input_line();
 	while (line != NULL)
@@ -67,5 +67,5 @@ void	ft_create_here_doc(char *delimiter)
 		line = read_input_line();
 	}
 	close_and_cleanup(fd, NULL);
-	signal_handler();
+	connect_signal();
 }
