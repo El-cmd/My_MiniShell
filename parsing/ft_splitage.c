@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:48:10 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/06 22:23:45 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:58:55 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	splitage(char *line, t_cmd_index *cmd_index)
 	if (cmd_vide(line_second))
 	{
 		ft_putstr_fd("Error: commande vide\n", 2);
+		free_tab(line_second);
 		return (1);
 	}
 	while (line_second[i])

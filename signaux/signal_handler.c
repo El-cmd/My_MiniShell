@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 09:56:10 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:32:10 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	connect_signal(void)
 {
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }
 
 void	abort_handler(int sig)
