@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 12:25:44 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:49:22 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 				}
 				if (valid_opt)
 				{
-				sup_newline = true;
+					sup_newline = true;
 					i++;
 					continue ;
 				}

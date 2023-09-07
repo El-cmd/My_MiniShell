@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 21:54:01 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/07 12:26:10 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 23:23:44 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,9 @@ static int	numstring_special(char *s1, char c)
 		return (0);
 	while (s1[i] != '\0')
 	{
-		if (s1[i] == '"' || s1[i] == '\'')
-		{
-			i = parseur_quotes(s1, i + 1, s1[i]);
-			if (i == -1)
-			{
-				ft_putstr_fd("Pipe Error\n", 2);
-				return (-1);
-			}
-		}
+		i = p_q(s1, i);
+		if (i == -1)
+			return (-1);
 		if (s1[i] == c)
 			cles = 0;
 		else if (cles == 0)
@@ -58,7 +52,7 @@ int	parseur_quotes_special(char *str, int i, int c, int *length)
 	return (-1);
 }
 
-static int	numchar_special(char *s2, char c, int i)
+static int	ns(char *s2, char c, int i)
 {
 	int	lenght;
 
@@ -108,7 +102,7 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 		k = 0;
 		while (s[i] == c)
 			i++;
-		dst[j] = (char *)malloc(sizeof(char) * (numchar_special(s, c, i) + 3));
+		dst[j] = (char *)malloc(sizeof(char) * (ns(s, c, i) + 3));
 		if (dst[j] == NULL)
 			return (freee(dst, j));
 		while (s[i] != '\0' && s[i] != c)

@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:16:05 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 16:30:44 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/07 23:11:27 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parseur_quotes_special_s(char *str, int i, int c, int *length)
 	return (-1);
 }
 
-static int	numchar_special_s(char *s2, char c, int i)
+static int	nss(char *s2, char c, int i)
 {
 	int	lenght;
 
@@ -108,7 +108,7 @@ static char	**affect_special_s(char *s, char **dst, char c, int l)
 		k = 0;
 		while (s[i] == c)
 			i++;
-		dst[j] = (char *)malloc(sizeof(char) * (numchar_special_s(s, c, i) + 3));
+		dst[j] = (char *)malloc(sizeof(char) * (nss(s, c, i) + 3));
 		if (dst[j] == NULL)
 			return (freee(dst, j));
 		while (s[i] != '\0' && s[i] != c)

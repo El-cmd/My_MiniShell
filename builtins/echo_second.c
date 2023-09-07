@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_second.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 02:22:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/04 03:03:00 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 23:05:51 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,30 @@ int	echo_quote(t_cmd *cmd)
 		}
 	}
 	return (0);
+}
+
+void	echo_final(t_cmd *cmd, bool v, bool sup_newline, int *i)
+{
+	int	j;
+
+	if (!ft_strncmp(cmd->argv[*i], "-n", 2))
+	{
+		j = 2;
+		v = true;
+		while (cmd->argv[*i][j])
+		{
+			if (cmd->argv[*i][j] != 'n')
+			{
+				v = false;
+				break ;
+			}
+			j++;
+		}
+		if (v)
+		{
+			sup_newline = true;
+			*i = *i + 1;
+			//continue;
+		}
+	}
 }

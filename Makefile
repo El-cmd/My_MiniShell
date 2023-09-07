@@ -55,7 +55,8 @@ SRC = main.c \
       builtins/echo_second.c \
       parsing/cut_cmd_suite.c \
       ft_split_special/ft_split_special.c \
-      ft_split_special/ft_split_squote.c
+      ft_split_special/ft_split_squote.c \
+      ft_split_special/split_utils.c
 
 OBJS = $(SRC:.c=.o)
 
