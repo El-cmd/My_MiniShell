@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 04:04:26 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:14:06 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	eternal_loop(t_data *data)
 		str = readline("MS#🤖: ");
 		if (!str)
 		{
-			printf("CTRL-D\nExit\n");
+			printf("Exit\n");
 			free(str);
 			free_everything(data);
 			exit(0);
@@ -46,6 +46,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	if (!isatty(STDIN_FILENO))
+		return(EXIT_FAILURE);
 	the_arg(argc, argv);
 	init_data(&data, envp);
 	eternal_loop(&data);
