@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 10:14:06 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:18:25 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	eternal_loop(t_data *data)
 	char	*str;
 
 	str = NULL;
+	rl_outstream = stderr;
 	while (1)
 	{
 		connect_signal();
