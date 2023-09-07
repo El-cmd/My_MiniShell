@@ -6,23 +6,35 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:22 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 16:03:26 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 02:21:17 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // Gestion de l'exit
+#include <stdbool.h>
+#include <ctype.h>
+
 bool	is_numeric(const char *str)
 {
+	bool	has_digits;
+
+	if (str == NULL || *str == '\0')
+		return (false);
+	if (*str == '+' || *str == '-')
+		str++;
+	has_digits = false;
 	while (*str)
 	{
-		if (!isdigit(*str) && *str != '\"' && *str != '\'')
+		if (!isdigit(*str))
 			return (false);
+		has_digits = true;
 		str++;
 	}
-	return (true);
+	return (has_digits);
 }
+
 
 void	ft_exit(t_cmd *cmd, t_data *data)
 {
