@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 21:54:01 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/07 01:19:31 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:26:10 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 			}
 			dst[j][k++] = s[i++];
 		}
-		dst[j][k] = '\0'; 
+		dst[j][k] = '\0';
 		j++;
 	}
 	dst[j] = NULL;

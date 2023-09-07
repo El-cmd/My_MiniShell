@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 12:12:04 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:25:44 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,50 +77,46 @@ int	pass_n(t_cmd *cmd)
 	return (i);
 }
 
-#include <stdbool.h>
-
-#include <stdbool.h>
-
-#include <stdbool.h>
-
-void ft_echo(t_cmd *cmd, t_data *data)
+void	ft_echo(t_cmd *cmd, t_data *data)
 {
-    int i = 1;
-    bool suppressNewline = false;
+	int		i;
+	int		j;
+	bool	sup_newline;
+	bool	valid_opt;
 
-    if (cmd->argv[i] && (!ft_strcmp(cmd->argv[0], "echo")))
-    {
-        while (cmd->argv[i])
-        {
-            if (!ft_strncmp(cmd->argv[i], "-n", 2))
-            {
-                int j = 2;
-                bool validOption = true;
-                while (cmd->argv[i][j])
-                {
-                    if (cmd->argv[i][j] != 'n')
-                    {
-                        validOption = false;
-                        break;
-                    }
-                    j++;
-                }
-
-                if (validOption)
-                {
-                    suppressNewline = true;
-                    i++;
-                    continue;
-                }
-            }
-            ft_echo_text(cmd->argv[i]);
-
-            if (cmd->argv[i + 1])
-                write(1, " ", 1);
-            i++;
-        }
-    }
-    if (!suppressNewline)
-        ft_putchar_fd('\n', 1);
-    data->exit_return = 0;
+	i = 1;
+	sup_newline = false;
+	if (cmd->argv[i] && (!ft_strcmp(cmd->argv[0], "echo")))
+	{
+		while (cmd->argv[i])
+		{
+			if (!ft_strncmp(cmd->argv[i], "-n", 2))
+			{
+				j = 2;
+				valid_opt = true;
+				while (cmd->argv[i][j])
+				{
+					if (cmd->argv[i][j] != 'n')
+					{
+						valid_opt = false;
+						break ;
+					}
+					j++;
+				}
+				if (valid_opt)
+				{
+				sup_newline = true;
+					i++;
+					continue ;
+				}
+			}
+			ft_echo_text(cmd->argv[i]);
+			if (cmd->argv[i + 1])
+				write(1, " ", 1);
+			i++;
+		}
+	}
+	if (!sup_newline)
+		ft_putchar_fd('\n', 1);
+	data->exit_return = 0;
 }

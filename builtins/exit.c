@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:22 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 02:21:17 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:27:22 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	is_numeric(const char *str)
 	}
 	return (has_digits);
 }
-
 
 void	ft_exit(t_cmd *cmd, t_data *data)
 {

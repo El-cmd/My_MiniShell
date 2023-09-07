@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:28 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 10:48:58 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:30:00 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,33 @@ int	is_valid(char *str)
 	return (1);
 }
 
-int ft_export(t_env_som *env, t_cmd *cmd, t_data *data)
+int	ft_export(t_env_som *env, t_cmd *cmd, t_data *data)
 {
-    int i;
-    int retour;
+	int	i;
+	int	retour;
 
-    i = 1;
-    retour = 0;
-    if (!ft_export_whithout_arg(env, cmd, data))
-    {
-        while (cmd->argv[i])
-        {       
-            if (is_valid(cmd->argv[i]))
-            {
-                if (!already_exist(cmd->argv[i], env))
-                    push_env(cmd->argv[i], env);
-            }
-            else
-            {
-                retour = 1;
-                printf("bash: export: %s: not a valid identifier\n", cmd->argv[i]);
-            }
-            i++;
-        }
-    }
-    if (retour == 1)
-        data->exit_return = 1;
-    else
-        data->exit_return = 0;
-    return (0);
+	i = 1;
+	retour = 0;
+	if (!ft_export_whithout_arg(env, cmd, data))
+	{
+		while (cmd->argv[i])
+		{
+			if (is_valid(cmd->argv[i]))
+			{
+				if (!already_exist(cmd->argv[i], env))
+					push_env(cmd->argv[i], env);
+			}
+			else
+			{
+				retour = 1;
+				printf("bash: export: %s: not a valid identifier\n", cmd->argv[i]);
+			}
+			i++;
+		}
+	}
+	if (retour == 1)
+		data->exit_return = 1;
+	else
+		data->exit_return = 0;
+	return (0);
 }

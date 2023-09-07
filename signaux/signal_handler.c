@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 10:32:10 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:26:43 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	ft_signalhd(int sig)
 	}
 }
 
-void cmdbloc_signal(void)
+void	cmdbloc_signal(void)
 {
-    signal(SIGINT, del_handler);
-    signal(SIGQUIT, abort_handler);
+	signal(SIGINT, del_handler);
+	signal(SIGQUIT, abort_handler);
 }
 
 void	exit_handler(int sig)
@@ -54,9 +54,9 @@ void	exit_handler(int sig)
 	return ;
 }
 
-void here_doc_signal(void)
+void	here_doc_signal(void)
 {
-    signal(SIGINT, ft_signalhd);
+	signal(SIGINT, ft_signalhd);
 	signal(SIGQUIT, ft_signalhd);
 }
 

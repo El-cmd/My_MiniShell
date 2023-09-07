@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:53:19 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/07 10:45:52 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:19:26 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	update_variable(char **variableParts, t_env *list, char *str)
 		list = list->next;
 	}
 }
-
 
 // Fonction pour vérifier si une variable existe
 int	already_exist(char *str, t_env_som *env)

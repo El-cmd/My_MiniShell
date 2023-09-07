@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 09:22:28 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:29:29 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,28 @@ int	no_str(char *cmd)
 	return (0);
 }
 
-int others_char(char *cmd)
+int	others_char(char *cmd)
 {
-    int i = 0;
+	int	i;
 
-    while (cmd[i] == ' ' || cmd[i] == '\t' || cmd[i] == '>' || cmd[i] == '<'
-           || cmd[i] == ';' || cmd[i] == '&' || cmd[i] == '|' || cmd[i] == '('
-           || cmd[i] == ')')
-    {
-        if (cmd[i] == '|' && (cmd[i + 1] != '\0' && cmd[i + 1] != ' ' && cmd[i + 1] != '\t'))
-        {
-            ft_putstr_fd(ERROR_TOKEN, 2);
-            return (1);
-        }
-        i++;
-    }
-    if (cmd[i] == '\0')
-    {
-        ft_putstr_fd(ERROR_TOKEN, 2);
-        return (1);
-    }
-
-    return (0);
+	i = 0;
+	while (cmd[i] == ' ' || cmd[i] == '\t' || cmd[i] == '>'
+		|| cmd[i] == '<' || cmd[i] == ';' || cmd[i] == '&'
+		|| cmd[i] == '|' || cmd[i] == '(' || cmd[i] == ')')
+	{
+		if (cmd[i] == '|' && (cmd[i + 1] != '\0' && cmd[i + 1] != ' ' && cmd[i + 1] != '\t'))
+		{
+			ft_putstr_fd(ERROR_TOKEN, 2);
+			return (1);
+		}
+		i++;
+	}
+	if (cmd[i] == '\0')
+	{
+		ft_putstr_fd(ERROR_TOKEN, 2);
+		return (1);
+	}
+	return (0);
 }
 
 void	get_file(char *str, int *i)
