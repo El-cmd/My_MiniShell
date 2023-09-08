@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 21:54:01 by eldoctor          #+#    #+#             */
-/*   Updated: 2023/09/08 17:36:35 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 18:01:34 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,28 @@ static int	ns(char *s2, char c, int i)
 	}
 	return (lenght);
 }
+//
+//int	special_quotes(char *str, int i, int c, char *s2, int *k)
+//{
+//	int	u;
+//
+//	u = 1;
+//	while (str[i])
+//	{
+//		if (u == 1)
+//		{
+//			u = 0;
+//			s2[*k] = str[i - 1];
+//			*k = *k + 1;
+//		}
+//		if (str[i] == c)
+//			return (i);
+//		s2[*k] = str[i];
+//		*k = *k + 1;
+//		i++;
+//	}
+//	return (-1);
+//}
 
 static char	**affect_special(char *s, char **dst, char c, int l)
 {
@@ -86,7 +108,7 @@ static char	**affect_special(char *s, char **dst, char c, int l)
 		while (s[i] != '\0' && s[i] != c)
 		{
 			if (s[i] == '\'' || s[i] == '\"')
-				split_norm(s, *dst, &k, &i);
+				split_norm(s, dst[j], &k, &i);
 			dst[j][k++] = s[i++];
 		}
 		dst[j][k] = '\0';

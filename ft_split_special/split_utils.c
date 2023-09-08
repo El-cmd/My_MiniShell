@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 23:14:20 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 17:38:50 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 18:02:32 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 int	p_q(char *s1, int i)
 {
 	if (s1[i] == '"' || s1[i] == '\'')
+	{
+		i = parseur_quotes(s1, i + 1, s1[i]);
+		if (i == -1)
+		{
+			ft_putstr_fd("Pipe Error\n", 2);
+			return (-1);
+		}
+	}
+	return (i);
+}
+
+int	p_qq(char *s1, int i)
+{
+	if (s1[i] == '\'')
 	{
 		i = parseur_quotes(s1, i + 1, s1[i]);
 		if (i == -1)

@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 17:35:29 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 17:51:16 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,9 +337,11 @@ void			exit_handler(int sig);
 void			signal_handler(int sig);
 void			del_handler(int sig);
 int				p_q(char *s1, int i);
+int				p_qq(char *s1, int i);
 int				special_quotes_d(char *str, int i, char *s2, int *k);
 int				special_quotes_ss(char *str, int i, char *s2, int *k);
 void			split_norm(char *s, char *dst, int *k, int *i);
+void 			split_norm_special(char *s, char *dst, int *k, int *i);
 
 extern t_global	g_global;
 
