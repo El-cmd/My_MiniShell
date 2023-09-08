@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 13:10:29 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 13:53:24 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	pushback_redir(t_redirindex *i, int type, int index, char *str)
 int	look_if_redir(char *line)
 {
 	int	i;
-	int q;
+	int	q;
 
 	i = 0;
 	q = 0;

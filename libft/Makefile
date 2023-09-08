@@ -13,6 +13,7 @@ _WHITE=\033[0;37m
 SRCS =	ft_isalnum.c \
 	ft_isprint.c \
       	ft_isascii.c \
+		ft_strcpy.c \
       	ft_strlen.c \
       	ft_isalpha.c \
       	ft_tolower.c \

@@ -6,13 +6,13 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:37 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 13:47:41 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 12:41:06 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	malloc_all(t_data *data)
+void	malloc_all(t_data *data)
 {
 	is_meta(data);
 	redir_or_not(data->cmd_index);
@@ -22,7 +22,6 @@ int	malloc_all(t_data *data)
 	cut_arg(data);
 	is_built(data);
 	boucle_redir(data);
-	return (1);
 }
 
 void	ft_open(t_redir *red)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 13:38:10 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 11:54:32 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ void			pushback_redir(t_redirindex *i, int type, int index, char *str);
 int				look_if_redir(char *line);
 
 /* redir_pars.c */
-int				malloc_all(t_data *data);
+void			malloc_all(t_data *data);
 void			begin_end_file(int i, t_redir *red, char *str);
 void			redir_fd(t_cmd *cmd);
 void			boucle_redir(t_data *data);
@@ -331,7 +331,6 @@ void			exit_handler(int sig);
 void			signal_handler(int sig);
 void			del_handler(int sig);
 int 			p_q(char *s1, int i);
-int				cmd_valid(t_data *data);
 
 extern t_global	g_global;
 

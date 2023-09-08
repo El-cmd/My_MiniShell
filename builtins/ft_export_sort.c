@@ -6,22 +6,34 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:51:34 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/08 12:26:26 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:00:38 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // Vérifie si une chaîne de caractères existe déjà dans la liste
-void	remplace(t_env *tmp2, char **tmp, char *str)
+void remplace(t_env *tmp2, char **tmp, char *str)
 {
-	free(tmp2->name_split);
-	free(tmp2->value_split);
-	free(tmp2->name);
-	tmp2->name_split = ft_strdup(tmp[0]);
-	if (tmp[1])
-		tmp2->value_split = ft_strdup(tmp[1]);
-	tmp2->name = ft_strdup(str);
+    if (tmp2->name_split)
+    {
+        free(tmp2->name_split);
+        tmp2->name_split = NULL;
+    }
+    if (tmp2->value_split)
+    {
+        free(tmp2->value_split);
+        tmp2->value_split = NULL;
+    }
+    if (tmp2->name)
+    {
+        free(tmp2->name);
+        tmp2->name = NULL;
+    }
+    tmp2->name_split = ft_strdup(tmp[0]);
+    if (tmp[1])
+        tmp2->value_split = ft_strdup(tmp[1]);
+    tmp2->name = ft_strdup(str);
 }
 
 void	free_env_names(char **env_names, int env_count)
@@ -97,34 +109,42 @@ void	alloc_env_names(char ***env_names, int env_count)
 }
 
 // Function to extract name and value from an environment string
-void	extract_name_and_value(const char *env_str, char **name, char **value)
+void extract_name_and_value(const char *env_str, char **name, char **value)
 {
-	char	*equal_sign;
+    char *equal_sign;
 
-	equal_sign = ft_strchr(env_str, '=');
-	if (!equal_sign)
-	{
-		*name = ft_strdup(env_str);
-		*value = ft_strdup("");
-	}
-	else
-	{
-		*name = (char *)malloc((equal_sign - env_str + 1) * sizeof(char));
-		if (!*name)
-		{
-			printf("Malloc Error\n");
-			exit(1);
-		}
-		ft_strncpy(*name, env_str, equal_sign - env_str);
-		(*name)[equal_sign - env_str] = '\0';
-		*value = ft_strdup(equal_sign + 1);
-		if (!*value)
-		{
-			printf("Malloc Error\n");
-			exit(1);
-		}
-	}
+    equal_sign = ft_strchr(env_str, '=');
+    if (!equal_sign)
+    {
+        *name = ft_strdup(env_str);
+        *value = (char *)malloc(1 * sizeof(char)); // Alloue un espace pour une chaîne vide.
+        if (!*value)
+        {
+            printf("Malloc Error\n");
+            exit(1);
+        }
+        (*value)[0] = '\0'; // Place le caractère nul pour créer une chaîne vide.
+    }
+    else
+    {
+        *name = (char *)malloc((equal_sign - env_str + 1) * sizeof(char));
+        if (!*name)
+        {
+            printf("Malloc Error\n");
+            exit(1);
+        }
+        ft_strncpy(*name, env_str, equal_sign - env_str);
+        (*name)[equal_sign - env_str] = '\0';
+        *value = (char *)malloc((ft_strlen(equal_sign + 1) + 1) * sizeof(char));
+        if (!*value)
+        {
+            printf("Malloc Error\n");
+            exit(1);
+        }
+        ft_strcpy(*value, equal_sign + 1);
+    }
 }
+
 
 void	alloc_fill(t_env_som *env, char ***env_names, int *env_count)
 {

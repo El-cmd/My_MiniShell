@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/08 10:55:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 13:42:40 by nspeciel         ###   ########.fr       */
+/*   Created: 2023/09/08 13:47:16 by nspeciel          #+#    #+#             */
+/*   Updated: 2023/09/08 13:51:49 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../minishell.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strcpy(char *dest, char *src)
 {
-	char	*tab;
-	size_t	n;
-	int		error;
+	int	i;
 
-	n = 0;
-	error = ft_strlen(s);
-	if (error == 0)
-		return ('\0');
-	tab = malloc(sizeof (char) * ft_strlen(s) + 1);
-	malloc_error(tab);
-	while (s[n])
+	i = 0;
+	while (src[i] != '\0')
 	{
-		tab[n] = s[n];
-		n++;
+		dest[i] = src[i];
+		i++;
 	}
-	tab[n] = 0;
-	return (tab);
+	dest[i] = '\0';
+	return (dest);
 }

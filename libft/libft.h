@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:35:47 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 12:14:39 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:48:32 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstadd_back(t_list **alst, t_list *new);
+char	*ft_strcpy(char *dest, char *src);
 t_list	*ft_lstlast(t_list *lst);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(void *content);
