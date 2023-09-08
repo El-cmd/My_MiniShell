@@ -6,16 +6,13 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:22 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 12:27:22 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:08:49 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // Gestion de l'exit
-#include <stdbool.h>
-#include <ctype.h>
-
 bool	is_numeric(const char *str)
 {
 	bool	has_digits;
