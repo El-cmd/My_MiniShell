@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 15:11:38 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 15:43:06 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,7 @@ void			print_title(void);
 int				is_redir_or_cmd(char c);
 
 //Test
+int 			plus_didee(char *equal_sign, char **name, const char *env_str, char **value);
 char			*format_env_name(const char *name, const char *value);
 void			add_env(t_env_som *env, const char *name);
 t_env_som		*create_env_som(void);

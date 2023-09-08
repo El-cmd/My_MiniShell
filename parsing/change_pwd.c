@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_pwd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:56:32 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/07 12:58:34 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:57:17 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	change_pwd(t_env_som *env)
 	free(tmppwd);
 }
 
+void	change(t_env *tmp, char **t)
+{
+	free(tmp->name_split);
+	tmp->name_split = ft_strdup(t[0]);
+	free(tmp->value_split);
+	tmp->value_split = ft_strdup(t[1]);
+}
+
 //mes a jours la varible oldpwd dans mon env
 void	change_oldpwd(t_env_som *env, char *oldpwd)
 {
@@ -50,15 +58,7 @@ void	change_oldpwd(t_env_som *env, char *oldpwd)
 		tmp->name = ft_strjoin("OLDPWD=", oldpwd);
 		t = ft_split(tmp->name, '=');
 		if (t && t[0] && t[1])
-		{
-			free(tmp->name_split);
-			tmp->name_split = ft_strdup(t[0]);
-			free(tmp->value_split);
-			tmp->value_split = ft_strdup(t[1]);
-		}
-		else
-		{
-		}
+			change(tmp, t);
 		free_tab(t);
 	}
 	else
