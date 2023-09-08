@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 13:01:58 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 13:10:29 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,25 @@ void	pushback_redir(t_redirindex *i, int type, int index, char *str)
 int	look_if_redir(char *line)
 {
 	int	i;
+	int q;
 
 	i = 0;
+	q = 0;
 	while (line[i] != '\0')
 	{
 		if (line[i] == '"' || line[i] == '\'')
 		{
 			i = parseur_quotes(line, i + 1, line[i]);
-			if (i == -1)
+			if (i == -1 && q == 1)
 				return (1);
+			else if (i == -1 && q == 0)
+				return (0);
 		}
 		else if (line[i] == '<' || line[i] == '>')
-		{
-			if (line[i + 1] == '\0')
-			{
-				//printf("le probleme est ici\n");
-				return (0);
-			}
-			i++;
-		}
+			q = 1;
 		i++;
 	}
-	return (1);
+	if (q == 1)
+		return (1);
+	return (0);
 }
