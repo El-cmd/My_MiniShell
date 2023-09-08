@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:26:06 by vloth             #+#    #+#             */
-/*   Updated: 2023/08/24 17:30:14 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:36:36 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@ void	the_arg(int ac, char **av)
 }
 
 // Gestion des erreur de malloc
-int	malloc_error(char *str)
-{
-	if (!str)
-	{
-		ft_putendl_fd("Malloc failure", 2);
-		exit(EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
 
 //fork error
 pid_t	fork_error(void)

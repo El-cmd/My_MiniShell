@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:35:47 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 13:48:32 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:39:58 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ char	**ft_split(char const *s, char c);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_atoi_exit(const char *nptr);
 char	**freee(char **dst, int j);
+int		malloc_error(char *str);
 
 #endif

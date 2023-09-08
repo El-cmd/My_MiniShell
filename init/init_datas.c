@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_datas.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:25:14 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 10:13:22 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:42:24 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_data(t_data *data, char **en)
 	data->exit_return = 0;
 	data->envp = en;
 	data->env = init_envp(en);
-	g_global.pid = 42;
+	g_pid = 42;
 	data->cmd_index = init_cmd();
 	data->path_exec = ft_getpath(data->env);
 }

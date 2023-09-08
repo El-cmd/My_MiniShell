@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 12:07:05 by vloth             #+#    #+#             */
-/*   Updated: 2021/06/16 17:33:07 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 18:36:29 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../minishell.h"
+
+int	malloc_error(char *str)
+{
+	if (!str)
+	{
+		ft_putendl_fd("Malloc failure", 2);
+		exit(EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

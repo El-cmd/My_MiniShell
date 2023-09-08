@@ -6,13 +6,13 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 14:50:26 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 18:42:12 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_global	g_global;
+pid_t	g_pid;
 
 void	eternal_loop(t_data *data)
 {
@@ -23,7 +23,7 @@ void	eternal_loop(t_data *data)
 	while (1)
 	{
 		connect_signal();
-		g_global.pid = 0;
+		g_pid = 0;
 		str = readline("MS#🤖: ");
 		if (!str)
 		{

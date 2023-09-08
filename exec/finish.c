@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:14:50 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/03 15:18:55 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 18:43:12 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	exit_process(t_data *data, int *fd)
 void	wait_all_and_finish(t_cmd *cmds, t_data *data)
 {
 	int	status;
-	int	pid;
+	int	pidtmp;
 
 	while (cmds)
 	{
-		pid = waitpid(0, &status, 0);
-		if (pid == g_global.pid)
+		pidtmp = waitpid(0, &status, 0);
+		if (pidtmp == g_pid)
 		{
 			if (WIFEXITED(status))
 				data->exit_return = WEXITSTATUS(status);
