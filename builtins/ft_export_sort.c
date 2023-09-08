@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:51:34 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/08 15:38:32 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 17:07:50 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	extract_name_and_value(const char *env_str, char **name, char **value)
 	char	*equal_sign;
 
 	equal_sign = ft_strchr(env_str, '=');
-	if (plus_didee(equal_sign, name, env_str, value))
+	if (sign(equal_sign, name, env_str, value))
 	{
 		*name = (char *)malloc((equal_sign - env_str + 1) * sizeof(char));
 		if (!*name)

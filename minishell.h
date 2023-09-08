@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 15:43:06 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 17:06:52 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ void			pushback_redir(t_redirindex *i, int type, int index, char *str);
 int				look_if_redir(char *line);
 
 /* redir_pars.c */
-int			malloc_all(t_data *data);
+int				malloc_all(t_data *data);
 void			begin_end_file(int i, t_redir *red, char *str);
 void			redir_fd(t_cmd *cmd);
 void			boucle_redir(t_data *data);
@@ -307,7 +307,7 @@ void			print_title(void);
 int				is_redir_or_cmd(char c);
 
 //Test
-int 			plus_didee(char *equal_sign, char **name, const char *env_str, char **value);
+int				sign(char *equal, char **name, const char *env_str, char **val);
 char			*format_env_name(const char *name, const char *value);
 void			add_env(t_env_som *env, const char *name);
 t_env_som		*create_env_som(void);
@@ -336,7 +336,7 @@ char			**ft_split_squote(char *s, char c);
 void			exit_handler(int sig);
 void			signal_handler(int sig);
 void			del_handler(int sig);
-int 			p_q(char *s1, int i);
+int				p_q(char *s1, int i);
 
 extern t_global	g_global;
 

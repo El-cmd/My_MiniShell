@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_exist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:53:19 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/08 15:42:48 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 17:07:35 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ int	already_exist(char *str, t_env_som *env)
 	return (0);
 }
 
-int	plus_didee(char *equal_sign, char **name, const char *env_str, char **value)
+int	sign(char *equal, char **name, const char *env_str, char **val)
 {
-	if (!equal_sign)
+	if (!equal)
 	{
 		*name = ft_strdup(env_str);
-		*value = (char *)malloc(1 * sizeof(char));
-		if (!*value)
+		*val = (char *)malloc(1 * sizeof(char));
+		if (!*val)
 		{
 			printf("Malloc Error\n");
 			exit(1);
 		}
-		(*value)[0] = '\0';
+		(*val)[0] = '\0';
 		return (0);
 	}
 	return (1);

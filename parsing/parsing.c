@@ -3,21 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 16:17:14 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 17:04:36 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*combine(const char *env_var, const char *prev_cmd, t_data *data)
+{
+	char	*env_var_copy;
+	char	*env_value;
+	char	*new_cmd;
+
+	env_var_copy = strdup(env_var);
+	env_value = ft_getenv(env_var_copy, data);
+	new_cmd = NULL;
+	if (prev_cmd)
+	{
+		new_cmd = ft_strjoin(prev_cmd, env_value);
+	}
+	else
+	{
+		new_cmd = ft_strdup(env_value);
+	}
+	free(env_var_copy);
+	free(env_value);
+	return (new_cmd);
+}
 
 char	*fait_le_cafe(char **test, t_data *data)
 {
 	int		j;
 	char	*cmd;
 	char	*env_value;
-	char	*new_cmd;
 
 	j = 0;
 	cmd = NULL;
@@ -31,17 +52,9 @@ char	*fait_le_cafe(char **test, t_data *data)
 		}
 		else
 		{
-			env_value = ft_getenv(test[j], data);
-			new_cmd = NULL;
-			if (cmd)
-			{
-				new_cmd = ft_strjoin(cmd, env_value);
-				free(cmd);
-			}
-			else
-				new_cmd = ft_strdup(env_value);
-			cmd = new_cmd;
-			free(env_value);
+			env_value = combine(test[j], cmd, data);
+			free(cmd);
+			cmd = env_value;
 		}
 		j++;
 	}
