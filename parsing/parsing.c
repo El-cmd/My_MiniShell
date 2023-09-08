@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:06:02 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 20:21:15 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 16:17:14 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ char	*fait_le_cafe(char **test, t_data *data)
 				free(cmd);
 			}
 			else
-			{
 				new_cmd = ft_strdup(env_value);
-			}
 			cmd = new_cmd;
 			free(env_value);
 		}
