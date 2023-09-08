@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:45 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 20:49:11 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 13:01:58 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,18 @@ int	look_if_redir(char *line)
 		{
 			i = parseur_quotes(line, i + 1, line[i]);
 			if (i == -1)
+				return (1);
+		}
+		else if (line[i] == '<' || line[i] == '>')
+		{
+			if (line[i + 1] == '\0')
+			{
+				//printf("le probleme est ici\n");
 				return (0);
-		}
-		else if (line[i] == '<')
-		{
-			if ((line[i + 1] == '<' || line[i + 1] == '\0'))
-				return (1);
-			i++;
-		}
-		else if (line[i] == '>')
-		{
-			if (line[i + 1] == '>' || line[i + 1] == '\0')
-				return (1);
+			}
 			i++;
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }

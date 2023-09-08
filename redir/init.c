@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:42 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 20:50:22 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 12:58:54 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	redir_or_not(t_cmd_index *index)
 	tmp = index->begin;
 	while (tmp)
 	{
-		if (!look_if_redir(tmp->cmd))
+		if (look_if_redir(tmp->cmd))
 			tmp->redir = true;
 		else
 			tmp->redir = false;
