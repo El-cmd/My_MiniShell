@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 02:22:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 23:05:51 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 15:03:19 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	echo_final(t_cmd *cmd, bool v, bool sup_newline, int *i)
 		{
 			sup_newline = true;
 			*i = *i + 1;
-			//continue;
 		}
 	}
 }

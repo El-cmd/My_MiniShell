@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:23:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/07 20:25:14 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 14:50:26 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	eternal_loop(t_data *data)
 		add_history(str);
 		if (!split_or_not(str, data->cmd_index))
 		{
-			malloc_all(data);
-			exec(data);
+			if (!malloc_all(data))
+				exec(data);
 		}
 		else
 			free_list_second(data);

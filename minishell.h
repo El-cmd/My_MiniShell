@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:10 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 11:54:32 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:11:38 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ void			pushback_redir(t_redirindex *i, int type, int index, char *str);
 int				look_if_redir(char *line);
 
 /* redir_pars.c */
-void			malloc_all(t_data *data);
+int			malloc_all(t_data *data);
 void			begin_end_file(int i, t_redir *red, char *str);
 void			redir_fd(t_cmd *cmd);
 void			boucle_redir(t_data *data);
@@ -307,6 +307,11 @@ void			print_title(void);
 int				is_redir_or_cmd(char c);
 
 //Test
+char			*format_env_name(const char *name, const char *value);
+void			add_env(t_env_som *env, const char *name);
+t_env_som		*create_env_som(void);
+void			remplace(t_env *tmp2, char **tmp, char *str);
+void			free_env_names(char **env_names, int env_count);
 void			wait_all_and_finish(t_cmd *cmds, t_data *data);
 void			exit_process(t_data *data, int *fd);
 void			parent_process(t_cmd *cmd, int *fd);
