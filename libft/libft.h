@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:35:47 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 00:05:50 by eldoctor         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:14:39 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 char	*ft_itoa(int n);
+char	*ft_strstr(const char *haystack, const char *needle);
+char	*ft_strncpy(char *dest, const char *src, unsigned int n);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));

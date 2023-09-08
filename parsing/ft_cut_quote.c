@@ -6,7 +6,7 @@
 /*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:57:36 by nspeciel          #+#    #+#             */
-/*   Updated: 2023/09/04 02:00:41 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:27:44 by nspeciel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	process_quotes(char **arg)
 	int		inquotes;
 	char	*tmp;
 
-	tmp = strdup(*arg);
-	len = strlen(tmp);
+	tmp = ft_strdup(*arg);
+	len = ft_strlen(tmp);
 	i = 0;
 	j = 0;
 	inquotes = 0;
@@ -37,7 +37,7 @@ void	process_quotes(char **arg)
 	}
 	tmp[j] = '\0';
 	free(*arg);
-	*arg = strdup(tmp);
+	*arg = ft_strdup(tmp);
 	free(tmp);
 }
 

@@ -18,6 +18,8 @@ SRCS =	ft_isalnum.c \
       	ft_tolower.c \
       	ft_toupper.c \
       	ft_strlcat.c \
+		ft_strncpy.c \
+		ft_strstr.c \
       	ft_isdigit.c \
       	ft_bzero.c \
       	ft_memset.c \
