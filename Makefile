@@ -57,7 +57,8 @@ SRC = main.c \
       ft_split_special/ft_split_special.c \
       ft_split_special/ft_split_squote.c \
       ft_split_special/split_utils.c \
-      builtins/export_sort_second.c
+      builtins/export_sort_second.c \
+      ft_split_special/split_u.c
 
 OBJS = $(SRC:.c=.o)
 

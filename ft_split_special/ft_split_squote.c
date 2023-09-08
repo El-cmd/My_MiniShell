@@ -6,7 +6,7 @@
 /*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:16:05 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 17:54:07 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/08 18:19:51 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,8 @@ static int	numstring_special_s(char *s1, char c)
 	while (s1[i] != '\0')
 	{
 		if (s1[i] == '\'')
-		{
-			i = parseur_quotes(s1, i + 1, s1[i]);
-			if (i == -1)
-			{
-				ft_putstr_fd("Pipe Error\n", 2);
+			if (pqq(s1, &i) == -1)
 				return (-1);
-			}
-		}
 		if (s1[i] == c)
 			cles = 0;
 		else if (cles == 0)
@@ -73,28 +67,6 @@ static int	nss(char *s2, char c, int i)
 	return (lenght);
 }
 
-int	special_quote_s(char *str, int i, int c, char *s2, int *k)
-{
-	int	u;
-
-	u = 1;
-	while (str[i])
-	{
-		if (u == 1)
-		{
-			u = 0;
-			s2[*k] = str[i - 1];
-			*k = *k + 1;
-		}
-		if (str[i] == c)
-			return (i);
-		s2[*k] = str[i];
-		*k = *k + 1;
-		i++;
-	}
-	return (-1);
-}
-
 static char	**affect_special_s(char *s, char **dst, char c, int l)
 {
 	int	i;
@@ -114,10 +86,7 @@ static char	**affect_special_s(char *s, char **dst, char c, int l)
 		while (s[i] != '\0' && s[i] != c)
 		{
 			if (s[i] == '\'')
-			{
-				dst[j][k] = s[i];
-				i = special_quote_s(s, i + 1, s[i], dst[j], &k);
-			}
+				split_norm_second(s, dst[j], &k, &i);
 			dst[j][k++] = s[i++];
 		}
 		dst[j][k] = '\0';
