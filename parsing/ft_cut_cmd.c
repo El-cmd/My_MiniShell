@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cut_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeciel <nspeciel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:24:57 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/06 22:16:38 by nspeciel         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:59:45 by vloth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ int	check_separators(char *line)
 		}
 		if (line[i] == '|')
 		{
-			if (line[i + 1] == '|')
-				return (-1);
-			if (line[i + 1] == '\0')
+			if (line[i + 1] == '|' || line[i + 1] == '\0')
 				return (-1);
 			j++;
 		}
