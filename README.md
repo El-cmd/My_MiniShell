@@ -10,4 +10,4 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 
 ## ⚙️ Instalation:
 - cloner le repo:
-  'git@github.com:El-cmd/My_MiniShell.git'
+  `git@github.com:El-cmd/My_MiniShell.git`
