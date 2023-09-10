@@ -4,6 +4,6 @@ L’objectif de ce projet est de créer un shell minimaliste.
 Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 
 ## Introduction:
->Instalation;
->Fonctionnalité;
->Sources; 
+- [Instalation]
+- [Fonctionnalité]
+- [Sources]
