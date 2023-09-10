@@ -4,6 +4,10 @@ L’objectif de ce projet est de créer un shell minimaliste.
 Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 
 ## Introduction:
-- Instalation
-- Fonctionnalités
-- Sources
+- ⚙️ Instalation
+- 💻 Fonctionnalités
+- 📜 Sources
+
+## ⚙️ Instalation:
+- cloner le repo:
+  'git@github.com:El-cmd/My_MiniShell.git'
