@@ -8,6 +8,6 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - 💻 Fonctionnalités
 - 📜 Sources
 
-## ⚙️ Instalation:
-- cloner le repo:
-  `git@github.com:El-cmd/My_MiniShell.git`
+  ## ⚙️ Instalation:
+  - cloner le repo:
+        `git@github.com:El-cmd/My_MiniShell.git`
