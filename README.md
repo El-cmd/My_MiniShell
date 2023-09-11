@@ -9,14 +9,15 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - 📜 Sources
 
 ## ⚙️ Instalation:
-- cloner le repo: `git@github.com:El-cmd/My_MiniShell.git`
+- cloner le repo: `git clone git@github.com:El-cmd/My_MiniShell.git`
 - Asurez-vous d'avoir la bibliotheque `readline` d'inclus sur votre apapreil ou intallez la. ⚠️ Si vous etes sur IOS abandonner cette idee. Elle n'est ni inclus ni installable sur cet OS.
 - Compiler le: `make`
 - Et enfin lancez le: `./minishell`
 
 ## 💻 Fonctionnalités:
 <a href="https://zupimages.net/viewer.php?id=23/37/f6hq.png"><img src="https://zupimages.net/up/23/37/f6hq.png" alt="" /></a>
-1. Gere les signaux: `Ctrl-C`, `Ctrl-D` et `Ctrl-\`
+1. Gere les signaux: `Ctrl-C`, `Ctrl-D` et `Ctrl-\`:
 - `Ctrl-C` = affiche un nouveau prompt sur une nouvelle ligne.
 - `Ctrl-D` = quitte le shell.
 - `Ctrl-\` = ne fait rien.
+2. Gere les builtins: `echo`, `pwd`, `cd`, `env`, `export`, `unset`, `exit`:
