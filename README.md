@@ -21,3 +21,10 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - `Ctrl-D` = quitte le shell.
 - `Ctrl-\` = ne fait rien.
 2. Gere les builtins: `echo`, `pwd`, `cd`, `env`, `export`, `unset`, `exit`:
+- `echo` = avec l’option -n et sans.
+- `pwd` = Affiche le repertoire courant.
+- `cd` = change de repertoire.
+- `env` = Affiche les variables d'environnements.
+- `export` = Ajoute une nouvelle variable d'environnement, sans arguments: affiche toute les variables dans l'ordre alpha-numerique.
+- `unset` = Supprime une variable d'environnement.
+- `exit` = Quitte le programme avec un retour 0 par defaut, ou un retour de l'argument donné, exemple `exit 5` retourne 5.
