@@ -17,6 +17,6 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 ## 💻 Fonctionnalités:
 <a href="https://zupimages.net/viewer.php?id=23/37/f6hq.png"><img src="https://zupimages.net/up/23/37/f6hq.png" alt="" /></a>
 1.Gere les signaux: `Ctrl-C`, `Ctrl-D` et `Ctrl-\`
-                   - `Ctrl-C` = affiche un nouveau prompt sur une nouvelle ligne.
-                   - `Ctrl-D` = quitte le shell.
-                   - `Ctrl-\` = ne fait rien.
+                   -  `Ctrl-C` = affiche un nouveau prompt sur une nouvelle ligne.
+                   -  `Ctrl-D` = quitte le shell.
+                   -  `Ctrl-\` = ne fait rien.
