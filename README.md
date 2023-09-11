@@ -20,6 +20,7 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - `Ctrl-C` = affiche un nouveau prompt sur une nouvelle ligne.
 - `Ctrl-D` = quitte le shell.
 - `Ctrl-\` = ne fait rien.
+<br>
 2. Gere les builtins: `echo`, `pwd`, `cd`, `env`, `export`, `unset`, `exit`:
 - `echo` = avec l’option -n et sans.
 - `pwd` = Affiche le repertoire courant.
