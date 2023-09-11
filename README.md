@@ -15,4 +15,4 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - Et enfin lancez le: `./minishell`
 
 ## 💻 Fonctionnalités:
-[url=https://zupimages.net/viewer.php?id=23/37/f6hq.png][img]https://zupimages.net/up/23/37/f6hq.png[/img][/url]
+<a href="https://zupimages.net/viewer.php?id=23/37/f6hq.png"><img src="https://zupimages.net/up/23/37/f6hq.png" alt="" /></a>
