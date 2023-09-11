@@ -29,3 +29,7 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - `export` = Ajoute une nouvelle variable d'environnement, sans arguments: affiche toute les variables dans l'ordre alpha-numerique.
 - `unset` = Supprime une variable d'environnement.
 - `exit` = Quitte le programme avec un retour 0 par defaut, ou un retour de l'argument donné, exemple `exit 5` retourne 5.
+
+3. Gere les pipes `|`.
+
+4. Gere les redirections `>`, `<`, `>>` et `<<`.
