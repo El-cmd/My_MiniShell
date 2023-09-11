@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_second.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vloth <vloth@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eldoctor <eldoctor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 02:22:30 by vloth             #+#    #+#             */
-/*   Updated: 2023/09/08 15:03:19 by vloth            ###   ########.fr       */
+/*   Updated: 2023/09/11 11:43:35 by eldoctor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	echo_final(t_cmd *cmd, bool v, bool sup_newline, int *i)
 	{
 		j = 2;
 		v = true;
+		(void)sup_newline;
 		while (cmd->argv[*i][j])
 		{
 			if (cmd->argv[*i][j] != 'n')
