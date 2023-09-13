@@ -41,3 +41,6 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
  ## 📜 Sources
 
 -  Toute la playlist de Code Vault sur les proccesus, et les pipe: [Lien Youtube](https://www.youtube.com/watch?v=5fnVr-zH-SE)
+-  Le manuel du veritable Bash: [Lien De la doc](https://www.gnu.org/software/bash/manual/bash.html)
+-  Et un grand merci a Vietdu91 pour ca fiche de debug: [lien de la fiche](https://docs.google.com/spreadsheets/d/1uJHQu0VPsjjBkR4hxOeCMEt3AOM1Hp_SmUzPFhAH-nA/edit#gid=0)  
+-   
