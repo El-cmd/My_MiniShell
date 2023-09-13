@@ -34,4 +34,10 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 -  Les pipes, sont des opérateurs essentiels dans le shell Unix/Linux. Ils permettent de chaîner plusieurs commandes ensemble, permettant ainsi de traiter les données de manière fluide et efficace.
 -  Exemple: `cat donnees.txt | grep "important" | wc -l`
 
-5. Gere les redirections `>`, `<`, `>>` et `<<`.
+4. Gere les redirections `>`, `<`, `>>` et `<<`.
+-  Les redirections sont des techniques permettant de manipuler le flux d'entrée et de sortie des commandes dans un shell Unix/Linux.
+-  Exemple: `commande > fichier_de_sortie.txt`
+
+ ## 📜 Sources
+
+-  Toute la playlist de Code Vault sur les proccesus, et les pipe: [Lien Youtube](https://www.youtube.com/watch?v=5fnVr-zH-SE)
