@@ -31,5 +31,7 @@ Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
 - `exit` = Quitte le programme avec un retour 0 par defaut, ou un retour de l'argument donné, exemple `exit 5` retourne 5.
 
 3. Gere les pipes `|`.
+-  Les pipes, sont des opérateurs essentiels dans le shell Unix/Linux. Ils permettent de chaîner plusieurs commandes ensemble, permettant ainsi de traiter les données de manière fluide et efficace.
+-  Exemple: `cat donnees.txt | grep "important" | wc -l`
 
-4. Gere les redirections `>`, `<`, `>>` et `<<`.
+5. Gere les redirections `>`, `<`, `>>` et `<<`.
