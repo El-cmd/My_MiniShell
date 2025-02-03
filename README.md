@@ -1,45 +1,75 @@
-# Documentation du Projet Minishell
-L’objectif de ce projet est de créer un shell minimaliste.
-Ça sera votre petit bash à vous.
-Vous en apprendrez beaucoup sur les processus et les descripteurs de fichier.
+# 🚀 MiniShell - Un Shell Minimaliste
 
-## Introduction:
-- ⚙️ Instalation
-- 💻 Fonctionnalités
-- 📜 Sources
+## 📖 À propos du projet
+MiniShell est une implémentation simplifiée d'un shell Unix, inspirée de Bash. Ce projet a été développé dans le cadre du cursus de l'école 42, avec pour objectif de comprendre en profondeur le fonctionnement des processus Unix et la gestion des descripteurs de fichiers.
 
-## ⚙️ Instalation:
-- cloner le repo: `git clone git@github.com:El-cmd/My_MiniShell.git`
-- Asurez-vous d'avoir la bibliotheque `readline` d'inclus sur votre apapreil ou intallez la. ⚠️ Si vous etes sur IOS abandonner cette idee. Elle n'est ni inclus ni installable sur cet OS.
-- Compiler le: `make`
-- Et enfin lancez le: `./minishell`
+## 🔧 Prérequis
+- Système Unix/Linux
+- Bibliothèque `readline` installée
+- Compilateur GCC
+- Make
 
-## 💻 Fonctionnalités:
+⚠️ Note : Ce projet n'est pas compatible avec macOS en raison des limitations de la bibliothèque `readline`.
+
+## ⚙️ Installation
+
+1. Clonez le dépôt :
+```bash
+git clone git@github.com:El-cmd/My_MiniShell.git
+cd My_MiniShell
+```
+
+2. Compilez le projet :
+```bash
+make
+```
+
+3. Lancez MiniShell :
+```bash
+./minishell
+```
+
+## 💻 Fonctionnalités
+
 <a href="https://zupimages.net/viewer.php?id=23/37/f6hq.png"><img src="https://zupimages.net/up/23/37/f6hq.png" alt="" /></a>
-1. Gere les signaux: `Ctrl-C`, `Ctrl-D` et `Ctrl-\`:
-- `Ctrl-C` = affiche un nouveau prompt sur une nouvelle ligne.
-- `Ctrl-D` = quitte le shell.
-- `Ctrl-\` = ne fait rien.
 
-2. Gere les builtins: `echo`, `pwd`, `cd`, `env`, `export`, `unset`, `exit`:
-- `echo` = avec l’option -n et sans.
-- `pwd` = Affiche le repertoire courant.
-- `cd` = change de repertoire.
-- `env` = Affiche les variables d'environnements.
-- `export` = Ajoute une nouvelle variable d'environnement, sans arguments: affiche toute les variables dans l'ordre alpha-numerique.
-- `unset` = Supprime une variable d'environnement.
-- `exit` = Quitte le programme avec un retour 0 par defaut, ou un retour de l'argument donné, exemple `exit 5` retourne 5.
+### 1. Gestion des Signaux
+- `Ctrl-C` : Interrompt la commande en cours et affiche un nouveau prompt
+- `Ctrl-D` : Quitte proprement le shell
+- `Ctrl-\` : Ne produit aucun effet (comportement personnalisé)
 
-3. Gere les pipes `|`.
--  Les pipes, sont des opérateurs essentiels dans le shell Unix/Linux. Ils permettent de chaîner plusieurs commandes ensemble, permettant ainsi de traiter les données de manière fluide et efficace.
--  Exemple: `cat donnees.txt | grep "important" | wc -l`
+### 2. Commandes Intégrées (Builtins)
+| Commande | Description |
+|----------|-------------|
+| `echo [-n]` | Affiche du texte (option -n pour supprimer le retour à la ligne) |
+| `pwd` | Affiche le chemin du répertoire courant |
+| `cd [dossier]` | Change le répertoire de travail |
+| `env` | Affiche les variables d'environnement |
+| `export` | Définit ou modifie une variable d'environnement |
+| `unset` | Supprime une variable d'environnement |
+| `exit [code]` | Quitte le shell avec le code de retour spécifié (0 par défaut) |
 
-4. Gere les redirections `>`, `<`, `>>` et `<<`.
--  Les redirections sont des techniques permettant de manipuler le flux d'entrée et de sortie des commandes dans un shell Unix/Linux.
--  Exemple: `commande > fichier_de_sortie.txt`
+### 3. Gestion des Pipes ( | )
+Permet de chaîner plusieurs commandes en redirigeant la sortie d'une commande vers l'entrée de la suivante.
 
- ## 📜 Sources
+Exemple :
+```bash
+ls -l | grep ".txt" | wc -l
+```
 
--  Toute la playlist de Code Vault sur les proccesus, et les pipe: [Lien Youtube](https://www.youtube.com/watch?v=5fnVr-zH-SE)
--  Le manuel du veritable Bash: [Lien De la doc](https://www.gnu.org/software/bash/manual/bash.html)
--  Et un grand merci a [Vietdu91](https://github.com/vietdu91) pour ca fiche de debug: [lien de la fiche](https://docs.google.com/spreadsheets/d/1uJHQu0VPsjjBkR4hxOeCMEt3AOM1Hp_SmUzPFhAH-nA/edit#gid=0)   
+### 4. Redirections
+| Opérateur | Description |
+|-----------|-------------|
+| `>` | Redirection de sortie (écrase) |
+| `>>` | Redirection de sortie (ajoute) |
+| `<` | Redirection d'entrée |
+| `<<` | Here-document (heredoc) |
+
+## � Ressources et Références
+
+- [Tutoriels Code Vault sur les processus et pipes](https://www.youtube.com/watch?v=5fnVr-zH-SE)
+- [Documentation officielle de Bash](https://www.gnu.org/software/bash/manual/bash.html)
+- [Guide de débogage par Vietdu91](https://docs.google.com/spreadsheets/d/1uJHQu0VPsjjBkR4hxOeCMEt3AOM1Hp_SmUzPFhAH-nA/edit#gid=0)
+
+## 🤝 Remerciements
+Un grand merci à [Vietdu91](https://github.com/vietdu91) pour son précieux guide de débogage qui a grandement facilité le développement de ce projet.
